@@ -1,10 +1,6 @@
 # WORKSPACE INSTRUCTIONS
 
-- Never make any changes that fall outside the scope of the user's request.
-- Never read sensitive information such as keys, certificates, passwords, or similar data.
-- Never read values ​​in environment files and environment variables; only read keys.
-- Always read all markdown files in the sections below to get complete information about the project, workflow between agents, do-do (DO) and don't-do (DO NOT) tasks.
-- Always ask the user when anything is unclear — intent, scope, affected area, expected behaviour. There are no acceptable assumptions.
+Always read all markdown files in the sections below to get complete information about the project, workflow between agents, do-do (DO) and don't-do (DO NOT) tasks.
 
 ---
 
