@@ -20,62 +20,71 @@ sequenceDiagram
     participant Tester as tester.agent.md
     participant Reviewer as reviewer.agent.md
 
-    User->>Root: Prompt (feature / bug)
+    User->>Root: Prompt (feature / bug / chore)
 
-    alt is feature (refactor | chore)
-        Root->>Planner: Delegate (feature planning prompt template)
-        Planner-->>Root: Plan response template
-    else is bug
-        Root->>Debugger: Delegate (bug planning prompt template)
-        Debugger-->>Root: Plan response template
-    end
+    alt is chore
+        Note over Root: Root Agent executes directly — no sub-agent delegation
+        Root->>User: Confirm chore scope
+        User-->>Root: Approved
+        Note over Root: Root Agent performs the chore in-place
+        Root->>User: Summary report (files changed)
 
-    Root->>User: Present plan for approval
-    alt user requests changes
-        User-->>Root: Feedback / revision request
-        alt is feature
-            Root->>Planner: Re-delegate with user feedback
-            Planner-->>Root: Updated plan response template
+    else is feature (refactor) or bug
+        alt is feature (refactor)
+            Root->>Planner: Delegate (feature planning prompt template)
+            Planner-->>Root: Plan response template
         else is bug
-            Root->>Debugger: Re-delegate with user feedback
-            Debugger-->>Root: Updated plan response template
+            Root->>Debugger: Delegate (bug planning prompt template)
+            Debugger-->>Root: Plan response template
         end
-        Root->>User: Present revised plan for approval
-    end
-    User-->>Root: Approved
 
-    loop Until complete (max 3 iterations)
-        Root->>Developer: Delegate (developer delegation prompt template)
-        Developer-->>Root: Sub-agent result template
-
-        Root->>Tester: Delegate (tester delegation prompt template)
-        Tester-->>Root: Sub-agent result template
-
-        alt result is incomplete or requirements unclear
-            Note over Root: Incomplete — re-plan with updated context
+        Root->>User: Present plan for approval
+        alt user requests changes
+            User-->>Root: Feedback / revision request
             alt is feature
-                Root->>Planner: Re-delegate with failure context
+                Root->>Planner: Re-delegate with user feedback
                 Planner-->>Root: Updated plan response template
             else is bug
-                Root->>Debugger: Re-delegate with failure context
+                Root->>Debugger: Re-delegate with user feedback
                 Debugger-->>Root: Updated plan response template
             end
-        else result is complete
-            loop Until accepted (max 2 reviewer blocks)
-                Root->>Reviewer: Delegate (reviewer delegation prompt template)
-                alt reviewer blocked
-                    Reviewer-->>Root: Blocked — issues found
-                    Note over Root: Re-delegate to responsible sub-agent
-                    Root->>Developer: Re-delegate with reviewer feedback
-                    Developer-->>Root: Sub-agent result template
-                else reviewer accepted
-                    Reviewer-->>Root: Accepted
+            Root->>User: Present revised plan for approval
+        end
+        User-->>Root: Approved
+
+        loop Until complete (max 3 iterations)
+            Root->>Developer: Delegate (developer delegation prompt template)
+            Developer-->>Root: Sub-agent result template
+
+            Root->>Tester: Delegate (tester delegation prompt template)
+            Tester-->>Root: Sub-agent result template
+
+            alt result is incomplete or requirements unclear
+                Note over Root: Incomplete — re-plan with updated context
+                alt is feature
+                    Root->>Planner: Re-delegate with failure context
+                    Planner-->>Root: Updated plan response template
+                else is bug
+                    Root->>Debugger: Re-delegate with failure context
+                    Debugger-->>Root: Updated plan response template
+                end
+            else result is complete
+                loop Until accepted (max 2 reviewer blocks)
+                    Root->>Reviewer: Delegate (reviewer delegation prompt template)
+                    alt reviewer blocked
+                        Reviewer-->>Root: Blocked — issues found
+                        Note over Root: Re-delegate to responsible sub-agent
+                        Root->>Developer: Re-delegate with reviewer feedback
+                        Developer-->>Root: Sub-agent result template
+                    else reviewer accepted
+                        Reviewer-->>Root: Accepted
+                    end
                 end
             end
         end
-    end
 
-    Root->>User: Summary report (work done, files changed, tests updated)
+        Root->>User: Summary report (work done, files changed, tests updated)
+    end
 ```
 
 ---
@@ -88,15 +97,32 @@ When a user prompt arrives, the root agent **must classify the intent** before d
 
 **Decision logic:**
 
-- If the prompt describes **new functionality, a refactor, or a chore** → classify as `feature`
+- If the prompt describes **new functionality or a refactor** → classify as `feature`
+- If the prompt describes a **chore** (dependency update, config change, tooling setup, lint-driven cleanup, or other small low-risk operation that does not touch business logic) → classify as `chore`
 - If the prompt describes **unexpected behavior, a failure, or a regression** → classify as `bug`
 
 > Use the classification skill to structure this decision.  
 > Skill reference: `skills/classification/SKILL.md`
 
+> **Chore fast-path:** chores skip the planning, delegation, and review pipeline. The Root Agent executes them directly. See **Step 2 — `chore`** below.
+
 ---
 
 ### Step 2 — Planning
+
+#### If `chore`:
+
+The Root Agent **executes the chore directly** — no delegation to `planner.agent.md`, `debugger.agent.md`, `developer.agent.md`, `tester.agent.md`, or `reviewer.agent.md`.
+
+The Root Agent must:
+
+- Confirm the scope and the file(s) affected with the user before making any changes
+- Wait for explicit user approval of that scope confirmation
+- Perform the change in-place (dependency bump, config tweak, tooling setup, lint-driven cleanup, etc.)
+- Skip Steps 3, 3.5, 4, 5, 6, and 7 entirely
+- Proceed directly to **Step 8 (Summary Report)** after execution
+
+If during execution the change turns out to be larger than expected, touches business logic, or risks regressions, the Root Agent **must stop**, re-classify the request as `feature` or `bug`, and resume from Step 2 with the new classification. Do not silently expand scope.
 
 #### If `feature`:
 
@@ -140,6 +166,8 @@ The plan must include:
 ---
 
 ### Step 3.5 — User Approval Gate
+
+> **Chore fast-path:** this step does not apply to `chore`. Chores get a lighter scope-confirmation gate inside Step 2 instead of the full plan-approval gate described below.
 
 Before any implementation begins, the root agent **must present the plan to the user and wait for explicit approval**.
 
@@ -265,14 +293,14 @@ The summary must include:
 
 ## Agent Responsibilities Reference
 
-| Agent                | Mode  | Responsibility                          |
-| -------------------- | ----- | --------------------------------------- |
-| Root Agent           | agent | Classify, orchestrate, validate, report |
-| `planner.agent.md`   | plan  | Create feature implementation plan      |
-| `debugger.agent.md`  | plan  | Create bug fix plan                     |
-| `developer.agent.md` | agent | Implement code changes                  |
-| `tester.agent.md`    | agent | Write and run tests                     |
-| `reviewer.agent.md`  | agent | Review output quality and correctness   |
+| Agent                | Mode  | Responsibility                                                        |
+| -------------------- | ----- | --------------------------------------------------------------------- |
+| Root Agent           | agent | Classify, orchestrate, validate, report — and execute chores directly |
+| `planner.agent.md`   | plan  | Create feature implementation plan                                    |
+| `debugger.agent.md`  | plan  | Create bug fix plan                                                   |
+| `developer.agent.md` | agent | Implement code changes                                                |
+| `tester.agent.md`    | agent | Write and run tests                                                   |
+| `reviewer.agent.md`  | agent | Review output quality and correctness                                 |
 
 ---
 

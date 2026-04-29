@@ -24,7 +24,7 @@ Skill references:
 
 ## Context
 
-- Original request type: feature | refactor | chore | bug fix
+- Original request type: feature | refactor | bug fix
 - Plan reference: {title of the plan from template-plan-response}
 - Iteration: {current loop count, e.g. "Iteration 1 of 3"}
 

@@ -1,11 +1,11 @@
 ---
 name: classification
-description: Intent classification logic for the Root Agent. Use when a user prompt arrives to determine whether the request is a feature (refactor | chore) or a bug before any delegation occurs.
+description: Intent classification logic for the Root Agent. Use when a user prompt arrives to determine whether the request is a feature (or refactor), a chore, or a bug before any delegation occurs. Chores route to the Root Agent's direct-execution fast-path; features and bugs route through the planning pipeline.
 ---
 
 ## Purpose
 
-Used by the **Root Agent** to classify every incoming user prompt before any delegation occurs. Classification determines which planning agent is invoked and which prompt template is used.
+Used by the **Root Agent** to classify every incoming user prompt before any execution occurs. Classification determines whether the work goes through the planning pipeline (feature/bug) or is executed directly by the Root Agent (chore).
 
 ---
 
@@ -17,10 +17,23 @@ Classify as `feature` when the prompt describes:
 
 - New functionality to be added
 - An existing behaviour to be refactored or improved
-- A chore (dependency update, config change, tooling setup, code cleanup)
 - A performance improvement with no broken behaviour involved
 
-**Signal words:** "add", "implement", "create", "build", "refactor", "improve", "update", "migrate", "upgrade", "support", "enable", "integrate"
+**Signal words:** "add", "implement", "create", "build", "refactor", "improve", "migrate", "support", "enable", "integrate"
+
+### Chore
+
+Classify as `chore` when the prompt describes a small, low-risk operation that does **not** touch business logic:
+
+- Dependency update or version bump
+- Config change (e.g. `package.json`, `tsconfig`, lint config)
+- Tooling setup (formatter, linter, hook installation)
+- Lint-driven cleanup (formatting, unused imports, naming-only changes)
+- Documentation-only edits in plain prose
+
+**Signal words:** "bump", "upgrade dependency", "format", "lint", "rename file", "update config", "install", "set up", "tweak", "cleanup"
+
+> Chores route to the **Root Agent's direct-execution fast-path** — no planner, developer, tester, or reviewer delegation. See [`AGENT_WORKFLOW.md`](../../AGENT_WORKFLOW.md) Step 2. If a "chore" turns out to touch business logic mid-execution, the Root Agent must stop and re-classify as `feature` or `bug`.
 
 ### Bug
 
@@ -63,15 +76,16 @@ Description: {one sentence stating the classification and primary reason}
 
 ## Next Step
 
-- [ ] Delegate to planner.agent.md using `prompt-feature-planning.skill.md`
-- [ ] Delegate to debugger.agent.md using `prompt-bug-planning.skill.md`
+- [ ] Delegate to planner.agent.md using `prompt-feature-planning.skill.md` (feature | refactor)
+- [ ] Delegate to debugger.agent.md using `prompt-bug-planning.skill.md` (bug)
+- [ ] Root Agent executes directly — no delegation (chore — see AGENT_WORKFLOW.md Step 2)
 ```
 
 ---
 
 ## Ambiguous Cases
 
-If the prompt contains signals for both `feature` and `bug`, or if any field cannot be filled with confidence:
+If the prompt contains signals for more than one of `feature`, `chore`, or `bug`, or if any field cannot be filled with confidence:
 
 > **Rule: ALWAYS ask the user. Never assume.**
 
@@ -94,7 +108,8 @@ Only proceed to delegation once every ambiguity is resolved by the user.
 
 ## Usage Notes
 
-- Classification is always the **first action** of the Root Agent. No delegation happens before it.
+- Classification is always the **first action** of the Root Agent. No execution or delegation happens before it.
 - **ALWAYS ask the user when anything is unclear** — intent, scope, affected area, expected behaviour. There are no acceptable assumptions.
-- The classification result feeds directly into the delegation prompt (`From`, `Title`, `Classification` fields).
+- For `feature` and `bug`, the classification result feeds directly into the delegation prompt (`From`, `Title`, `Classification` fields).
+- For `chore`, classification feeds into the scope-confirmation message the Root Agent shows the user before direct execution (no delegation).
 - A prompt that cannot be classified without guessing must be treated as blocked until the user clarifies.

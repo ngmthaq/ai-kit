@@ -24,7 +24,7 @@ Skill references:
 
 ## Context
 
-- Original request type: feature | refactor | chore | bug fix
+- Original request type: feature | refactor | bug fix
 - Review iteration: {e.g. "Review 1 of 2"}
 - Plan reference: {title of the plan from template-plan-response}
 

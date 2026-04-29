@@ -1,11 +1,11 @@
 ---
 name: prompt-feature-planning
-description: Delegation prompt template from Root Agent to planner.agent.md. Use when delegating a feature, refactor, or chore request for implementation planning.
+description: Delegation prompt template from Root Agent to planner.agent.md. Use when delegating a feature or refactor request for implementation planning.
 ---
 
 ## Purpose
 
-Delegation prompt template used by the **Root Agent** when sending a feature, refactor, or chore request to `planner.agent.md` for implementation planning.
+Delegation prompt template used by the **Root Agent** when sending a feature or refactor request to `planner.agent.md` for implementation planning.
 
 ---
 
@@ -15,7 +15,7 @@ Delegation prompt template used by the **Root Agent** when sending a feature, re
 From: Root Agent
 To: planner.agent.md
 Title: Feature Planning Request — {short title of the feature}
-Description: {one sentence describing what this feature/refactor/chore achieves}
+Description: {one sentence describing what this feature/refactor achieves}
 
 Skill references:
 - {list all relevant skill files scanned from the skills/ directory that planner should apply}
@@ -28,7 +28,7 @@ Skill references:
 
 ## Classification
 
-- Type: feature | refactor | chore
+- Type: feature | refactor
 - Rationale: {why this was classified as such}
 
 ## Codebase Context

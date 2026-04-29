@@ -4,7 +4,7 @@
 
 - **Project Name**: `My Copilot`
 - **Project Description**: `A curated collection of AI copilot customization files — agents, skills, and document templates.`
-- **Programming Languages**: `JavaScript`
+- **Programming Languages**: `N/A`
 - **Frameworks**: `N/A`
 - **Package Managers**: `Yarn`
 - **Key Libraries**: `N/A`
