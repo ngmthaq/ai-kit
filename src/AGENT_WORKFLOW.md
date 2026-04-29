@@ -180,11 +180,11 @@ Present the following to the user:
 
 **Decision logic:**
 
-| User Response    | Root Agent Action                                                                       |
-| ---------------- | --------------------------------------------------------------------------------------- |
-| Approved         | Create markdown file based on plan response as memory, then proceed to **Step 4**       |
-| Requests changes | Re-delegate to planner or debugger with user feedback, then re-present the revised plan |
-| Cancels / aborts | Stop the workflow and acknowledge                                                       |
+| User Response    | Root Agent Action                                                                                      |
+| ---------------- | ------------------------------------------------------------------------------------------------------ |
+| Approved         | Create markdown file based on plan response in **Doc Directory** as memory, then proceed to **Step 4** |
+| Requests changes | Re-delegate to planner or debugger with user feedback, then re-present the revised plan                |
+| Cancels / aborts | Stop the workflow and acknowledge                                                                      |
 
 > The root agent must **not proceed to execution** until the user has explicitly approved the plan. This gate applies on every planning cycle, including re-plans triggered by incomplete results.
 
