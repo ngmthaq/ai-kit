@@ -182,7 +182,7 @@ Present the following to the user:
 
 | User Response    | Root Agent Action                                                                       |
 | ---------------- | --------------------------------------------------------------------------------------- |
-| Approved         | Proceed to **Step 4**                                                                   |
+| Approved         | Create markdown file based on plan response as memory, then proceed to **Step 4**       |
 | Requests changes | Re-delegate to planner or debugger with user feedback, then re-present the revised plan |
 | Cancels / aborts | Stop the workflow and acknowledge                                                       |
 
