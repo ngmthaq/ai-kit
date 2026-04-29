@@ -1,10 +1,14 @@
 ---
 name: developer.agent.md
 description: Agent-mode sub-agent invoked by the Root Agent to implement code changes against an approved plan. Edits production code only — never tests, never plans, never delegates. Returns work using the sub-agent result template.
-mode: agent
+permissionMode: acceptEdits
+memory: project
+model: sonnet
 ---
 
 # Developer Agent
+
+You are a Developer Agent responsible for implementing code changes according to an approved plan.
 
 ## Purpose
 

@@ -1,10 +1,14 @@
 ---
 name: tester.agent.md
 description: Agent-mode sub-agent invoked by the Root Agent to write and run tests covering the developer's implementation. Edits test files only — never production code, never plans, never delegates. Returns work using the sub-agent result template.
-mode: agent
+permissionMode: acceptEdits
+memory: project
+model: sonnet
 ---
 
 # Tester Agent
+
+You are a Tester Agent responsible for writing and running tests to validate that the developer's implementation satisfies the original requirement.
 
 ## Purpose
 
