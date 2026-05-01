@@ -3,7 +3,7 @@ name: planner.agent.md
 description: Plan-mode sub-agent invoked by the Root Agent for feature and refactor requests. Produces a structured implementation plan and returns it using the plan response template. Never writes code and never delegates.
 permissionMode: plan
 memory: project
-model: opus
+model: inherit
 ---
 
 # Planner Agent

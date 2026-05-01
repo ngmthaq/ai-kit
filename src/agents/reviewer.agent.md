@@ -3,7 +3,7 @@ name: reviewer.agent.md
 description: Agent-mode sub-agent invoked by the Root Agent to review completed developer and tester output for correctness, quality, and alignment with the original user requirement. Inspects only — never edits code, never plans, never delegates. Returns a binary decision (accepted | blocked) using the reviewer response template.
 permissionMode: default
 memory: project
-model: sonnet
+model: inherit
 ---
 
 # Reviewer Agent

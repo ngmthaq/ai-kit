@@ -293,14 +293,14 @@ The summary must include:
 
 ## Agent Responsibilities Reference
 
-| Agent                | Mode  | Responsibility                                                        |
-| -------------------- | ----- | --------------------------------------------------------------------- |
-| Root Agent           | agent | Classify, orchestrate, validate, report — and execute chores directly |
-| `planner.agent.md`   | plan  | Create feature implementation plan                                    |
-| `debugger.agent.md`  | plan  | Create bug fix plan                                                   |
-| `developer.agent.md` | agent | Implement code changes                                                |
-| `tester.agent.md`    | agent | Write and run tests                                                   |
-| `reviewer.agent.md`  | agent | Review output quality and correctness                                 |
+| Agent                | Mode    | Responsibility                                                        |
+| -------------------- | ------- | --------------------------------------------------------------------- |
+| Root Agent           | agent   | Classify, orchestrate, validate, report — and execute chores directly |
+| `planner.agent.md`   | plan    | Create feature implementation plan                                    |
+| `debugger.agent.md`  | plan    | Create bug fix plan                                                   |
+| `developer.agent.md` | agent   | Implement code changes                                                |
+| `tester.agent.md`    | agent   | Write and run tests                                                   |
+| `reviewer.agent.md`  | default | Review output quality and correctness                                 |
 
 ---
 

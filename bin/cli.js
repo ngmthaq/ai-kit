@@ -5,8 +5,6 @@
 const fs = require("fs");
 const path = require("path");
 
-const TEMPLATE = process.argv[3];
-
 const AVAILABLE_INSTRUCTION_FILE = {
   github: "copilot-instructions.md",
   claude: "CLAUDE.md",
@@ -25,6 +23,15 @@ function infoLog(message) {
 }
 
 async function init() {
+  const TEMPLATE = process.argv[3];
+  if (Object.keys(AVAILABLE_INSTRUCTION_FILE).indexOf(TEMPLATE) === -1) {
+    errorLog(`An error occurred, unknown template: ${TEMPLATE}`);
+    infoLog(
+      `Supported templates: ${Object.keys(AVAILABLE_INSTRUCTION_FILE).join(", ")}`,
+    );
+    process.exit(1);
+  }
+
   // Backup agent folder if it exists
   const agentDir = path.join(process.cwd(), `.${TEMPLATE}`);
   if (fs.existsSync(agentDir)) {
@@ -69,14 +76,6 @@ function showHelp() {
 
 try {
   const COMMAND = process.argv[2];
-  if (Object.keys(AVAILABLE_INSTRUCTION_FILE).indexOf(TEMPLATE) === -1) {
-    errorLog(`An error occurred, unknown template: ${TEMPLATE}`);
-    infoLog(
-      `Supported templates: ${Object.keys(AVAILABLE_INSTRUCTION_FILE).join(", ")}`,
-    );
-    process.exit(1);
-  }
-
   switch (COMMAND) {
     case "init":
       init();

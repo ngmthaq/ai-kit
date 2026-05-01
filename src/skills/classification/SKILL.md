@@ -16,8 +16,11 @@ Used by the **Root Agent** to classify every incoming user prompt before any exe
 Classify as `feature` when the prompt describes:
 
 - New functionality to be added
+- Agent skill additions or modifications that add new capabilities
 - An existing behaviour to be refactored or improved
 - A performance improvement with no broken behaviour involved
+- A non-breaking change that adds value or enhances the user experience
+- A change that is explicitly framed as a "feature" by the user
 
 **Signal words:** "add", "implement", "create", "build", "refactor", "improve", "migrate", "support", "enable", "integrate"
 
@@ -31,10 +34,11 @@ Classify as `chore` when the prompt describes a small, low-risk operation that d
 - Lint-driven cleanup (formatting, unused imports, naming-only changes)
 - Documentation-only edits in plain prose
 - Give feedback on something without asking for a change to be made
+- A change that is explicitly framed as a "chore" by the user
 
 **Signal words:** "bump", "upgrade dependency", "format", "lint", "rename file", "update config", "install", "set up", "tweak", "cleanup"
 
-> Chores route to the **Root Agent's direct-execution fast-path** — no planner, developer, tester, or reviewer delegation. See [`AGENT_WORKFLOW.md`](../../AGENT_WORKFLOW.md) Step 2. If a "chore" turns out to touch business logic mid-execution, the Root Agent must stop and re-classify as `feature` or `bug`.
+> If a "chore" turns out to touch business logic mid-execution, the Root Agent must stop and re-classify as `feature` or `bug`.
 
 ### Bug
 
@@ -45,6 +49,7 @@ Classify as `bug` when the prompt describes:
 - A crash, error, or exception
 - A regression introduced by a recent change
 - Output that does not match the specification
+- A change that is explicitly framed as a "bug" by the user
 
 **Signal words:** "broken", "not working", "fails", "error", "crash", "wrong", "incorrect", "regression", "unexpected", "should be", "used to work"
 
