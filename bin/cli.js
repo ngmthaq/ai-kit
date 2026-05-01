@@ -35,10 +35,10 @@ async function init() {
   // Backup agent folder if it exists
   const agentDir = path.join(process.cwd(), `.${TEMPLATE}`);
   if (fs.existsSync(agentDir)) {
-    const backupName = `${TEMPLATE}_backup_${Date.now()}`;
+    const backupName = `.${TEMPLATE}_backup_${Date.now()}`;
     const backupDir = path.join(process.cwd(), backupName);
     fs.renameSync(agentDir, backupDir);
-    successLog(`Existing .${TEMPLATE} directory backed up to .${backupName}`);
+    successLog(`Existing .${TEMPLATE} directory backed up to ${backupName}`);
   }
 
   // Copy src directory to working directory
