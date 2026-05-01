@@ -7,20 +7,31 @@ const path = require("path");
 
 const TEMPLATE = process.argv[3];
 
-const INSTRUCTION_FILE = {
+const AVAILABLE_INSTRUCTION_FILE = {
   github: "copilot-instructions.md",
   claude: "CLAUDE.md",
 };
+
+function errorLog(message) {
+  console.error("\x1b[31m%s\x1b[0m", message);
+}
+
+function successLog(message) {
+  console.log("\x1b[32m%s\x1b[0m", message);
+}
+
+function infoLog(message) {
+  console.log("\x1b[34m%s\x1b[0m", message);
+}
 
 async function init() {
   // Backup agent folder if it exists
   const agentDir = path.join(process.cwd(), `.${TEMPLATE}`);
   if (fs.existsSync(agentDir)) {
-    const backupDir = path.join(process.cwd(), `.backup_${TEMPLATE}`);
+    const backupName = `${TEMPLATE}_backup_${Date.now()}`;
+    const backupDir = path.join(process.cwd(), backupName);
     fs.renameSync(agentDir, backupDir);
-    console.log(
-      `Existing .${TEMPLATE} directory backed up to .backup_${TEMPLATE}`,
-    );
+    successLog(`Existing .${TEMPLATE} directory backed up to .${backupName}`);
   }
 
   // Copy src directory to working directory
@@ -29,7 +40,7 @@ async function init() {
   fs.cpSync(srcDir, destDir, { recursive: true });
 
   // Rename default instruction file to corresponding template instruction file
-  const instructionFile = INSTRUCTION_FILE[TEMPLATE];
+  const instructionFile = AVAILABLE_INSTRUCTION_FILE[TEMPLATE];
   const defaultInstructionPath = path.join(
     destDir,
     "WORKSPACE_INSTRUCTIONS.md",
@@ -44,20 +55,28 @@ async function init() {
 
 function showHelp() {
   console.log(`
-    @ngmthaq20/my-copilot CLI
+    > @ngmthaq20/my-copilot CLI
 
     Usage:
-      npx @ngmthaq20/my-copilot@latest init [template]        Initialize a new project
-      npx @ngmthaq20/my-copilot@latest help                   Show help message
+      npx @ngmthaq20/my-copilot@latest init [template]      - Initialize a new project
+      npx @ngmthaq20/my-copilot@latest help                 - Show help message
 
     Templates:
-      github      Init .github directory with Github Copilot configuration
-      claude      Init .claude directory with Claude Code configuration
+      github    - Init .github directory with Github Copilot configuration
+      claude    - Init .claude directory with Claude Code configuration
     `);
 }
 
 try {
   const COMMAND = process.argv[2];
+  if (Object.keys(AVAILABLE_INSTRUCTION_FILE).indexOf(TEMPLATE) === -1) {
+    errorLog(`An error occurred, unknown template: ${TEMPLATE}`);
+    infoLog(
+      `Supported templates: ${Object.keys(AVAILABLE_INSTRUCTION_FILE).join(", ")}`,
+    );
+    process.exit(1);
+  }
+
   switch (COMMAND) {
     case "init":
       init();
@@ -69,11 +88,13 @@ try {
       break;
 
     default:
-      console.error(`Unknown command: ${COMMAND}`);
-      showHelp();
+      errorLog(`An error occurred, unknown command: ${COMMAND}`);
+      infoLog(
+        "Use 'npx @ngmthaq20/my-copilot@latest help' for usage information",
+      );
       process.exit(1);
   }
 } catch (error) {
-  console.error("An error occurred:", error.message);
+  errorLog(`An error occurred: ${error.message}`);
   process.exit(1);
 }

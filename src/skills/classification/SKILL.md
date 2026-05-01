@@ -30,6 +30,7 @@ Classify as `chore` when the prompt describes a small, low-risk operation that d
 - Tooling setup (formatter, linter, hook installation)
 - Lint-driven cleanup (formatting, unused imports, naming-only changes)
 - Documentation-only edits in plain prose
+- Give feedback on something without asking for a change to be made
 
 **Signal words:** "bump", "upgrade dependency", "format", "lint", "rename file", "update config", "install", "set up", "tweak", "cleanup"
 

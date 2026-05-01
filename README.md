@@ -5,7 +5,7 @@ Scaffold Claude-flavored agents, skills, and workflow templates into your projec
 ## Usage
 
 ```sh
-npx @ngmthaq20/ai-kit@latest init
+npx @ngmthaq20/ai-kit@latest init claude
 ```
 
 This copies the bundled templates into `.claude/` in the current working directory.
