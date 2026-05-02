@@ -128,7 +128,7 @@ If during execution the change turns out to be larger than expected, touches bus
 
 Delegate to **`planner.agent.md`** in **plan mode** using the feature planning prompt template.
 
-> Prompt template skill: [prompt-feature-planning](./skills/prompt-feature-planning/SKILL.md)
+> Prompt template skill: [delegation-prompt](./skills/delegation-prompt/SKILL.md) — `Feature Planning Prompt`
 
 The delegation message must include:
 
@@ -140,7 +140,7 @@ The delegation message must include:
 
 Delegate to **`debugger.agent.md`** in **plan mode** using the bug fix prompt template.
 
-> Prompt template skill: [prompt-bug-planning](./skills/prompt-bug-planning/SKILL.md)
+> Prompt template skill: [delegation-prompt](./skills/delegation-prompt/SKILL.md) — `Bug Planning Prompt`
 
 The delegation message must include:
 
@@ -154,7 +154,7 @@ The delegation message must include:
 
 `planner.agent.md` or `debugger.agent.md` must return a structured plan to the root agent using the **plan response template**.
 
-> Plan response template skill: [template-plan-response](./skills/template-plan-response/SKILL.md)
+> Plan response template skill: [agent-response-template](./skills/agent-response-template/SKILL.md) — `Plan Response Template`
 
 The plan must include:
 
@@ -200,7 +200,7 @@ The root agent reads the plan and delegates to the appropriate sub-agent(s).
 
 Use the developer delegation prompt template.
 
-> Prompt template skill: [prompt-developer-delegation](./skills/prompt-developer-delegation/SKILL.md)
+> Prompt template skill: [delegation-prompt](./skills/delegation-prompt/SKILL.md) — `Developer Delegation Prompt`
 
 Include:
 
@@ -213,7 +213,7 @@ Include:
 
 Use the tester delegation prompt template.
 
-> Prompt template skill: [prompt-tester-delegation](./skills/prompt-tester-delegation/SKILL.md)
+> Prompt template skill: [delegation-prompt](./skills/delegation-prompt/SKILL.md) — `Tester Delegation Prompt`
 
 Include:
 
@@ -228,7 +228,7 @@ Include:
 
 `developer.agent.md` and `tester.agent.md` must return results to the root agent using the **sub-agent result template**.
 
-> Result template skill: [template-sub-agent-result](./skills/template-sub-agent-result/SKILL.md)
+> Result template skill: [agent-response-template](./skills/agent-response-template/SKILL.md) — `Sub-Agent Result Template`
 
 The result must include:
 
@@ -260,7 +260,7 @@ When looping back, the root agent must pass:
 
 Delegate to **`reviewer.agent.md`** using the reviewer delegation prompt template.
 
-> Prompt template skill: [prompt-reviewer-delegation](./skills/prompt-reviewer-delegation/SKILL.md)
+> Prompt template skill: [delegation-prompt](./skills/delegation-prompt/SKILL.md) — `Reviewer Delegation Prompt`
 
 Include:
 

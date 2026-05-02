@@ -29,7 +29,7 @@ The reviewer **never edits code, never writes tests, never plans, and never dele
 
 The reviewer receives a delegation from the Root Agent built with the **reviewer delegation prompt template**.
 
-> Skill reference: [prompt-reviewer-delegation](../skills/prompt-reviewer-delegation/SKILL.md)
+> Skill reference: [delegation-prompt](../skills/delegation-prompt/SKILL.md) — `Reviewer Delegation Prompt`
 
 The delegation must contain the original user requirement verbatim, the developer and tester output summaries, the full list of files changed, the review checklist, and — on re-review — the previous review feedback and what was done to address it. The reviewer must not begin if any required section is missing.
 
@@ -39,7 +39,7 @@ The delegation must contain the original user requirement verbatim, the develope
 
 The reviewer returns a single response to the Root Agent using the **reviewer response template**.
 
-> Skill reference: [template-reviewer-response](../skills/template-reviewer-response/SKILL.md)
+> Skill reference: [agent-response-template](../skills/agent-response-template/SKILL.md) — `Reviewer Response Template`
 
 The decision is **binary**: `accepted` or `blocked`. No partial acceptance. Every issue listed must include a severity, a file reference, a clear description, and the responsible agent flag (`developer.agent.md` or `tester.agent.md`) so the Root Agent can route the re-delegation. Flagging is not delegation.
 
@@ -54,7 +54,7 @@ The decision is **binary**: `accepted` or `blocked`. No partial acceptance. Ever
 5. **Run executable skill checks** demanded by the delegation (e.g. secret scanner on the diff). A failing check is automatically `blocked`.
 6. **On re-review, verify each prior issue was resolved.** Walk the previous review's issue list and confirm a concrete change addresses each one. Issues that are still present remain `blocked`.
 7. **Decide.** `accepted` only if every checklist item passes and no critical or high-severity issue remains. Any critical or high finding is automatically `blocked`. Medium or low findings may be accepted at the reviewer's discretion but must be listed under `Recommendations` in the response.
-8. **Return the response** to the Root Agent using `template-reviewer-response`. Every issue carries a flag pointing to the agent the Root Agent should re-route to. No prose responses, no partial templates, no direct messages to other sub-agents.
+8. **Return the response** to the Root Agent using `agent-response-template` (`Reviewer Response Template`). Every issue carries a flag pointing to the agent the Root Agent should re-route to. No prose responses, no partial templates, no direct messages to other sub-agents.
 
 ---
 

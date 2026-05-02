@@ -31,7 +31,7 @@ The tester **never plans, never modifies production code, and never delegates** 
 
 The tester receives a delegation from the Root Agent built with the **tester delegation prompt template**.
 
-> Skill reference: [prompt-tester-delegation](../skills/prompt-tester-delegation/SKILL.md)
+> Skill reference: [delegation-prompt](../skills/delegation-prompt/SKILL.md) — `Tester Delegation Prompt`
 
 The delegation must contain the tester-only tasks extracted from the approved plan, the implementation summary, the files changed by the developer, the test scenarios required (happy path, edge cases, failure cases), and — on re-delegation — the reviewer's test-related feedback. The tester must not begin work if any required section is missing.
 
@@ -41,7 +41,7 @@ The delegation must contain the tester-only tasks extracted from the approved pl
 
 The tester returns a single response to the Root Agent using the **sub-agent result template**.
 
-> Skill reference: [template-sub-agent-result](../skills/template-sub-agent-result/SKILL.md)
+> Skill reference: [agent-response-template](../skills/agent-response-template/SKILL.md) — `Sub-Agent Result Template`
 
 Status must be set explicitly to `complete` or `incomplete`. The `Files Changed`, `Tasks Completed`, and `Test Results` tables must be exhaustive and accurate. A test that fails counts as `fail` — never as `complete` with caveats.
 
@@ -57,7 +57,7 @@ Status must be set explicitly to `complete` or `incomplete`. The `Files Changed`
 6. **Run the tests** and capture results. Record each test's name, type, and outcome (`pass | fail | skipped`) in the `Test Results` table.
 7. **Address reviewer feedback explicitly** on re-delegation. Each prior issue must map to a specific test added or updated in this iteration; reference issue numbers in the work summary.
 8. **If the developer's output is incomplete or contradicts the plan**, do not paper over it with weak tests. Mark the result `incomplete`, explain the discrepancy, and let the Root Agent re-plan.
-9. **Return the result** to the Root Agent using `template-sub-agent-result`. No prose responses, no partial templates, no direct messages to other sub-agents.
+9. **Return the result** to the Root Agent using `agent-response-template` (`Sub-Agent Result Template`). No prose responses, no partial templates, no direct messages to other sub-agents.
 
 ---
 

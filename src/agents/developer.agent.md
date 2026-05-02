@@ -31,7 +31,7 @@ The developer **never plans, never writes tests, and never delegates** — only 
 
 The developer receives a delegation from the Root Agent built with the **developer delegation prompt template**.
 
-> Skill reference: [prompt-developer-delegation](../skills/prompt-developer-delegation/SKILL.md)
+> Skill reference: [delegation-prompt](../skills/delegation-prompt/SKILL.md) — `Developer Delegation Prompt`
 
 The delegation must contain the developer-only tasks extracted from the approved plan, the file scope, architecture and convention notes, and — on re-delegation — the reviewer feedback that must be addressed. The developer must not begin work if any required section is missing.
 
@@ -41,7 +41,7 @@ The delegation must contain the developer-only tasks extracted from the approved
 
 The developer returns a single response to the Root Agent using the **sub-agent result template**.
 
-> Skill reference: [template-sub-agent-result](../skills/template-sub-agent-result/SKILL.md)
+> Skill reference: [agent-response-template](../skills/agent-response-template/SKILL.md) — `Sub-Agent Result Template`
 
 Status must be set explicitly to `complete` or `incomplete`. The `Files Changed` table and `Tasks Completed` table must be exhaustive and accurate.
 
@@ -56,7 +56,7 @@ Status must be set explicitly to `complete` or `incomplete`. The `Files Changed`
 5. **Honor acceptance criteria.** Each task is done only when its acceptance criteria are met. If a criterion cannot be met, mark the task `blocked` in the result and explain why.
 6. **Address reviewer feedback explicitly** on re-delegation. Each prior issue must map to a specific change in this iteration; reference issue numbers in the work summary.
 7. **Run any executable skill checks** demanded by the delegation (e.g. secret scanning on the diff). A failing check means Status is `incomplete` until resolved.
-8. **Return the result** to the Root Agent using `template-sub-agent-result`. No prose responses, no partial templates, no direct messages to other sub-agents.
+8. **Return the result** to the Root Agent using `agent-response-template` (`Sub-Agent Result Template`). No prose responses, no partial templates, no direct messages to other sub-agents.
 
 ---
 

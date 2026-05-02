@@ -29,7 +29,7 @@ The planner **never writes, edits, or executes code**, and **never delegates** �
 
 The planner receives a delegation from the Root Agent built with the **feature planning prompt template**.
 
-> Skill reference: [prompt-feature-planning](../skills/prompt-feature-planning/SKILL.md)
+> Skill reference: [delegation-prompt](../skills/delegation-prompt/SKILL.md) — `Feature Planning Prompt`
 
 The Root Agent must populate every section of that template before delegation. The planner must not begin planning if any input section is missing or unclear.
 
@@ -39,7 +39,7 @@ The Root Agent must populate every section of that template before delegation. T
 
 The planner returns a single response to the Root Agent using the **plan response template**.
 
-> Skill reference: [template-plan-response](../skills/template-plan-response/SKILL.md)
+> Skill reference: [agent-response-template](../skills/agent-response-template/SKILL.md) — `Plan Response Template`
 
 Every section of that template must be populated. Tasks must be atomic, ordered, and **labelled** with the sub-agent the Root Agent should later route them to (`developer.agent.md` or `tester.agent.md`). Labelling is not delegation.
 
@@ -54,7 +54,7 @@ Every section of that template must be populated. Tasks must be atomic, ordered,
 5. **Label each task** with the responsible sub-agent type (`developer.agent.md` or `tester.agent.md`) in the `Assigned Agent` column. The planner does not delegate — labels exist solely to inform Root Agent routing.
 6. **List risks and assumptions** explicitly. Anything inferred from context — not stated by the user — belongs here.
 7. **Surface every open question.** If any task, requirement, or design decision cannot be resolved with certainty from the input, set Status to `Blocked` and list the question. Do not plan around the gap.
-8. **Return the plan** to the Root Agent using `template-plan-response`. No prose responses, no partial templates, no direct messages to other sub-agents.
+8. **Return the plan** to the Root Agent using `agent-response-template` (`Plan Response Template`). No prose responses, no partial templates, no direct messages to other sub-agents.
 
 ---
 
