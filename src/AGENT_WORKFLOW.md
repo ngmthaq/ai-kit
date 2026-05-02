@@ -102,7 +102,7 @@ When a user prompt arrives, the root agent **must classify the intent** before d
 - If the prompt describes **unexpected behavior, a failure, or a regression** → classify as `bug`
 
 > Use the classification skill to structure this decision.  
-> Skill reference: `skills/classification/SKILL.md`
+> Skill reference: [classification](./skills/classification/SKILL.md)
 
 > **Chore fast-path:** chores skip the planning, delegation, and review pipeline. The Root Agent executes them directly. See **Step 2 — `chore`** below.
 
@@ -128,7 +128,7 @@ If during execution the change turns out to be larger than expected, touches bus
 
 Delegate to **`planner.agent.md`** in **plan mode** using the feature planning prompt template.
 
-> Prompt template skill: `skills/prompt-feature-planning/SKILL.md`
+> Prompt template skill: [prompt-feature-planning](./skills/prompt-feature-planning/SKILL.md)
 
 The delegation message must include:
 
@@ -140,7 +140,7 @@ The delegation message must include:
 
 Delegate to **`debugger.agent.md`** in **plan mode** using the bug fix prompt template.
 
-> Prompt template skill: `skills/prompt-bug-planning/SKILL.md`
+> Prompt template skill: [prompt-bug-planning](./skills/prompt-bug-planning/SKILL.md)
 
 The delegation message must include:
 
@@ -154,7 +154,7 @@ The delegation message must include:
 
 `planner.agent.md` or `debugger.agent.md` must return a structured plan to the root agent using the **plan response template**.
 
-> Plan response template skill: `skills/template-plan-response/SKILL.md`
+> Plan response template skill: [template-plan-response](./skills/template-plan-response/SKILL.md)
 
 The plan must include:
 
@@ -200,7 +200,7 @@ The root agent reads the plan and delegates to the appropriate sub-agent(s).
 
 Use the developer delegation prompt template.
 
-> Prompt template skill: `skills/prompt-developer-delegation/SKILL.md`
+> Prompt template skill: [prompt-developer-delegation](./skills/prompt-developer-delegation/SKILL.md)
 
 Include:
 
@@ -213,7 +213,7 @@ Include:
 
 Use the tester delegation prompt template.
 
-> Prompt template skill: `skills/prompt-tester-delegation/SKILL.md`
+> Prompt template skill: [prompt-tester-delegation](./skills/prompt-tester-delegation/SKILL.md)
 
 Include:
 
@@ -228,7 +228,7 @@ Include:
 
 `developer.agent.md` and `tester.agent.md` must return results to the root agent using the **sub-agent result template**.
 
-> Result template skill: `skills/template-sub-agent-result/SKILL.md`
+> Result template skill: [template-sub-agent-result](./skills/template-sub-agent-result/SKILL.md)
 
 The result must include:
 
@@ -260,7 +260,7 @@ When looping back, the root agent must pass:
 
 Delegate to **`reviewer.agent.md`** using the reviewer delegation prompt template.
 
-> Prompt template skill: `skills/prompt-reviewer-delegation/SKILL.md`
+> Prompt template skill: [prompt-reviewer-delegation](./skills/prompt-reviewer-delegation/SKILL.md)
 
 Include:
 
@@ -291,40 +291,9 @@ The summary must include:
 
 ---
 
-## Agent Responsibilities Reference
-
-| Agent                | Mode    | Responsibility                                                        |
-| -------------------- | ------- | --------------------------------------------------------------------- |
-| Root Agent           | agent   | Classify, orchestrate, validate, report — and execute chores directly |
-| `planner.agent.md`   | plan    | Create feature implementation plan                                    |
-| `debugger.agent.md`  | plan    | Create bug fix plan                                                   |
-| `developer.agent.md` | agent   | Implement code changes                                                |
-| `tester.agent.md`    | agent   | Write and run tests                                                   |
-| `reviewer.agent.md`  | default | Review output quality and correctness                                 |
-
----
-
 ## Loop Guard
 
 To prevent infinite loops, the root agent must track **loop iterations per session**.
 
 - After **3 consecutive incomplete cycles** on the same task → surface the blockers to the user and request clarification before continuing.
 - After **2 consecutive reviewer blocks** on the same output → surface reviewer feedback to the user and ask whether to proceed or abort.
-
----
-
-## Skill References Summary
-
-| Purpose                     | Skill File                                    |
-| --------------------------- | --------------------------------------------- |
-| Classification              | `skills/classification/SKILL.md`              |
-| Feature planning prompt     | `skills/prompt-feature-planning/SKILL.md`     |
-| Bug planning prompt         | `skills/prompt-bug-planning/SKILL.md`         |
-| Plan response template      | `skills/template-plan-response/SKILL.md`      |
-| Developer delegation prompt | `skills/prompt-developer-delegation/SKILL.md` |
-| Tester delegation prompt    | `skills/prompt-tester-delegation/SKILL.md`    |
-| Sub-agent result template   | `skills/template-sub-agent-result/SKILL.md`   |
-| Reviewer delegation prompt  | `skills/prompt-reviewer-delegation/SKILL.md`  |
-| Reviewer response template  | `skills/template-reviewer-response/SKILL.md`  |
-
-> The root agent must scan the `skills/` directory before every delegation and include all relevant skill files in the `Skill references` field of the prompt. This is mandatory — sub-agents derive their behaviour and output format from the skills assigned to them.

@@ -20,7 +20,7 @@ The debugger **never writes, edits, or executes code**, and **never delegates** 
 
 ## Position in the Workflow
 
-- Triggered at **Step 2 (Planning)** of [`AGENT_WORKFLOW.md`](../AGENT_WORKFLOW.md) when classification is `bug`.
+- Triggered at **Step 2 (Planning)** of [AGENT_WORKFLOW](../AGENT_WORKFLOW.md) when classification is `bug`.
 - Re-triggered by the Root Agent when the user requests changes to the plan, or when the Root Agent loops back from **Step 6 (Completeness Check)** with failure context from a sub-agent.
 
 ---
@@ -29,7 +29,7 @@ The debugger **never writes, edits, or executes code**, and **never delegates** 
 
 The debugger receives a delegation from the Root Agent built with the **bug planning prompt template**.
 
-> Skill reference: [`skills/prompt-bug-planning/SKILL.md`](../skills/prompt-bug-planning/SKILL.md)
+> Skill reference: [prompt-bug-planning](../skills/prompt-bug-planning/SKILL.md)
 
 The Root Agent must populate every section of that template — observed behavior, expected behavior, reproduction steps, and environment — before delegation. The debugger must not begin planning if any input section is missing or unclear.
 
@@ -39,7 +39,7 @@ The Root Agent must populate every section of that template — observed behavio
 
 The debugger returns a single response to the Root Agent using the **plan response template**.
 
-> Skill reference: [`skills/template-plan-response/SKILL.md`](../skills/template-plan-response/SKILL.md)
+> Skill reference: [template-plan-response](../skills/template-plan-response/SKILL.md)
 
 Every section of that template must be populated. Tasks must be atomic, ordered, and **labelled** with the sub-agent the Root Agent should later route them to (`developer.agent.md` or `tester.agent.md`). Labelling is not delegation.
 
@@ -70,13 +70,12 @@ Every section of that template must be populated. Tasks must be atomic, ordered,
 
 ---
 
-## Skill References
+## Additional Skill References
 
 The debugger must apply, at minimum, the following skills on every delegation:
 
-- [`skills/prompt-bug-planning/SKILL.md`](../skills/prompt-bug-planning/SKILL.md) — input contract
-- [`skills/template-plan-response/SKILL.md`](../skills/template-plan-response/SKILL.md) — output contract
-- [`skills/clean-code/SKILL.md`](../skills/clean-code/SKILL.md) — quality principles to bake into the plan
+- [clean-code](../skills/clean-code/SKILL.md) — quality principles to bake into the plan
+- [testing-workflow](../skills/testing-workflow/SKILL.md) — testing workflow principles
 
 Additional skills passed in the delegation's `Skill references` field must also be applied.
 

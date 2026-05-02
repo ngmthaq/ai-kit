@@ -6,25 +6,25 @@ Always read all markdown files in the sections below to get complete information
 
 ## PROJECT OVERVIEW
 
-This section will provide an overview of the project, such as the project name, description, programming language, frameworks, main libraries used, library management platform, and project documentation location. Users can add more information here; please read and remember all the information - see [PROJECT_OVERVIEW.md](./PROJECT_OVERVIEW.md).
+This section will provide an overview of the project, such as the project name, description, programming language, frameworks, main libraries used, library management platform, and project documentation location. Users can add more information here; please read and remember all the information - see [PROJECT_OVERVIEW](./PROJECT_OVERVIEW.md).
 
 ---
 
 ## DO
 
-This section will provide information about the "DO" (Do-Do) item. Agents should refer to the items here to prioritize tasks when receiving assignments from users - see [DO.md](./DO.md)
+This section will provide information about the "DO" (Do-Do) item. Agents should refer to the items here to prioritize tasks when receiving assignments from users - see [DO](./DO.md)
 
 ---
 
 ## DO NOT
 
-This section will provide information about the "DO NOT" clause; agents should read the items here to avoid following them when receiving tasks from users - see [DO_NOT.md](./DO_NOT.md)
+This section will provide information about the "DO NOT" clause; agents should read the items here to avoid following them when receiving tasks from users - see [DO_NOT](./DO_NOT.md)
 
 ---
 
 ## AGENT WORKFLOW
 
-Whenever an agent receives a task from a user, they must always follow the workflow outlined here to ensure 'Spec-First' adherence - see [AGENT_WORKFLOW.md](./AGENT_WORKFLOW.md)
+Whenever an agent receives a task from a user, they must always follow the workflow outlined here to ensure 'Spec-First' adherence - see [AGENT_WORKFLOW](./AGENT_WORKFLOW.md)
 
 > **NOTE:** Spec-First AI agents (or Specification-Driven Development) represent a shift from "vibe coding" (impulsive, conversational AI prompts) to a methodical approach where high-quality documentation, requirements, and constraints are established before code is generated
 

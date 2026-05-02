@@ -10,8 +10,11 @@
 - **Key Libraries**: `N/A`
 - **Database**: `N/A`
 - **Doc Directory**: `<workspace>/<target>/docs`
+- **Testing Workflow**: `Code-First`
 
 > **NOTE:**
 >
 > - Resolve `<workspace>` is the current workspace
 > - Resolve `<target>` is the current AI platform, which could be a .github, .claude, etc folder
+>
+> Testing Workflow includes: Code-First, Test-Fist, or Skip-Testing

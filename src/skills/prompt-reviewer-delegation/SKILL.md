@@ -65,7 +65,7 @@ Reviewer must assess all of the following:
 
 ## Expected Output
 
-Return your result using `template-reviewer-response.skill.md`.
+Return your result using `template-reviewer-response` skill.
 ```
 
 ---
@@ -75,4 +75,4 @@ Return your result using `template-reviewer-response.skill.md`.
 - Root Agent must scan `skills/` and assign all relevant skill files to `Skill references` — reviewer enforces them.
 - On re-review, always include the `Previous Review Feedback` section so reviewer can confirm issues were resolved.
 - Reviewer must not modify code — only assess and report.
-- Reviewer must respond using `template-reviewer-response.skill.md`.
+- Reviewer must respond using `template-reviewer-response` skill.

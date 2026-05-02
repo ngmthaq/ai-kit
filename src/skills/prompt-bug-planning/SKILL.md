@@ -83,4 +83,4 @@ Please answer so the debugger can produce an accurate fix plan.
 - **ALWAYS ask the user when any section cannot be filled with confidence** — do not infer, guess, or fabricate details.
 - If reproduction steps are unknown, ask the user — do not state "unknown" and proceed.
 - `Skill references` must be populated by scanning the `skills/` directory and selecting all files relevant to the bug domain.
-- Debugger must respond using `template-plan-response.skill.md`.
+- Debugger must respond using `template-plan-response` skill.

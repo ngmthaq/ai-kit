@@ -60,7 +60,7 @@ Skill references:
 
 ## Expected Output
 
-Return your result using `template-sub-agent-result.skill.md`.
+Return your result using `template-sub-agent-result` skill.
 ```
 
 ---
@@ -70,4 +70,4 @@ Return your result using `template-sub-agent-result.skill.md`.
 - Root Agent must scan `skills/` and assign all relevant skill files to `Skill references` before delegating.
 - On re-delegation, always include the reviewer feedback section — developer must address each point explicitly.
 - `Acceptance Criteria` per task is mandatory — vague tasks produce vague results.
-- Developer must respond using `template-sub-agent-result.skill.md`.
+- Developer must respond using `template-sub-agent-result` skill.

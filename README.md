@@ -38,7 +38,7 @@ With GitHub Copilot, you can flexibly switch to other models supported by the pl
 
 ## Developer Guide
 
-See [DEVELOPER_GUIDE.md](./DEVELOPER_GUIDE.md)
+See [DEVELOPER_GUIDE](./DEVELOPER_GUIDE.md)
 
 ---
 

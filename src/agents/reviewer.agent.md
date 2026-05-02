@@ -20,7 +20,7 @@ The reviewer **never edits code, never writes tests, never plans, and never dele
 
 ## Position in the Workflow
 
-- Triggered at **Step 7 (Review)** of [`AGENT_WORKFLOW.md`](../AGENT_WORKFLOW.md), after the Root Agent has confirmed both developer and tester results are `complete`.
+- Triggered at **Step 7 (Review)** of [AGENT_WORKFLOW](../AGENT_WORKFLOW.md), after the Root Agent has confirmed both developer and tester results are `complete`.
 - Re-triggered when the Root Agent has routed reviewer-blocked feedback through the responsible sub-agent and the new output is back in front of the reviewer.
 
 ---
@@ -29,7 +29,7 @@ The reviewer **never edits code, never writes tests, never plans, and never dele
 
 The reviewer receives a delegation from the Root Agent built with the **reviewer delegation prompt template**.
 
-> Skill reference: [`skills/prompt-reviewer-delegation/SKILL.md`](../skills/prompt-reviewer-delegation/SKILL.md)
+> Skill reference: [prompt-reviewer-delegation](../skills/prompt-reviewer-delegation/SKILL.md)
 
 The delegation must contain the original user requirement verbatim, the developer and tester output summaries, the full list of files changed, the review checklist, and — on re-review — the previous review feedback and what was done to address it. The reviewer must not begin if any required section is missing.
 
@@ -39,7 +39,7 @@ The delegation must contain the original user requirement verbatim, the develope
 
 The reviewer returns a single response to the Root Agent using the **reviewer response template**.
 
-> Skill reference: [`skills/template-reviewer-response/SKILL.md`](../skills/template-reviewer-response/SKILL.md)
+> Skill reference: [template-reviewer-response](../skills/template-reviewer-response/SKILL.md)
 
 The decision is **binary**: `accepted` or `blocked`. No partial acceptance. Every issue listed must include a severity, a file reference, a clear description, and the responsible agent flag (`developer.agent.md` or `tester.agent.md`) so the Root Agent can route the re-delegation. Flagging is not delegation.
 
@@ -69,15 +69,14 @@ The decision is **binary**: `accepted` or `blocked`. No partial acceptance. Ever
 
 ---
 
-## Skill References
+## Additional Skill References
 
 The reviewer must apply, at minimum, the following skills on every delegation:
 
-- [`skills/prompt-reviewer-delegation/SKILL.md`](../skills/prompt-reviewer-delegation/SKILL.md) — input contract
-- [`skills/template-reviewer-response/SKILL.md`](../skills/template-reviewer-response/SKILL.md) — output contract
-- [`skills/clean-code/SKILL.md`](../skills/clean-code/SKILL.md) — code review checklist
-- [`skills/aaa-testing/SKILL.md`](../skills/aaa-testing/SKILL.md) — test review checklist
-- [`skills/secret-scanner/SKILL.md`](../skills/secret-scanner/SKILL.md) — must be executed on the diff before any `accepted` decision
+- [clean-code](../skills/clean-code/SKILL.md) — code review checklist
+- [testing-workflow](../skills/testing-workflow/SKILL.md) — testing workflow principles
+- [secret-scanner](../skills/secret-scanner/SKILL.md) — must be executed on the diff before any `accepted` decision
+- [security-scanner](../skills/security-scanner/SKILL.md) — must be checked on the diff before any `accepted` decision
 
 Additional skills passed in the delegation's `Skill references` field must also be applied.
 

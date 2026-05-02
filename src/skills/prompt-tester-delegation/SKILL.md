@@ -63,7 +63,7 @@ Skill references:
 
 ## Expected Output
 
-Return your result using `template-sub-agent-result.skill.md`.
+Return your result using `template-sub-agent-result` skill.
 ```
 
 ---
@@ -73,4 +73,4 @@ Return your result using `template-sub-agent-result.skill.md`.
 - Root Agent must scan `skills/` and assign all relevant skill files to `Skill references` before delegating.
 - Tester must not modify production code — only test files.
 - If developer output is incomplete, tester should flag this in the result rather than testing partial work.
-- Tester must respond using `template-sub-agent-result.skill.md`.
+- Tester must respond using `template-sub-agent-result` skill.

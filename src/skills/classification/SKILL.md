@@ -82,8 +82,8 @@ Description: {one sentence stating the classification and primary reason}
 
 ## Next Step
 
-- [ ] Delegate to planner.agent.md using `prompt-feature-planning.skill.md` (feature | refactor)
-- [ ] Delegate to debugger.agent.md using `prompt-bug-planning.skill.md` (bug)
+- [ ] Delegate to planner.agent.md using `prompt-feature-planning` (feature | refactor)
+- [ ] Delegate to debugger.agent.md using `prompt-bug-planning` (bug)
 - [ ] Root Agent executes directly — no delegation (chore — see AGENT_WORKFLOW.md Step 2)
 ```
 

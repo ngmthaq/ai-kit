@@ -72,4 +72,4 @@ Please answer so the plan is accurate.
 - Root Agent must fill every section before delegating. Do not send partial prompts.
 - **ALWAYS ask the user when any section cannot be filled with confidence** — do not infer, guess, or proceed with placeholders.
 - `Skill references` must be populated by scanning the `skills/` directory and selecting all files relevant to the feature domain.
-- Planner must respond using `template-plan-response.skill.md`.
+- Planner must respond using `template-plan-response` skill.

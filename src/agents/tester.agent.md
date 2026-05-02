@@ -20,7 +20,7 @@ The tester **never plans, never modifies production code, and never delegates** 
 
 ## Position in the Workflow
 
-- Triggered at **Step 4 (Delegation to Sub-Agents)** of [`AGENT_WORKFLOW.md`](../AGENT_WORKFLOW.md), after the developer has returned a `complete` result.
+- Triggered at **Step 4 (Delegation to Sub-Agents)** of [AGENT_WORKFLOW](../AGENT_WORKFLOW.md), after the developer has returned a `complete` result.
 - Re-triggered by the Root Agent when:
   - The Root Agent loops back from **Step 6 (Completeness Check)** with refined plan context.
   - The reviewer blocked the work for test-related reasons and the Root Agent re-delegates with reviewer feedback (Step 7).
@@ -31,7 +31,7 @@ The tester **never plans, never modifies production code, and never delegates** 
 
 The tester receives a delegation from the Root Agent built with the **tester delegation prompt template**.
 
-> Skill reference: [`skills/prompt-tester-delegation/SKILL.md`](../skills/prompt-tester-delegation/SKILL.md)
+> Skill reference: [prompt-tester-delegation](../skills/prompt-tester-delegation/SKILL.md)
 
 The delegation must contain the tester-only tasks extracted from the approved plan, the implementation summary, the files changed by the developer, the test scenarios required (happy path, edge cases, failure cases), and — on re-delegation — the reviewer's test-related feedback. The tester must not begin work if any required section is missing.
 
@@ -41,7 +41,7 @@ The delegation must contain the tester-only tasks extracted from the approved pl
 
 The tester returns a single response to the Root Agent using the **sub-agent result template**.
 
-> Skill reference: [`skills/template-sub-agent-result/SKILL.md`](../skills/template-sub-agent-result/SKILL.md)
+> Skill reference: [template-sub-agent-result](../skills/template-sub-agent-result/SKILL.md)
 
 Status must be set explicitly to `complete` or `incomplete`. The `Files Changed`, `Tasks Completed`, and `Test Results` tables must be exhaustive and accurate. A test that fails counts as `fail` — never as `complete` with caveats.
 
@@ -72,13 +72,12 @@ Status must be set explicitly to `complete` or `incomplete`. The `Files Changed`
 
 ---
 
-## Skill References
+## Additional Skill References
 
 The tester must apply, at minimum, the following skills on every delegation:
 
-- [`skills/prompt-tester-delegation/SKILL.md`](../skills/prompt-tester-delegation/SKILL.md) — input contract
-- [`skills/template-sub-agent-result/SKILL.md`](../skills/template-sub-agent-result/SKILL.md) — output contract
-- [`skills/aaa-testing/SKILL.md`](../skills/aaa-testing/SKILL.md) — test structure and naming
+- [testing-workflow](../skills/testing-workflow/SKILL.md) — testing workflow
+- [clean-code](../skills/clean-code/SKILL.md) — coding principles
 
 Additional skills passed in the delegation's `Skill references` field must also be applied.
 

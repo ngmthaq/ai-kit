@@ -20,7 +20,7 @@ The developer **never plans, never writes tests, and never delegates** — only 
 
 ## Position in the Workflow
 
-- Triggered at **Step 4 (Delegation to Sub-Agents)** of [`AGENT_WORKFLOW.md`](../AGENT_WORKFLOW.md) after the user has approved the plan.
+- Triggered at **Step 4 (Delegation to Sub-Agents)** of [AGENT_WORKFLOW](../AGENT_WORKFLOW.md) after the user has approved the plan.
 - Re-triggered by the Root Agent when:
   - The Root Agent loops back from **Step 6 (Completeness Check)** with refined plan context.
   - The reviewer blocked the work and the Root Agent re-delegates with reviewer feedback (Step 7).
@@ -31,7 +31,7 @@ The developer **never plans, never writes tests, and never delegates** — only 
 
 The developer receives a delegation from the Root Agent built with the **developer delegation prompt template**.
 
-> Skill reference: [`skills/prompt-developer-delegation/SKILL.md`](../skills/prompt-developer-delegation/SKILL.md)
+> Skill reference: [prompt-developer-delegation](../skills/prompt-developer-delegation/SKILL.md)
 
 The delegation must contain the developer-only tasks extracted from the approved plan, the file scope, architecture and convention notes, and — on re-delegation — the reviewer feedback that must be addressed. The developer must not begin work if any required section is missing.
 
@@ -41,7 +41,7 @@ The delegation must contain the developer-only tasks extracted from the approved
 
 The developer returns a single response to the Root Agent using the **sub-agent result template**.
 
-> Skill reference: [`skills/template-sub-agent-result/SKILL.md`](../skills/template-sub-agent-result/SKILL.md)
+> Skill reference: [template-sub-agent-result](../skills/template-sub-agent-result/SKILL.md)
 
 Status must be set explicitly to `complete` or `incomplete`. The `Files Changed` table and `Tasks Completed` table must be exhaustive and accurate.
 
@@ -71,14 +71,11 @@ Status must be set explicitly to `complete` or `incomplete`. The `Files Changed`
 
 ---
 
-## Skill References
+## Additional Skill References
 
 The developer must apply, at minimum, the following skills on every delegation:
 
-- [`skills/prompt-developer-delegation/SKILL.md`](../skills/prompt-developer-delegation/SKILL.md) — input contract
-- [`skills/template-sub-agent-result/SKILL.md`](../skills/template-sub-agent-result/SKILL.md) — output contract
-- [`skills/clean-code/SKILL.md`](../skills/clean-code/SKILL.md) — coding principles
-- [`skills/secret-scanner/SKILL.md`](../skills/secret-scanner/SKILL.md) — must be executed on the diff before marking work complete
+- [clean-code](../skills/clean-code/SKILL.md) — coding principles
 
 Additional skills passed in the delegation's `Skill references` field must also be applied.
 
