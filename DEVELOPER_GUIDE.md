@@ -130,8 +130,7 @@ The same flow as features, but the Root Agent focuses on root cause analysis bef
 **Example prompt:**
 
 ```
-Bug: User profile avatar upload returns 413 error for files over 1MB, even though our
-limit should be 10MB.
+Bug: User profile avatar upload returns 413 error for files over 1MB, even though our limit should be 10MB.
 
 Expected: Files up to 10MB upload successfully.
 Actual: 413 Payload Too Large for anything over ~1MB.

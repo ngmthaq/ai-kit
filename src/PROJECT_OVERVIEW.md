@@ -17,4 +17,6 @@
 > - Resolve `<workspace>` is the current workspace
 > - Resolve `<target>` is the current AI platform, which could be a .github, .claude, etc folder
 >
-> Testing Workflow includes: Code-First, Test-Fist, or Skip-Testing
+> **Package Managers** is a platform used to manage libraries (eg: npm, yarn, pip, conda,...)
+> **Doc Directory** is the folder that stores the plans created by the agent
+> **Testing Workflow** includes: `Code-First`, `Test-Fist`, or `Skip-Testing`

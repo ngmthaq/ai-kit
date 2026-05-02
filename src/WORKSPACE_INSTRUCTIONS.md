@@ -10,6 +10,12 @@ This section will provide an overview of the project, such as the project name, 
 
 ---
 
+## CODING CONVENTIONS
+
+This section will describe the coding conventions for the project. Always follow these conventions to ensure everyone understands and adheres to them - see [CODING_CONVENTIONS](./CODING_CONVENTIONS.md)
+
+---
+
 ## DO
 
 This section will provide information about the "DO" (Do-Do) item. Agents should refer to the items here to prioritize tasks when receiving assignments from users - see [DO](./DO.md)

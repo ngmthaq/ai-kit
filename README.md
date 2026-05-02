@@ -36,9 +36,33 @@ With GitHub Copilot, you can flexibly switch to other models supported by the pl
 
 ---
 
+## CODING_CONVENTIONS.md
+
+Always define coding conventions for your project before assigning it to AI agents. Fill in the coding conventions in the `CODING_CONVENTIONS.md` file located in the AI ​​agents' configuration directory.
+
+---
+
+## DO_NOT.md
+
+Define what the AI ​​Agent should NOT do in the `DO_NOT.md` file located in the AI ​​agents' configuration directory before assigning tasks to the AI ​​Agent.
+
+---
+
+## DO.md
+
+Define what the AI ​​Agent should do in the `DO.md` file located in the AI ​​agents' configuration directory before assigning tasks to the AI ​​Agent.
+
+---
+
+## PROJECT_OVERVIEW.md
+
+Fill in the general project information in the `PROJECT_OVERVIEW.md` file in the agent configuration directory. This will give agents an overview before they start working.
+
+---
+
 ## Developer Guide
 
-See [DEVELOPER_GUIDE](./DEVELOPER_GUIDE.md)
+See [DEVELOPER_GUIDE](./DEVELOPER_GUIDE.md).
 
 ---
 
