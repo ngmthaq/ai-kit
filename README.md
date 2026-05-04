@@ -42,15 +42,9 @@ Always define coding conventions for your project before assigning it to AI agen
 
 ---
 
-## DO_NOT.md
+## AGENT_RULES.md
 
-Define what the AI ​​Agent should NOT do in the `DO_NOT.md` file located in the AI ​​agents' configuration directory before assigning tasks to the AI ​​Agent.
-
----
-
-## DO.md
-
-Define what the AI ​​Agent should do in the `DO.md` file located in the AI ​​agents' configuration directory before assigning tasks to the AI ​​Agent.
+Define what the AI Agent should and should NOT do in the `AGENT_RULES.md` file located in the AI agents' configuration directory before assigning tasks to the AI Agent.
 
 ---
 
