@@ -95,16 +95,7 @@ sequenceDiagram
 
 When a user prompt arrives, the root agent **must classify the intent** before doing anything else.
 
-**Decision logic:**
-
-- If the prompt describes **new functionality or a refactor** → classify as `feature`
-- If the prompt describes a **chore** (dependency update, config change, tooling setup, lint-driven cleanup, or other small low-risk operation that does not touch business logic) → classify as `chore`
-- If the prompt describes **unexpected behavior, a failure, or a regression** → classify as `bug`
-
-> Use the classification skill to structure this decision.  
 > Skill reference: [classification](./skills/classification/SKILL.md)
-
-> **Chore fast-path:** chores skip the planning, delegation, and review pipeline. The Root Agent executes them directly. See **Step 2 — `chore`** below.
 
 ---
 
@@ -130,23 +121,11 @@ Delegate to **`planner.agent.md`** in **plan mode** using the feature planning p
 
 > Prompt template skill: [delegation-prompt](./skills/delegation-prompt/SKILL.md) — `Feature Planning Prompt`
 
-The delegation message must include:
-
-- Original user prompt
-- Classification result and rationale
-- Any relevant context from the codebase
-
 #### If `bug`:
 
 Delegate to **`debugger.agent.md`** in **plan mode** using the bug fix prompt template.
 
 > Prompt template skill: [delegation-prompt](./skills/delegation-prompt/SKILL.md) — `Bug Planning Prompt`
-
-The delegation message must include:
-
-- Original user prompt
-- Observed vs. expected behavior (if available)
-- Any stack traces, logs, or reproduction steps
 
 ---
 
@@ -155,13 +134,6 @@ The delegation message must include:
 `planner.agent.md` or `debugger.agent.md` must return a structured plan to the root agent using the **plan response template**.
 
 > Plan response template skill: [agent-response-template](./skills/agent-response-template/SKILL.md) — `Plan Response Template`
-
-The plan must include:
-
-- Summary of the implementation or fix approach
-- Ordered list of tasks
-- Identified sub-agents required (developer / tester)
-- Open questions or blockers (if any)
 
 ---
 
@@ -180,13 +152,20 @@ Present the following to the user:
 
 **Decision logic:**
 
-| User Response    | Root Agent Action                                                                                      |
-| ---------------- | ------------------------------------------------------------------------------------------------------ |
-| Approved         | Create markdown file based on plan response in **Doc Directory** as memory, then proceed to **Step 4** |
-| Requests changes | Re-delegate to planner or debugger with user feedback, then re-present the revised plan                |
-| Cancels / aborts | Stop the workflow and acknowledge                                                                      |
+| User Response    | Root Agent Action                                                                       |
+| ---------------- | --------------------------------------------------------------------------------------- |
+| Approved         | Create markdown file from the plan response, then proceed to **Step 4**                 |
+| Requests changes | Re-delegate to planner or debugger with user feedback, then re-present the revised plan |
+| Cancels / aborts | Stop the workflow and acknowledge                                                       |
 
 > The root agent must **not proceed to execution** until the user has explicitly approved the plan. This gate applies on every planning cycle, including re-plans triggered by incomplete results.
+
+#### Create markdown file
+
+If the user approves the plan response, create a Markdown file from the plan response in the **Documents** folder to save it to memory.
+
+- File name template: `<dd-mm-yyyy-hh-mm-ss>-<plan-name>.md`.
+- Example: `01-12-2026-16-30-01-handle-send-registration-mail.md`.
 
 ---
 
@@ -194,33 +173,17 @@ Present the following to the user:
 
 The root agent reads the plan and delegates to the appropriate sub-agent(s).
 
-> **Key rule — Skill Scanning:** Before composing any delegation prompt, the root agent **must scan the `skills/` directory** and identify all skill files relevant to the task domain. These must be listed explicitly in the `Skill references` field of the delegation prompt. Sub-agents are responsible for reading and applying every skill listed. Do not delegate without populated skill references.
-
 #### Delegate to `developer.agent.md`:
 
 Use the developer delegation prompt template.
 
 > Prompt template skill: [delegation-prompt](./skills/delegation-prompt/SKILL.md) — `Developer Delegation Prompt`
 
-Include:
-
-- Full implementation plan
-- Specific task(s) for this agent
-- File scope and constraints
-- All relevant skill references (scanned from `skills/`)
-
 #### Delegate to `tester.agent.md`:
 
 Use the tester delegation prompt template.
 
 > Prompt template skill: [delegation-prompt](./skills/delegation-prompt/SKILL.md) — `Tester Delegation Prompt`
-
-Include:
-
-- Full implementation plan
-- What to test (unit / integration / e2e)
-- Expected behavior to validate
-- All relevant skill references (scanned from `skills/`)
 
 ---
 
@@ -230,23 +193,16 @@ Include:
 
 > Result template skill: [agent-response-template](./skills/agent-response-template/SKILL.md) — `Sub-Agent Result Template`
 
-The result must include:
-
-- Status: `complete` | `incomplete`
-- Summary of work done
-- Files changed
-- Blockers or missing requirements (if incomplete)
-
 ---
 
 ### Step 6 — Completeness Check (Root Agent)
 
 The root agent evaluates the returned result:
 
-| Condition                                          | Action                                                 |
-| -------------------------------------------------- | ------------------------------------------------------ |
-| Status is `incomplete` or requirements are unclear | Loop back to **Step 2** (re-plan with updated context) |
-| Status is `complete`                               | Proceed to **Step 7** (review)                         |
+| Condition                                        | Action                                                 |
+| ------------------------------------------------ | ------------------------------------------------------ |
+| Status is incomplete or requirements are unclear | Loop back to **Step 2** (re-plan with updated context) |
+| Status is complete`                              | Proceed to **Step 7** (review)                         |
 
 When looping back, the root agent must pass:
 
@@ -262,19 +218,12 @@ Delegate to **`reviewer.agent.md`** using the reviewer delegation prompt templat
 
 > Prompt template skill: [delegation-prompt](./skills/delegation-prompt/SKILL.md) — `Reviewer Delegation Prompt`
 
-Include:
-
-- Summary of all work done
-- Files changed
-- Original user requirement
-- All relevant skill references (scanned from `skills/`)
-
 #### Reviewer response:
 
-| Reviewer Decision            | Root Agent Action                                                                     |
-| ---------------------------- | ------------------------------------------------------------------------------------- |
-| `blocked` — issues found     | Loop back to **Step 4** (re-delegate to responsible sub-agent with reviewer feedback) |
-| `accepted` — output is valid | Proceed to **Step 8**                                                                 |
+| Reviewer Decision            | Root Agent Action       |
+| ---------------------------- | ----------------------- |
+| `blocked` — issues found     | Loop back to **Step 4** |
+| `accepted` — output is valid | Proceed to **Step 8**   |
 
 ---
 

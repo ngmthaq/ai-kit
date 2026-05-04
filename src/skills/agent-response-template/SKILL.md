@@ -21,7 +21,7 @@ Use when `planner.agent.md` or `debugger.agent.md` is returning a structured imp
 
 ### Template
 
-```
+```md
 From: planner.agent.md | debugger.agent.md
 To: Root Agent
 Title: Plan Response — {short title matching the original request title}
@@ -31,26 +31,19 @@ Description: {one sentence summarising the proposed approach}
 
 ## Approach Summary
 
-{2–4 sentences explaining the overall implementation or fix strategy. Why this approach was chosen.}
+- {2–4 sentences explaining the overall implementation or fix strategy. Why this approach was chosen.}
 
-## Task List
+## Functional Requirements
 
-{Ordered list of atomic tasks. Each task must map to a specific sub-agent.}
+- {List the specific functional requirements that must be met for this plan to be considered successful. Each requirement should be testable and verifiable.}
 
-| # | Task | Assigned Agent | Dependencies |
-|---|------|----------------|--------------|
-| 1 | {task description} | developer.agent.md | none |
-| 2 | {task description} | tester.agent.md | task 1 |
-| … | … | … | … |
+## Non-Functional Requirements
+
+- {List any performance, security, maintainability, or other non-functional requirements relevant to this plan.}
 
 ## Files in Scope
 
 - {List all files expected to be created, modified, or deleted}
-
-## Sub-Agents Required
-
-- [ ] developer.agent.md — {reason}
-- [ ] tester.agent.md — {reason}
 
 ## Risks & Assumptions
 
@@ -70,6 +63,26 @@ Description: {one sentence summarising the proposed approach}
 
 - [ ] Ready to execute
 - [ ] Blocked — requires user input on: {describe each blocker clearly}
+
+## Task List
+
+{Ordered list of atomic tasks. Each task must map to a specific sub-agent.}
+
+| #   | Status | Task               | Assigned Agent     | Dependencies | Skills             |
+| --- | ------ | ------------------ | ------------------ | ------------ | ------------------ |
+| 1   | WIP    | {task description} | developer.agent.md | none         | `clean-code`       |
+| 2   | TODO   | {task description} | tester.agent.md    | task 1       | `testing-workflow` |
+| …   | …      | …                  | …                  | …            | …                  |
+
+> **Note:** Tasks must be atomic and actionable. Avoid vague descriptions like "Refactor codebase" — instead, break it down into specific changes to files or functions. Each task must have a clear owner (developer or tester) and reference any relevant skills that should be applied during execution.
+
+> **Note:** Status field in `Task List` includes:
+
+- `TODO` for tasks not yet started
+- `WIP` for tasks currently in progress
+- `Blocked` for tasks that cannot proceed due to an unresolved issue (with a reference to the blocker in the Blockers section)
+- `Skipped` for tasks intentionally left out of this iteration (with justification in the Notes for Root Agent section)
+- `Done` for completed tasks
 ```
 
 ### Usage Notes
@@ -87,7 +100,7 @@ Use when `developer.agent.md` or `tester.agent.md` is returning work results aft
 
 ### Template
 
-```
+```md
 From: developer.agent.md | tester.agent.md
 To: Root Agent
 Title: Result — {short title matching the original delegation title}
@@ -106,24 +119,24 @@ Description: {one sentence summarising what was completed or why it is incomplet
 
 ## Files Changed
 
-| File | Action | Notes |
-|------|--------|-------|
-| {path/to/file} | created | modified | deleted | {brief note on what changed} |
-| … | … | … |
+| File           | Action                       | Notes                        |
+| -------------- | ---------------------------- | ---------------------------- |
+| {path/to/file} | created - modified - deleted | {brief note on what changed} |
+| …              | …                            | …                            |
 
 ## Tasks Completed
 
-| # | Task | Outcome |
-|---|------|---------|
-| 1 | {task description} | done | skipped | blocked |
-| … | … | … |
+| #   | Task               | Outcome                  |
+| --- | ------------------ | ------------------------ |
+| 1   | {task description} | done - skipped - blocked |
+| …   | …                  | …                        |
 
 ## Test Results (tester.agent.md only)
 
-| Test | Type | Result |
-|------|------|--------|
-| {test name} | unit | integration | e2e | pass | fail | skipped |
-| … | … | … |
+| Test        | Type                     | Result                |
+| ----------- | ------------------------ | --------------------- |
+| {test name} | unit - integration - e2e | pass - fail - skipped |
+| …           | …                        | …                     |
 
 ## Blockers / Missing Requirements
 
@@ -151,7 +164,7 @@ Use when `reviewer.agent.md` is returning a final review decision.
 
 ### Template
 
-```
+```md
 From: reviewer.agent.md
 To: Root Agent
 Title: Review Response — {short title matching the review request title}
@@ -170,24 +183,26 @@ Description: {one sentence stating the decision and the primary reason}
 
 ## Checklist Results
 
-| Item | Result | Notes |
-|------|--------|-------|
-| Satisfies original user requirement | pass | fail | partial | {notes} |
-| Follows project conventions and skill references | pass | fail | partial | {notes} |
-| No unintended side effects or regressions | pass | fail | partial | {notes} |
-| Tests cover required scenarios and pass | pass | fail | partial | {notes} |
-| No security, performance, or maintainability issues | pass | fail | partial | {notes} |
+| Item                                                | Result                | Notes   |
+| --------------------------------------------------- | --------------------- | ------- |
+| Satisfies original user requirement                 | pass - fail - partial | {notes} |
+| Follows project conventions and skill references    | pass - fail - partial | {notes} |
+| No unintended side effects or regressions           | pass - fail - partial | {notes} |
+| Tests cover required scenarios and pass             | pass - fail - partial | {notes} |
+| No security, performance, or maintainability issues | pass - fail - partial | {notes} |
 
 ## Issues Found (if blocked)
 
 {List each issue clearly. Each issue must include enough detail for the responsible sub-agent to act on it without further clarification.}
 
-| # | Severity | File | Description | Assigned To |
-|---|----------|------|-------------|-------------|
-| 1 | critical | high | medium | low | {path/to/file} | {clear description of the issue} | developer.agent.md | tester.agent.md |
-| … | … | … | … | … |
+| #   | Severity                       | File           | Description                      |
+| --- | ------------------------------ | -------------- | -------------------------------- |
+| 1   | critical - high - medium - low | {path/to/file} | {clear description of the issue} |
+| …   | …                              | …              | …                                |
 
 - Leave empty if decision is `accepted`.
+
+> **Note:** Create a detailed description for each issue, so that Root Agent can route it directly to the responsible sub-agent with clear instructions for resolution. Avoid vague feedback like "Code quality is poor" — instead, specify "Function `calculateTotal` in `billing.js` has a cyclomatic complexity of 15, which exceeds our standard of 10."
 
 ## Recommendations (non-blocking)
 

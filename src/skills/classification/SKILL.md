@@ -57,7 +57,7 @@ Classify as `bug` when the prompt describes:
 
 ## Decision Template
 
-```
+```md
 From: Root Agent
 To: Root Agent (self)
 Title: Classification — {short title of the user prompt}

@@ -21,11 +21,7 @@ Find your development context below and apply the listed principles. Multiple se
 
 ---
 
-## 🏗️ OOP Languages
-
-_Java, C#, TypeScript, Kotlin, Swift, Python (class-based)_
-
-### SOLID
+## SOLID
 
 **S — Single Responsibility Principle**
 Every class, module, or function has **one and only one reason to change**.
@@ -117,7 +113,7 @@ class OrderService {
 
 ---
 
-### DRY — Don't Repeat Yourself
+## DRY — Don't Repeat Yourself
 
 Every piece of knowledge has a **single, authoritative representation** in the system.
 
@@ -154,11 +150,7 @@ export type User = { id: string; email: string; role: string };
 
 ---
 
-## 🧮 Functional / General-Purpose Languages
-
-_JavaScript (FP style), Python (functional), Go, Rust, Elixir, Haskell_
-
-### KISS — Keep It Simple, Stupid
+## KISS — Keep It Simple, Stupid
 
 Solutions should be **as simple as possible** to fulfill their requirements — no simpler, no more complex.
 
@@ -219,17 +211,7 @@ function processOrder(order) {
 
 ---
 
-### DRY _(also applies here)_
-
-Same principle as in OOP — language-agnostic. Applies to utility functions, constants, test setup, and shared schemas equally in functional codebases.
-
----
-
-## 🖥️ UI / Component Development
-
-_React, Vue, Angular, Flutter, SwiftUI_
-
-### Atomic Design
+## Atomic Design
 
 Organize all UI components into five levels based on complexity and composition.
 
@@ -330,7 +312,7 @@ components/
 
 ---
 
-### Separation of Concerns _(UI context)_
+## Separation of Concerns
 
 Keep business logic out of components — the UI renders, the domain decides.
 
@@ -356,23 +338,7 @@ function CheckoutPage({ cart }) {
 }
 ```
 
----
-
-## 🔧 Backend / API Development
-
-_REST, GraphQL, microservices, serverless_
-
-### Separation of Concerns
-
 Divide the system into layers, each owning exactly one concern.
-
-| Layer                    | Owns                                           | Must NOT contain                           |
-| ------------------------ | ---------------------------------------------- | ------------------------------------------ |
-| **Controller / Handler** | Input validation, routing, response formatting | Business rules, DB queries                 |
-| **Service / Domain**     | Business rules, workflows, decisions           | SQL, HTTP, HTML                            |
-| **Repository / DAO**     | Queries, persistence, caching                  | Business rules                             |
-| **Infrastructure**       | HTTP clients, queues, email, file I/O          | Domain logic                               |
-| **Cross-cutting**        | Auth, logging, validation, error handling      | Business logic — use middleware/decorators |
 
 ```python
 # Bad — data access, business logic, and side effects all in one function
@@ -423,6 +389,8 @@ async function createUser(data: UserInput) {
   return user;
 }
 ```
+
+---
 
 **SoC Enforcement Rules**
 
