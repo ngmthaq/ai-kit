@@ -141,37 +141,35 @@ Delegate to **`debugger.agent.md`** in **plan mode** using the bug fix prompt te
 
 > **Chore fast-path:** this step does not apply to `chore`. Chores get a lighter scope-confirmation gate inside Step 2 instead of the full plan-approval gate described below.
 
-Before any implementation begins, the root agent **must present the plan to the user and wait for explicit approval**.
-
-Present the following to the user:
-
-- The plan summary and approach
-- The full task list with assigned agents
-- Files in scope
-- Any open questions or blockers flagged by the planner/debugger
+Before any implementation begins, the root agent **must** present the full plan response from planner/debuger to the user and **wait** for explicit approval. **DO NOT** make things up.
 
 **Decision logic:**
 
-| User Response    | Root Agent Action                                                                       |
-| ---------------- | --------------------------------------------------------------------------------------- |
-| Approved         | Create markdown file from the plan response, then proceed to **Step 4**                 |
-| Requests changes | Re-delegate to planner or debugger with user feedback, then re-present the revised plan |
-| Cancels / aborts | Stop the workflow and acknowledge                                                       |
+#### Approved
 
-> The root agent must **not proceed to execution** until the user has explicitly approved the plan. This gate applies on every planning cycle, including re-plans triggered by incomplete results.
-
-#### Create markdown file
-
-If the user approves the plan response, create a Markdown file from the plan response in the **Documents** folder to save it to memory.
+If the user approves the plan response, create a markdown file from the plan response in the **Doc Directory** folder to save it to memory. Always copy full response from planner/debuger agent, **DO NOT** make things up.
 
 - File name template: `<dd-mm-yyyy-hh-mm-ss>-<plan-name>.md`.
 - Example: `01-12-2026-16-30-01-handle-send-registration-mail.md`.
+
+After markdown file created, then proceed to **Step 4**.
+
+#### Requests Changes
+
+- If the user requests a plan change, return to **step 2** with the user's change request. **DO NOT** delegate sub-agent(s) if the user does not approve the plan.
+- The root agent must **not proceed to execution** until the user has explicitly approved the plan. This gate applies on every planning cycle, including re-plans triggered by incomplete results.
+
+#### Cancels / Aborts
+
+- Stop the workflow and acknowledge
 
 ---
 
 ### Step 4 — Delegation to Sub-Agents
 
 The root agent reads the plan and delegates to the appropriate sub-agent(s).
+
+> **ALWAYS** delegate to the appropriate sub-agent, **DO NOT** modify code directly.
 
 #### Delegate to `developer.agent.md`:
 
@@ -202,7 +200,12 @@ The root agent evaluates the returned result:
 | Condition                                        | Action                                                 |
 | ------------------------------------------------ | ------------------------------------------------------ |
 | Status is incomplete or requirements are unclear | Loop back to **Step 2** (re-plan with updated context) |
-| Status is complete`                              | Proceed to **Step 7** (review)                         |
+| Status is complete                               | Proceed to **Step 7** (review)                         |
+
+When root agent received complete response from sub-agent, the root agent must:
+
+- **NOT** modify code directly
+- Proceed to review step - **Step 7**
 
 When looping back, the root agent must pass:
 
@@ -237,6 +240,8 @@ The summary must include:
 - Files changed
 - Tests added or updated
 - Any outstanding notes or follow-up recommendations
+
+Also update the `Status` column in the `## Task List` section of the markdown document plan.
 
 ---
 

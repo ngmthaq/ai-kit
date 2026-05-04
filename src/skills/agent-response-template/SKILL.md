@@ -22,10 +22,10 @@ Use when `planner.agent.md` or `debugger.agent.md` is returning a structured imp
 ### Template
 
 ```md
-From: planner.agent.md | debugger.agent.md
-To: Root Agent
-Title: Plan Response — {short title matching the original request title}
-Description: {one sentence summarising the proposed approach}
+- From: planner.agent.md | debugger.agent.md
+- To: Root Agent
+- Title: Plan Response — {short title matching the original request title}
+- Description: {one sentence summarising the proposed approach}
 
 ---
 
@@ -101,10 +101,10 @@ Use when `developer.agent.md` or `tester.agent.md` is returning work results aft
 ### Template
 
 ```md
-From: developer.agent.md | tester.agent.md
-To: Root Agent
-Title: Result — {short title matching the original delegation title}
-Description: {one sentence summarising what was completed or why it is incomplete}
+- From: developer.agent.md | tester.agent.md
+- To: Root Agent
+- Title: Result — {short title matching the original delegation title}
+- Description: {one sentence summarising what was completed or why it is incomplete}
 
 ---
 
@@ -165,10 +165,10 @@ Use when `reviewer.agent.md` is returning a final review decision.
 ### Template
 
 ```md
-From: reviewer.agent.md
-To: Root Agent
-Title: Review Response — {short title matching the review request title}
-Description: {one sentence stating the decision and the primary reason}
+- From: reviewer.agent.md
+- To: Root Agent
+- Title: Review Response — {short title matching the review request title}
+- Description: {one sentence stating the decision and the primary reason}
 
 ---
 

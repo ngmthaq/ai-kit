@@ -24,24 +24,20 @@ Use when delegating a feature or refactor request to `planner.agent.md` for impl
 ### Template
 
 ```md
-From: Root Agent
-To: planner.agent.md
-Title: Feature Planning Request — {short title of the feature}
-Description: {one sentence describing what this feature/refactor achieves}
+- From: Root Agent
+- To: planner.agent.md
+- Title: Feature Planning Request — {short title of the feature}
+- Description: {one sentence describing what this feature/refactor achieves}
 
 ---
 
-Document references:
+## Document References
 
 - {list any relevant documents from memory or the plan that the planner should reference}
 
----
-
-Skill references:
+## Skill References
 
 - {list all relevant skill files scanned from the skills/ directory that planner should apply}
-
----
 
 ## Original User Prompt
 
@@ -88,8 +84,8 @@ Please answer so the plan is accurate.
 
 - Root Agent must fill every section before delegating. Do not send partial prompts.
 - **ALWAYS ask the user when any section cannot be filled with confidence** — do not infer, guess, or proceed with placeholders.
-- `Skill references` must be populated by scanning the `skills/` directory and selecting all files relevant to the feature domain.
-- `Document references` should include any relevant memory items or previous plans that the planner should reference when creating the implementation plan.
+- `Skill References` must be populated by scanning the `skills/` directory and selecting all files relevant to the feature domain.
+- `Document References` should include any relevant memory items or previous plans that the planner should reference when creating the implementation plan.
 - Planner must respond using `agent-response-template` skill (`Plan Response Template` section).
 
 ---
@@ -101,24 +97,20 @@ Use when delegating a bug report to `debugger.agent.md` for fix planning.
 ### Template
 
 ```md
-From: Root Agent
-To: debugger.agent.md
-Title: Bug Fix Planning Request — {short title of the bug}
-Description: {one sentence describing the broken behavior and its impact}
+- From: Root Agent
+- To: debugger.agent.md
+- Title: Bug Fix Planning Request — {short title of the bug}
+- Description: {one sentence describing the broken behavior and its impact}
 
 ---
 
-Document references:
+## Document References
 
 - {list any relevant documents from memory or the plan that the debugger should reference}
 
----
-
-Skill references:
+## Skill References
 
 - {list all relevant skill files scanned from the skills/ directory that debugger should apply}
-
----
 
 ## Original User Prompt
 
@@ -176,8 +168,8 @@ Please answer so the debugger can produce an accurate fix plan.
 - Root Agent must fill every section before delegating. Do not send partial prompts.
 - **ALWAYS ask the user when any section cannot be filled with confidence** — do not infer, guess, or fabricate details.
 - If reproduction steps are unknown, ask the user — do not state "unknown" and proceed.
-- `Skill references` must be populated by scanning the `skills/` directory and selecting all files relevant to the bug domain.
-- `Document references` should include any relevant memory items or previous plans that the debugger should reference when creating the fix plan.
+- `Skill References` must be populated by scanning the `skills/` directory and selecting all files relevant to the bug domain.
+- `Document References` should include any relevant memory items or previous plans that the debugger should reference when creating the fix plan.
 - Debugger must respond using `agent-response-template` skill (`Plan Response Template` section).
 
 ---
@@ -189,24 +181,20 @@ Use when assigning implementation tasks derived from an approved plan to `Develo
 ### Template
 
 ```md
-From: Root Agent
-To: developer.agent.md
-Title: Implementation Task — {short title matching the plan title}
-Description: {one sentence describing what must be implemented in this delegation}
+- From: Root Agent
+- To: developer.agent.md
+- Title: Implementation Task — {short title matching the plan title}
+- Description: {one sentence describing what must be implemented in this delegation}
 
 ---
 
-Document references:
+## Document References
 
 - {list any relevant documents from memory or the plan that the developer should reference}
 
----
-
-Skill references:
+## Skill References
 
 - {list all relevant skill files scanned from the skills/ directory that developer should apply}
-
----
 
 ## Context
 
@@ -251,8 +239,8 @@ Return your result using `agent-response-template` skill (`Sub-Agent Result Temp
 
 ### Usage Notes
 
-- Root Agent must scan `skills/` and assign all relevant skill files to `Skill references` before delegating.
-- `Document references` should include any relevant memory items or the original plan that the developer should reference when implementing.
+- Root Agent must scan `skills/` and assign all relevant skill files to `Skill References` before delegating.
+- `Document References` should include any relevant memory items or the original plan that the developer should reference when implementing.
 - On re-delegation, always include the reviewer feedback section — developer must address each point explicitly.
 - `Acceptance Criteria` per task is mandatory — vague tasks produce vague results.
 - Developer must respond using `agent-response-template` skill (`Sub-Agent Result Template` section).
@@ -266,24 +254,20 @@ Use when assigning testing tasks after developer implementation is complete to `
 ### Template
 
 ```md
-From: Root Agent
-To: tester.agent.md
-Title: Testing Task — {short title matching the plan title}
-Description: {one sentence describing what must be tested in this delegation}
+- From: Root Agent
+- To: tester.agent.md
+- Title: Testing Task — {short title matching the plan title}
+- Description: {one sentence describing what must be tested in this delegation}
 
 ---
 
-Document references:
+## Document References
 
 - {list any relevant documents from memory or the plan that the tester should reference}
 
----
-
-Skill references:
+## Skill References
 
 - {list all relevant skill files scanned from the skills/ directory that tester should apply}
-
----
 
 ## Context
 
@@ -331,8 +315,8 @@ Return your result using `agent-response-template` skill (`Sub-Agent Result Temp
 
 ### Usage Notes
 
-- Root Agent must scan `skills/` and assign all relevant skill files to `Skill references` before delegating.
-- `Document references` should include any relevant memory items or the original plan that the tester should reference when creating tests.
+- Root Agent must scan `skills/` and assign all relevant skill files to `Skill References` before delegating.
+- `Document References` should include any relevant memory items or the original plan that the tester should reference when creating tests.
 - Tester must not modify production code — only test files.
 - If developer output is incomplete, tester should flag this in the result rather than testing partial work.
 - Tester must respond using `agent-response-template` skill (`Sub-Agent Result Template` section).
@@ -346,24 +330,20 @@ Use when submitting completed developer and tester output for quality review to 
 ### Template
 
 ```md
-From: Root Agent
-To: reviewer.agent.md
-Title: Review Request — {short title matching the original task title}
-Description: {one sentence describing what was built or fixed and what the reviewer must assess}
+- From: Root Agent
+- To: reviewer.agent.md
+- Title: Review Request — {short title matching the original task title}
+- Description: {one sentence describing what was built or fixed and what the reviewer must assess}
 
 ---
 
-Document references:
+## Document References
 
 - {list any relevant documents from memory or the original plan that the reviewer should reference}
 
----
-
-Skill references:
+## Skill References
 
 - {list all relevant skill files scanned from the skills/ directory that reviewer should apply}
-
----
 
 ## Context
 
@@ -413,8 +393,8 @@ Return your result using `agent-response-template` skill (`Reviewer Response Tem
 
 ### Usage Notes
 
-- Root Agent must scan `skills/` and assign all relevant skill files to `Skill references` — reviewer enforces them.
-- `Document references` should include any relevant memory items or the original plan that the reviewer should reference when assessing.
+- Root Agent must scan `skills/` and assign all relevant skill files to `Skill References` — reviewer enforces them.
+- `Document References` should include any relevant memory items or the original plan that the reviewer should reference when assessing.
 - On re-review, always include the `Previous Review Feedback` section so reviewer can confirm issues were resolved.
 - Reviewer must not modify code — only assess and report.
 - Reviewer must respond using `agent-response-template` skill (`Reviewer Response Template` section).
