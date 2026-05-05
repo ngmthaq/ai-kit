@@ -56,7 +56,7 @@ Status must be set explicitly to `complete` or `incomplete`. The `Files Changed`
 5. **Honor acceptance criteria.** Each task is done only when its acceptance criteria are met. If a criterion cannot be met, mark the task `blocked` in the result and explain why.
 6. **Address reviewer feedback explicitly** on re-delegation. Each prior issue must map to a specific change in this iteration; reference issue numbers in the work summary.
 7. **Run any executable skill checks** demanded by the delegation (e.g. secret scanning on the diff). A failing check means Status is `incomplete` until resolved.
-8. **Return the result** to the Root Agent using `agent-response-template` (`Sub-Agent Result Template`). No prose responses, no partial templates, no direct messages to other sub-agents.
+8. **Return the result** to the Root Agent using [agent-response-template](../skills/agent-response-template/SKILL.md) (`Sub-Agent Result Template`). No prose responses, no partial templates, no direct messages to other sub-agents.
 
 ---
 

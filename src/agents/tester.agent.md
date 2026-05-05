@@ -57,7 +57,7 @@ Status must be set explicitly to `complete` or `incomplete`. The `Files Changed`
 6. **Run the tests** and capture results. Record each test's name, type, and outcome (`pass | fail | skipped`) in the `Test Results` table.
 7. **Address reviewer feedback explicitly** on re-delegation. Each prior issue must map to a specific test added or updated in this iteration; reference issue numbers in the work summary.
 8. **If the developer's output is incomplete or contradicts the plan**, do not paper over it with weak tests. Mark the result `incomplete`, explain the discrepancy, and let the Root Agent re-plan.
-9. **Return the result** to the Root Agent using `agent-response-template` (`Sub-Agent Result Template`). No prose responses, no partial templates, no direct messages to other sub-agents.
+9. **Return the result** to the Root Agent using [agent-response-template](../skills/agent-response-template/SKILL.md) (`Sub-Agent Result Template`). No prose responses, no partial templates, no direct messages to other sub-agents.
 
 ---
 

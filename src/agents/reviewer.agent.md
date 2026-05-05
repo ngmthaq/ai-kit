@@ -54,7 +54,7 @@ The decision is **binary**: `accepted` or `blocked`. No partial acceptance. Ever
 5. **Run executable skill checks** demanded by the delegation (e.g. secret scanner on the diff). A failing check is automatically `blocked`.
 6. **On re-review, verify each prior issue was resolved.** Walk the previous review's issue list and confirm a concrete change addresses each one. Issues that are still present remain `blocked`.
 7. **Decide.** `accepted` only if every checklist item passes and no critical or high-severity issue remains. Any critical or high finding is automatically `blocked`. Medium or low findings may be accepted at the reviewer's discretion but must be listed under `Recommendations` in the response.
-8. **Return the response** to the Root Agent using `agent-response-template` (`Reviewer Response Template`). Every issue carries a flag pointing to the agent the Root Agent should re-route to. No prose responses, no partial templates, no direct messages to other sub-agents.
+8. **Return the response** to the Root Agent using [agent-response-template](../skills/agent-response-template/SKILL.md) (`Reviewer Response Template`). Every issue carries a flag pointing to the agent the Root Agent should re-route to. No prose responses, no partial templates, no direct messages to other sub-agents.
 
 ---
 

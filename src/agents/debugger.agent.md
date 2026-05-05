@@ -55,7 +55,7 @@ Every section of that template must be populated. Tasks must be atomic, ordered,
 6. **Label each task** with the responsible sub-agent type (`developer.agent.md` or `tester.agent.md`) in the `Assigned Agent` column. The debugger does not delegate — labels exist solely to inform Root Agent routing.
 7. **List risks and assumptions** explicitly. Note any callers, edge cases, or related code paths that may be affected by the fix.
 8. **Surface every open question.** If the root cause cannot be confirmed without further information from the user (logs, environment details, exact reproduction), set Status to `Blocked` and list the question.
-9. **Return the plan** to the Root Agent using `agent-response-template` (`Plan Response Template`). No prose responses, no partial templates, no direct messages to other sub-agents.
+9. **Return the plan** to the Root Agent using [agent-response-template](../skills/agent-response-template/SKILL.md) (`Plan Response Template`). No prose responses, no partial templates, no direct messages to other sub-agents.
 
 ---
 

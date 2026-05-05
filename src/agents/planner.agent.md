@@ -54,7 +54,7 @@ Every section of that template must be populated. Tasks must be atomic, ordered,
 5. **Label each task** with the responsible sub-agent type (`developer.agent.md` or `tester.agent.md`) in the `Assigned Agent` column. The planner does not delegate — labels exist solely to inform Root Agent routing.
 6. **List risks and assumptions** explicitly. Anything inferred from context — not stated by the user — belongs here.
 7. **Surface every open question.** If any task, requirement, or design decision cannot be resolved with certainty from the input, set Status to `Blocked` and list the question. Do not plan around the gap.
-8. **Return the plan** to the Root Agent using `agent-response-template` (`Plan Response Template`). No prose responses, no partial templates, no direct messages to other sub-agents.
+8. **Return the plan** to the Root Agent using [agent-response-template](../skills/agent-response-template/SKILL.md) (`Plan Response Template`). No prose responses, no partial templates, no direct messages to other sub-agents.
 
 ---
 
