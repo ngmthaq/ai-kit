@@ -26,6 +26,26 @@ To configure the model dynamically depending on the agent, see the `Agent Model 
 
 ---
 
+### First-Time Onboarding / Outdated Project Information
+
+If you are setting up AI agents on a project for the first time, or if `PROJECT_OVERVIEW.md` and `CODING_CONVENTIONS.md` are outdated, use the built-in **onboarding** skill to let the AI discover and document your project automatically.
+
+In any agent chat, type:
+
+```
+/onboarding
+```
+
+The skill will guide the AI through:
+
+1. Discovering project name, description, languages, frameworks, package manager, key libraries, database, doc directory, and testing workflow — then writing results to `PROJECT_OVERVIEW.md`.
+2. Scanning the codebase for coding conventions, presenting them for your approval, then writing results to `CODING_CONVENTIONS.md`.
+3. _(Optional)_ Running secret and security scanners.
+4. _(Optional)_ Auditing codebase quality against clean code principles.
+5. _(Optional)_ Auditing test files for AAA structure.
+
+---
+
 ## Agent Model Configuration
 
 In the agents folder, you will see many agent files; you can configure each agent to run a different model depending on your purpose.
