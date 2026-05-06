@@ -28,7 +28,7 @@
 
 {Brief description of what the developer implemented — what changed and why, so tester understands scope.}
 
-## Files Changed by Developer
+## Files Changed by Developer (if **Testing Workflow** is `Code-First`)
 
 - {list all files created or modified by developer.agent.md}
 

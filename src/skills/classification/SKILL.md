@@ -11,19 +11,6 @@ Used by the **Root Agent** to classify every incoming user prompt before any exe
 
 ## Classification Rules
 
-### Feature
-
-Classify as `feature` when the prompt describes:
-
-- New functionality to be added
-- Agent skill additions or modifications that add new capabilities
-- An existing behaviour to be refactored or improved
-- A performance improvement with no broken behaviour involved
-- A non-breaking change that adds value or enhances the user experience
-- A change that is explicitly framed as a "feature" by the user
-
-**Signal words:** "add", "implement", "create", "build", "refactor", "improve", "migrate", "support", "enable", "integrate"
-
 ### Chore
 
 Classify as `chore` when the prompt describes a small, low-risk operation that does **not** touch business logic:
@@ -40,6 +27,19 @@ Classify as `chore` when the prompt describes a small, low-risk operation that d
 
 > If a "chore" turns out to touch business logic mid-execution, the Root Agent must stop and re-classify as `feature` or `bug`.
 
+### Feature
+
+Classify as `feature` when the prompt describes:
+
+- New functionality to be added
+- Agent skill additions or modifications that add new capabilities
+- An existing behaviour to be refactored or improved
+- A performance improvement with no broken behaviour involved
+- A non-breaking change that adds value or enhances the user experience
+- A change that is explicitly framed as a "feature" by the user
+
+**Signal words:** "add", "implement", "create", "build", "refactor", "improve", "migrate", "support", "enable", "integrate"
+
 ### Bug
 
 Classify as `bug` when the prompt describes:
@@ -55,60 +55,11 @@ Classify as `bug` when the prompt describes:
 
 ---
 
-## Decision Template
-
-```md
-From: Root Agent
-To: Root Agent (self)
-Title: Classification — {short title of the user prompt}
-Description: {one sentence stating the classification and primary reason}
-
----
-
-## Input
-
-- User prompt: {paste the full original user prompt verbatim}
-
-## Classification Result
-
-- Type: feature | refactor | chore | bug
-- Rationale: {one or two sentences explaining why this classification was chosen}
-
-## Ambiguity Notes
-
-- {List any signals that pointed toward a different classification}
-- {List any assumptions made to resolve ambiguity}
-- Leave empty if classification was unambiguous.
-
-## Next Step
-
-- [ ] Delegate to planner.agent.md using `delegation-prompt` (feature | refactor, Feature Planning Prompt section)
-- [ ] Delegate to debugger.agent.md using `delegation-prompt` (bug, Bug Planning Prompt section)
-- [ ] Root Agent executes directly — no delegation (chore — see AGENT_WORKFLOW.md Step 2)
-```
-
----
-
 ## Ambiguous Cases
 
-If the prompt contains signals for more than one of `feature`, `chore`, or `bug`, or if any field cannot be filled with confidence:
+**Rule: ALWAYS ask the user. Never assume.**
 
-> **Rule: ALWAYS ask the user. Never assume.**
-
-Stop and ask the user a direct, specific question before proceeding. Do not guess, infer, or proceed with a best-effort classification.
-
-**Ask template:**
-
-```
-I need clarification before I can proceed:
-
-1. {specific question — e.g. "Is this describing a broken existing behaviour, or a new capability you want added?"}
-2. {additional question if needed}
-
-Please answer so I can route this correctly.
-```
-
-Only proceed to delegation once every ambiguity is resolved by the user.
+If the prompt contains signals for more than one of `feature`, `chore`, or `bug`, or if any field cannot be filled with confidence. Stop and ask the user a direct, specific question before proceeding. Do not guess, infer, or proceed with a best-effort classification. Only proceed to delegation once every ambiguity is resolved by the user.
 
 ---
 
@@ -116,6 +67,7 @@ Only proceed to delegation once every ambiguity is resolved by the user.
 
 - Classification is always the **first action** of the Root Agent. No execution or delegation happens before it.
 - **ALWAYS ask the user when anything is unclear** — intent, scope, affected area, expected behaviour. There are no acceptable assumptions.
-- For `feature` and `bug`, the classification result feeds directly into the delegation prompt (`From`, `Title`, `Classification` fields).
 - For `chore`, classification feeds into the scope-confirmation message the Root Agent shows the user before direct execution (no delegation).
+- For `feature`, delegate to planner.agent.md using [delegation-prompt](../delegation-prompt/) (Feature Planning Prompt section)
+- For `bug`, delegate to debugger.agent.md using [delegation-prompt](../delegation-prompt/) (Bug Planning Prompt section)
 - A prompt that cannot be classified without guessing must be treated as blocked until the user clarifies.

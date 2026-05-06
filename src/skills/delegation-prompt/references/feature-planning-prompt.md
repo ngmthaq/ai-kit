@@ -22,51 +22,19 @@
 
 {paste the full original user prompt verbatim}
 
-## Classification
-
-- Type: feature | refactor
-- Rationale: {why this was classified as such}
-
-## Codebase Context
-
-- Affected modules / files: {list known files or modules relevant to this feature}
-- Architecture notes: {any patterns, conventions, or constraints the planner must respect}
-- Dependencies: {external libraries, services, or internal modules involved}
-
-## Requirements
-
-{Expand the user prompt into clear, unambiguous requirements. Use bullet points. Each item must be testable.}
-
 ## Constraints
 
-- {Performance, security, backward-compatibility, or scope constraints}
-```
+**ALWAYS ask the user when any section cannot be filled with confidence** — do not infer, guess, or proceed with placeholders. If any requirement, constraint, or context field cannot be filled with certainty from the user prompt, list it here and STOP. Do not process until the user has answered every open question.
 
----
+## Additional Information
 
-## Open Questions
-
-Rule: ALWAYS ask the user. Never assume. If any requirement, constraint, or context field cannot be filled with certainty from the user prompt, list it here and STOP. Do not delegate to planner.agent.md until the user has answered every open question.
-
-**Ask template:**
-
-```
-Before I can create the implementation plan, I need clarification:
-
-1. {specific question}
-2. {specific question}
-
-Please answer so the plan is accurate.
-
-- {List anything unclear — scope, affected files, constraints, expected behaviour, definition of done}
+{Root Agent can add additional information here to help planner create the plan}
 ```
 
 ---
 
 ## Usage Notes
 
-- Root Agent must fill every section before delegating. Do not send partial prompts.
-- **ALWAYS ask the user when any section cannot be filled with confidence** — do not infer, guess, or proceed with placeholders.
 - `Skill References` must be populated by scanning the `skills/` directory and selecting all files relevant to the feature domain.
 - `Document References` should include any relevant memory items or previous plans that the planner should reference when creating the implementation plan.
 - Planner must respond using [agent-response-template](../../agent-response-template/) skill (`Plan Response Template` section).

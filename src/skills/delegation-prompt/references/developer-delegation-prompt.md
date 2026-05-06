@@ -50,6 +50,10 @@
 - {Performance, security, backward-compatibility, or scope constraints}
 - {Must not break: list critical existing behaviors}
 
+## Test Cases (if **Testing Workflow** is `Test-First`)
+
+- {list all files created or modified by tester.agent.md}
+
 ## Reviewer Feedback (if re-delegation)
 
 {If this is a re-delegation triggered by a reviewer block, paste the reviewer's feedback here. Leave empty on first delegation.}

@@ -61,9 +61,9 @@
 
 - `TODO` for tasks not yet started
 - `WIP` for tasks currently in progress
-- `Blocked` for tasks that cannot proceed due to an unresolved issue (with a reference to the blocker in the Blockers section)
-- `Skipped` for tasks intentionally left out of this iteration (with justification in the Notes for Root Agent section)
-- `Done` for completed tasks
+- `BLOCKED` for tasks that cannot proceed due to an unresolved issue (with a reference to the blocker in the Blockers section)
+- `SKIPPED` for tasks intentionally left out of this iteration (with justification in the Notes for Root Agent section)
+- `DONE` for completed tasks
 ```
 
 ---
