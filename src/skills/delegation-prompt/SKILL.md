@@ -1,6 +1,7 @@
 ---
 name: delegation-prompt
 description: Delegation prompt templates for Root Agent handoffs to planner.agent.md, debugger.agent.md, developer.agent.md, tester.agent.md, and reviewer.agent.md. Use when composing feature planning, bug planning, implementation, testing, or review delegations.
+user-invocable: false
 ---
 
 ## Purpose

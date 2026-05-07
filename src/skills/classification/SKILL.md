@@ -1,6 +1,7 @@
 ---
 name: classification
 description: Intent classification logic for the Root Agent. Use when a user prompt arrives to determine whether the request is a feature (or refactor), a chore, or a bug before any delegation occurs. Chores route to the Root Agent's direct-execution fast-path; features and bugs route through the planning pipeline.
+user-invocable: false
 ---
 
 ## Purpose
