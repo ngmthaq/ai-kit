@@ -49,8 +49,10 @@
 
 ## Usage Notes
 
-- `Skill References` must be populated by scanning the `skills/` directory and selecting all files relevant to the bug domain.
+- The Root Agent doesn't need to explore the codebase if the task is too complex; let the debugger sub-agent handle that.
+- Always load documents from the **Documents Folder** before delegating tasks to sub-agents; this will help extract additional information from previous tasks if relevant.
 - `Document References` should include any relevant memory items or previous plans that the debugger should reference when creating the fix plan.
+- `Skill References` must be populated by scanning the `skills/` directory and selecting all files relevant to the bug domain.
 - Debugger must respond using [agent-response-template](../../agent-response-template/) skill (`Plan Response Template` section).
 - User prompts can be confusing or contain spelling errors; Root Agent must analyze and clarify them, then provide the following information to the debugger:
   - Observed Behavior (Describe exactly what is happening)

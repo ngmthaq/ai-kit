@@ -18,12 +18,6 @@
 
 - {list all relevant skill files scanned from the skills/ directory that reviewer should apply}
 
-## Context
-
-- Original request type: feature | refactor | bug fix
-- Review iteration: {e.g. "Review 1 of 2"}
-- Plan reference: {title of the plan from agent-response-template / Plan Response Template}
-
 ## Original User Requirement
 
 {Paste the original user prompt verbatim. Reviewer must validate against this, not assumptions.}
@@ -62,6 +56,10 @@ Reviewer must assess all of the following:
 ## Expected Output
 
 Return your result using [agent-response-template](../../agent-response-template/) skill (`Reviewer Response Template` section).
+
+## Additional Information
+
+{Root Agent can add additional information here to help reviewer review the output}
 ```
 
 ---

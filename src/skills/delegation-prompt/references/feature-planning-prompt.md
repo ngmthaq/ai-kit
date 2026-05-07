@@ -35,6 +35,8 @@
 
 ## Usage Notes
 
-- `Skill References` must be populated by scanning the `skills/` directory and selecting all files relevant to the feature domain.
+- The Root Agent doesn't need to explore the codebase if the task is too complex; let the planer sub-agent handle that.
+- Always load documents from the **Documents Folder** before delegating tasks to sub-agents; this will help extract additional information from previous tasks if relevant.
 - `Document References` should include any relevant memory items or previous plans that the planner should reference when creating the implementation plan.
+- `Skill References` must be populated by scanning the `skills/` directory and selecting all files relevant to the feature domain.
 - Planner must respond using [agent-response-template](../../agent-response-template/) skill (`Plan Response Template` section).

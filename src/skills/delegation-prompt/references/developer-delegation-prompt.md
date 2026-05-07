@@ -18,12 +18,6 @@
 
 - {list all relevant skill files scanned from the skills/ directory that developer should apply}
 
-## Context
-
-- Original request type: feature | refactor | bug fix
-- Plan reference: {title of the plan from agent-response-template / Plan Response Template}
-- Iteration: {current loop count, e.g. "Iteration 1 of 3"}
-
 ## Tasks Assigned
 
 {Extract only the developer tasks from the plan's Task List. Do not include tester tasks.}
@@ -61,6 +55,10 @@
 ## Expected Output
 
 Return your result using [agent-response-template](../../agent-response-template/) skill (`Sub-Agent Result Template` section).
+
+## Additional Information
+
+{Root Agent can add additional information here to help developer implement task}
 ```
 
 ---
