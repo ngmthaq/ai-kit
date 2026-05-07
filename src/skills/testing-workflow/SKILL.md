@@ -1,6 +1,7 @@
 ---
 name: testing-workflow
 description: Best practices for structuring tests with project overview specific guidelines on test organization, naming conventions, and test data management to ensure maintainable and effective testing across the codebase.
+user-invocable: false
 ---
 
 # Testing Workflow

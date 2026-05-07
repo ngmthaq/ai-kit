@@ -1,6 +1,7 @@
 ---
 name: agent-response-template
 description: Response templates for planner.agent.md, debugger.agent.md, developer.agent.md, tester.agent.md, and reviewer.agent.md. Use when returning a plan, a sub-agent work result, or a reviewer decision back to Root Agent.
+user-invocable: false
 ---
 
 ## Purpose
