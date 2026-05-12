@@ -69,6 +69,6 @@ If the prompt contains signals for more than one of `feature`, `chore`, or `bug`
 - Classification is always the **first action** of the Root Agent. No execution or delegation happens before it.
 - **ALWAYS ask the user when anything is unclear** — intent, scope, affected area, expected behaviour. There are no acceptable assumptions.
 - For `chore`, classification feeds into the scope-confirmation message the Root Agent shows the user before direct execution (no delegation).
-- For `feature`, delegate to planner.agent.md using [delegation-prompt](../delegation-prompt/) (Feature Planning Prompt section)
-- For `bug`, delegate to debugger.agent.md using [delegation-prompt](../delegation-prompt/) (Bug Planning Prompt section)
+- For `feature`, spawn a sub-agent loaded with the [planner](../planner/SKILL.md) role using [delegation-prompt](../delegation-prompt/) (Feature Planning Prompt section)
+- For `bug`, spawn a sub-agent loaded with the [debugger](../debugger/SKILL.md) role using [delegation-prompt](../delegation-prompt/) (Bug Planning Prompt section)
 - A prompt that cannot be classified without guessing must be treated as blocked until the user clarifies.

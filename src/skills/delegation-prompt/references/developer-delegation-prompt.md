@@ -4,7 +4,7 @@
 
 ```md
 - From: Root Agent
-- To: developer.agent.md
+- To: developer (sub-agent loaded with [developer skill](../../developer/SKILL.md))
 - Title: Implementation Task — {short title matching the plan title}
 - Description: {one sentence describing what must be implemented in this delegation}
 
@@ -46,7 +46,7 @@
 
 ## Test Cases (if **Testing Workflow** is `Test-First`)
 
-- {list all files created or modified by tester.agent.md}
+- {list all files created or modified by the tester sub-agent}
 
 ## Reviewer Feedback (if re-delegation)
 

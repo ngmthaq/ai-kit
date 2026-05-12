@@ -3,7 +3,7 @@
 ## Template
 
 ```md
-- From: planner.agent.md | debugger.agent.md
+- From: planner | debugger (sub-agent loaded with the matching role skill)
 - To: Root Agent
 - Title: Plan Response — {short title matching the original request title}
 - Description: {one sentence summarising the proposed approach}
@@ -49,13 +49,13 @@
 
 {Ordered list of atomic tasks. Each task must map to a specific sub-agent.}
 
-| #   | Status | Task               | Assigned Agent     | Dependencies | Skills             |
-| --- | ------ | ------------------ | ------------------ | ------------ | ------------------ |
-| 1   | WIP    | {task description} | developer.agent.md | none         | `clean-code`       |
-| 2   | TODO   | {task description} | tester.agent.md    | task 1       | `testing-workflow` |
-| …   | …      | …                  | …                  | …            | …                  |
+| #   | Status | Task               | Responsible Role | Dependencies | Skills             |
+| --- | ------ | ------------------ | ---------------- | ------------ | ------------------ |
+| 1   | WIP    | {task description} | developer        | none         | `clean-code`       |
+| 2   | TODO   | {task description} | tester           | task 1       | `testing-workflow` |
+| …   | …      | …                  | …                | …            | …                  |
 
-> **Note:** Tasks must be atomic and actionable. Avoid vague descriptions like "Refactor codebase" — instead, break it down into specific changes to files or functions. Each task must have a clear owner (developer or tester) and reference any relevant skills that should be applied during execution.
+> **Note:** Tasks must be atomic and actionable. Avoid vague descriptions like "Refactor codebase" — instead, break it down into specific changes to files or functions. Each task must flag a `Responsible Role` (developer or tester) so the Root Agent can route correctly, and reference any relevant skills that should be applied during execution.
 
 > **Note:** Status field in `Task List` includes:
 
@@ -70,7 +70,7 @@
 
 ## Usage Notes
 
-- Every task in the Task List must have a clear owner (developer or tester).
+- Every task in the Task List must flag a `Responsible Role` (developer or tester). Flagging is a routing hint for the Root Agent — the planner/debugger does not delegate.
 - **ALWAYS set Status to `Blocked` and list every open question** when anything is unclear — do not plan around gaps or make assumptions.
 - If Status is `Blocked`, the Root Agent must ask the user before proceeding to Step 4. Execution must not begin with unresolved blockers.
-- Root Agent uses this response to populate delegation prompts for `developer.agent.md` and `tester.agent.md`.
+- Root Agent uses this response to populate delegation prompts for the [developer](../../developer/SKILL.md) and [tester](../../tester/SKILL.md) sub-agents.

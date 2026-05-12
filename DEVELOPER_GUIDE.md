@@ -39,7 +39,7 @@ The system supports three types of tasks:
 | **Bug**     | Unexpected behavior or regression                    | "Login fails when email contains a plus sign" |
 | **Chore**   | Low-risk housekeeping with no business logic changes | "Bump axios to 1.7.0"                         |
 
-> Want to understand what happens under the hood? See the `agents/` folder in the repo.
+> Want to understand what happens under the hood? See the [workflow skill](src/skills/workflow/SKILL.md) and the role skills under [src/skills/](src/skills/) — `planner`, `debugger`, `developer`, `tester`, `reviewer`.
 
 ---
 
@@ -299,6 +299,6 @@ Agents flag follow-up items for a reason. Leaving them unaddressed accumulates t
 │  Agent pauses and surfaces blockers → provide missing context       │
 ├─────────────────────────────────────────────────────────────────────┤
 │ WANT MORE DETAIL?                                                   │
-│  See the agents/ folder in the repo.                                │
+│  See src/skills/workflow + the role skills under src/skills/.       │
 └─────────────────────────────────────────────────────────────────────┘
 ```

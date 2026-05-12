@@ -1,6 +1,6 @@
 # WORKSPACE INSTRUCTIONS
 
-Always read all markdown files in the sections below to get complete information about the project, workflow between agents, do-do (DO) and don't-do (DO NOT) tasks.
+Always read all markdown files in the sections below to get complete information about the project, do-do (DO) and don't-do (DO NOT) tasks.
 
 ---
 
@@ -19,9 +19,3 @@ This section will describe the programming conventions for the project. If agent
 ## AGENT RULES
 
 This section provides information on "DO" and "DO NOT" clauses. Agents should refer to these items to prioritize tasks when receiving assignments from users or to avoid following them when receiving assignments from users - see [AGENT_RULES](./AGENT_RULES.md)
-
----
-
-## AGENT WORKFLOW
-
-Whenever an agent receives a task from a user, they must always follow the workflow outlined here and must not deviate from it - see [AGENT_WORKFLOW](./AGENT_WORKFLOW.md)

@@ -3,7 +3,7 @@
 ## Template
 
 ```md
-- From: developer.agent.md | tester.agent.md
+- From: developer | tester (sub-agent loaded with the matching role skill)
 - To: Root Agent
 - Title: Result — {short title matching the original delegation title}
 - Description: {one sentence summarising what was completed or why it is incomplete}
@@ -33,7 +33,7 @@
 | 1   | {task description} | done - skipped - blocked |
 | …   | …                  | …                        |
 
-## Test Results (tester.agent.md only)
+## Test Results (tester sub-agent only)
 
 | Test        | Type                     | Result                |
 | ----------- | ------------------------ | --------------------- |

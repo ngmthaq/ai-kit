@@ -4,7 +4,7 @@
 
 ```md
 - From: Root Agent
-- To: tester.agent.md
+- To: tester (sub-agent loaded with [tester skill](../../tester/SKILL.md))
 - Title: Testing Task — {short title matching the plan title}
 - Description: {one sentence describing what must be tested in this delegation}
 
@@ -24,7 +24,7 @@
 
 ## Files Changed by Developer (if **Testing Workflow** is `Code-First`)
 
-- {list all files created or modified by developer.agent.md}
+- {list all files created or modified by the developer sub-agent}
 
 ## Tasks Assigned
 
