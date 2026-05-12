@@ -1,1 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
 yarn lint-staged
+if npm version patch --no-git-tag-version; then
+  git add package.json package-lock.json yarn.lock || git add -A || { echo "Failed to stage version files"; exit 1; }
+else
+  echo "npm version failed"; exit 1
+fi
