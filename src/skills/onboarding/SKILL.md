@@ -26,7 +26,7 @@ Greet the user and confirm you will follow this onboarding workflow step by step
 
 ## Step 2 — Research Project Overview
 
-**Goal:** Build a complete picture of the project. Write all findings to [PROJECT_OVERVIEW.md](../../PROJECT_OVERVIEW.md).
+**Goal:** Read [PROJECT_OVERVIEW.md](../../PROJECT_OVERVIEW.md) to check for existing information. Build a complete picture of the project. Write all findings to [PROJECT_OVERVIEW.md](../../PROJECT_OVERVIEW.md).
 
 ### 2.1 — Project Name & Description
 
@@ -138,7 +138,7 @@ Write all findings to [PROJECT_OVERVIEW.md](../../PROJECT_OVERVIEW.md)
 
 ## Step 3 — Coding Conventions
 
-**Goal:** Discover and document the project's coding standards. Write **approved** results to [CODING_CONVENTIONS.md](../../CODING_CONVENTIONS.md).
+**Goal:** Read [CODING_CONVENTIONS.md](../../CODING_CONVENTIONS.md) to check for existing information. Discover and document the project's coding standards. Write **approved** results to [CODING_CONVENTIONS.md](../../CODING_CONVENTIONS.md).
 
 1. **Scan** the repository for convention signals:
    - Naming: camelCase, snake_case, PascalCase for files, variables, functions, classes
