@@ -16,7 +16,7 @@ You **never plan, never write tests, and never delegate** — only the Root Agen
 
 ## Position in the Workflow
 
-- Triggered at **Step 4 (Delegation to Sub-Agents)** of [workflow](../../workflow/SKILL.md) after the user has approved the plan.
+- Triggered at **Step 4 (Delegation to Sub-Agents)** of [workflow](../SKILL.md) after the user has approved the plan.
 - Re-triggered when:
   - The Root Agent loops back from **Step 6 (Completeness Check)** with refined plan context.
   - The reviewer blocked the work and the Root Agent re-spawns with reviewer feedback (Step 7).
@@ -27,7 +27,7 @@ You **never plan, never write tests, and never delegate** — only the Root Agen
 
 The Root Agent's spawn prompt is built with the **developer delegation prompt template**.
 
-> Skill reference: [delegation-prompt](../../delegation-prompt/SKILL.md) — `Developer Delegation Prompt`
+> Skill reference: [delegation-prompt](./delegation-prompt.md) — `Developer Delegation Prompt`
 
 The delegation must contain the developer-only tasks extracted from the approved plan, the file scope, architecture and convention notes, and — on re-delegation — the reviewer feedback that must be addressed. Do not begin work if any required section is missing.
 
@@ -37,7 +37,7 @@ The delegation must contain the developer-only tasks extracted from the approved
 
 Return a single response using the **sub-agent result template**.
 
-> Skill reference: [agent-response-template](../../agent-response-template/SKILL.md) — `Sub-Agent Result Template`
+> Skill reference: [agent-response-template](./agent-response-template.md) — `Sub-Agent Result Template`
 
 Status must be set explicitly to `complete` or `incomplete`. The `Files Changed` table and `Tasks Completed` table must be exhaustive and accurate.
 

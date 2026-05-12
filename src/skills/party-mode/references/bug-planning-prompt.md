@@ -4,7 +4,7 @@
 
 ```md
 - From: Root Agent
-- To: debugger (sub-agent loaded with [debugger skill](../../sub-agents/references/debugger.md))
+- To: debugger (sub-agent loaded with [debugger skill](./debugger.md))
 - Title: Bug Fix Planning Request — {short title of the bug}
 - Description: {one sentence describing the broken behavior and its impact}
 
@@ -53,7 +53,7 @@
 - Always load documents from the **Documents Folder** before delegating tasks to sub-agents; this will help extract additional information from previous tasks if relevant.
 - `Document References` should include any relevant memory items or previous plans that the debugger should reference when creating the fix plan.
 - `Skill References` must be populated by scanning the `skills/` directory and selecting all files relevant to the bug domain.
-- Debugger must respond using [agent-response-template](../../agent-response-template/) skill (`Plan Response Template` section).
+- Debugger must respond using [agent-response-template](./agent-response-template.md) skill (`Plan Response Template` section).
 - User prompts can be confusing or contain spelling errors; Root Agent must analyze and clarify them, then provide the following information to the debugger:
   - Observed Behavior (Describe exactly what is happening)
   - Expected Behavior (Describe what should happen instead)

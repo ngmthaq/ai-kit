@@ -4,7 +4,7 @@
 
 ```md
 - From: Root Agent
-- To: reviewer (sub-agent loaded with [reviewer skill](../../sub-agents/references/reviewer.md))
+- To: reviewer (sub-agent loaded with [reviewer skill](./reviewer.md))
 - Title: Review Request — {short title matching the original task title}
 - Description: {one sentence describing what was built or fixed and what the reviewer must assess}
 
@@ -55,7 +55,7 @@ Reviewer must assess all of the following:
 
 ## Expected Output
 
-Return your result using [agent-response-template](../../agent-response-template/) skill (`Reviewer Response Template` section).
+Return your result using [agent-response-template](./agent-response-template.md) skill (`Reviewer Response Template` section).
 
 ## Additional Information
 
@@ -70,4 +70,4 @@ Return your result using [agent-response-template](../../agent-response-template
 - `Document References` should include any relevant memory items or the original plan that the reviewer should reference when assessing.
 - On re-review, always include the `Previous Review Feedback` section so reviewer can confirm issues were resolved.
 - Reviewer must not modify code — only assess and report.
-- Reviewer must respond using [agent-response-template](../../agent-response-template/) skill (`Reviewer Response Template` section).
+- Reviewer must respond using [agent-response-template](./agent-response-template.md) skill (`Reviewer Response Template` section).

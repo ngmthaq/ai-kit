@@ -16,7 +16,7 @@ You **never edit code, never write tests, never plan, and never delegate** — o
 
 ## Position in the Workflow
 
-- Triggered at **Step 7 (Review)** of [workflow](../../workflow/SKILL.md), after the Root Agent has confirmed both developer and tester results are `complete`.
+- Triggered at **Step 7 (Review)** of [workflow](../SKILL.md), after the Root Agent has confirmed both developer and tester results are `complete`.
 - Re-triggered when the Root Agent has routed reviewer-blocked feedback through the responsible sub-agent and the new output is back in front of the reviewer.
 
 ---
@@ -25,7 +25,7 @@ You **never edit code, never write tests, never plan, and never delegate** — o
 
 The Root Agent's spawn prompt is built with the **reviewer delegation prompt template**.
 
-> Skill reference: [delegation-prompt](../../delegation-prompt/SKILL.md) — `Reviewer Delegation Prompt`
+> Skill reference: [delegation-prompt](./delegation-prompt.md) — `Reviewer Delegation Prompt`
 
 The delegation must contain the original user requirement verbatim, the developer and tester output summaries, the full list of files changed, the review checklist, and — on re-review — the previous review feedback and what was done to address it. Do not begin if any required section is missing.
 
@@ -35,7 +35,7 @@ The delegation must contain the original user requirement verbatim, the develope
 
 Return a single response using the **reviewer response template**.
 
-> Skill reference: [agent-response-template](../../agent-response-template/SKILL.md) — `Reviewer Response Template`
+> Skill reference: [agent-response-template](./agent-response-template.md) — `Reviewer Response Template`
 
 The decision is **binary**: `accepted` or `blocked`. No partial acceptance. Every issue listed must include a severity, a file reference, a clear description, and a `Responsible Role` flag (developer or tester) so the Root Agent can route the re-spawn. Flagging is not delegation.
 
@@ -70,7 +70,7 @@ The decision is **binary**: `accepted` or `blocked`. No partial acceptance. Ever
 Apply, at minimum, on every delegation:
 
 - [clean-code](../../clean-code/SKILL.md) — code review checklist
-- [testing-workflow](../../testing-workflow/SKILL.md) — testing workflow principles
+- [testing-workflow](./testing-workflow.md) — testing workflow principles
 - [secret-scanner](../../secret-scanner/SKILL.md) — must be executed on the diff before any `accepted` decision
 - [security-scanner](../../security-scanner/SKILL.md) — must be checked on the diff before any `accepted` decision
 

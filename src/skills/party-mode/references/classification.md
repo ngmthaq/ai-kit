@@ -1,9 +1,3 @@
----
-name: classification
-description: Intent classification logic for the Root Agent. Use when a user prompt arrives to determine whether the request is a feature (or refactor) or a bug before any delegation occurs. All requests route through the planning pipeline.
-user-invocable: false
----
-
 ## Purpose
 
 Used by the **Root Agent** to classify every incoming user prompt before any execution occurs. Classification determines how the work is routed through the planning pipeline.
@@ -52,6 +46,6 @@ If the prompt contains signals for more than one of `feature` or `bug`, or if an
 
 - Classification is always the **first action** of the Root Agent. No execution or delegation happens before it.
 - **ALWAYS ask the user when anything is unclear** — intent, scope, affected area, expected behaviour. There are no acceptable assumptions.
-- For `feature`, spawn a sub-agent loaded with the [planner](../sub-agents/references/planner.md) role using [delegation-prompt](../delegation-prompt/) (Feature Planning Prompt section)
-- For `bug`, spawn a sub-agent loaded with the [debugger](../sub-agents/references/debugger.md) role using [delegation-prompt](../delegation-prompt/) (Bug Planning Prompt section)
+- For `feature`, spawn a sub-agent loaded with the [planner](./planner.md) role using [delegation-prompt](./delegation-prompt.md) (Feature Planning Prompt section)
+- For `bug`, spawn a sub-agent loaded with the [debugger](./debugger.md) role using [delegation-prompt](./delegation-prompt.md) (Bug Planning Prompt section)
 - A prompt that cannot be classified without guessing must be treated as blocked until the user clarifies.

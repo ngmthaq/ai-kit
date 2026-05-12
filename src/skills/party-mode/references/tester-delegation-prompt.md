@@ -4,7 +4,7 @@
 
 ```md
 - From: Root Agent
-- To: tester (sub-agent loaded with [tester skill](../../sub-agents/references/tester.md))
+- To: tester (sub-agent loaded with [tester skill](./tester.md))
 - Title: Testing Task — {short title matching the plan title}
 - Description: {one sentence describing what must be tested in this delegation}
 
@@ -53,7 +53,7 @@
 
 ## Expected Output
 
-Return your result using [agent-response-template](../../agent-response-template/) skill (`Sub-Agent Result Template` section).
+Return your result using [agent-response-template](./agent-response-template.md) skill (`Sub-Agent Result Template` section).
 
 ## Additional Information
 
@@ -68,4 +68,4 @@ Return your result using [agent-response-template](../../agent-response-template
 - `Document References` should include any relevant memory items or the original plan that the tester should reference when creating tests.
 - Tester must not modify production code — only test files.
 - If developer output is incomplete, tester should flag this in the result rather than testing partial work.
-- Tester must respond using [agent-response-template](../../agent-response-template/) skill (`Sub-Agent Result Template` section).
+- Tester must respond using [agent-response-template](./agent-response-template.md) skill (`Sub-Agent Result Template` section).

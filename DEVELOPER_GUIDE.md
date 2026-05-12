@@ -37,7 +37,7 @@ The system supports three types of tasks:
 | **Feature** | New functionality or a refactor   | "Add pagination to the user list API"         |
 | **Bug**     | Unexpected behavior or regression | "Login fails when email contains a plus sign" |
 
-> Want to understand what happens under the hood? See the [workflow skill](src/skills/workflow/SKILL.md) and the role skills under [src/skills/](src/skills/) — `planner`, `debugger`, `developer`, `tester`, `reviewer`.
+> Want to understand what happens under the hood? See the [party-mode skill](src/skills/party-mode/SKILL.md) and the role skills under [src/skills/party-mode/references/](src/skills/party-mode/references/) — `planner`, `debugger`, `developer`, `tester`, `reviewer`.
 
 ---
 
@@ -76,6 +76,8 @@ This is the full pipeline: plan → approve → implement → test → review.
 **Example prompt:**
 
 ```
+/party-mode
+
 Feature: Add email verification on sign-up.
 
 When a new user registers, send a verification email with a unique token.
@@ -102,6 +104,8 @@ The same flow as features, but the Root Agent focuses on root cause analysis bef
 **Example prompt:**
 
 ```
+/party-mode
+
 Bug: User profile avatar upload returns 413 error for files over 1MB, even though our limit should be 10MB.
 
 Expected: Files up to 10MB upload successfully.
@@ -258,6 +262,7 @@ Agents flag follow-up items for a reason. Leaving them unaddressed accumulates t
 │  Agent pauses and surfaces blockers → provide missing context       │
 ├─────────────────────────────────────────────────────────────────────┤
 │ WANT MORE DETAIL?                                                   │
-│  See src/skills/workflow + the role skills under src/skills/.       │
+│  See src/skills/party-mode + the role skills under                  │
+│  src/skills/party-mode/references/.                                 │
 └─────────────────────────────────────────────────────────────────────┘
 ```
