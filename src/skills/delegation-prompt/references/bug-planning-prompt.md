@@ -4,7 +4,7 @@
 
 ```md
 - From: Root Agent
-- To: debugger (sub-agent loaded with [debugger skill](../../debugger/SKILL.md))
+- To: debugger (sub-agent loaded with [debugger skill](../../sub-agents/references/debugger.md))
 - Title: Bug Fix Planning Request — {short title of the bug}
 - Description: {one sentence describing the broken behavior and its impact}
 

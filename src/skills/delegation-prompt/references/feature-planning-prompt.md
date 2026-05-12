@@ -4,7 +4,7 @@
 
 ```md
 - From: Root Agent
-- To: planner (sub-agent loaded with [planner skill](../../planner/SKILL.md))
+- To: planner (sub-agent loaded with [planner skill](../../sub-agents/references/planner.md))
 - Title: Feature Planning Request — {short title of the feature}
 - Description: {one sentence describing what this feature/refactor achieves}
 

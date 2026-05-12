@@ -3,7 +3,7 @@
 ## Template
 
 ```md
-- From: reviewer (sub-agent loaded with the [reviewer skill](../../reviewer/SKILL.md))
+- From: reviewer (sub-agent loaded with the [reviewer skill](../../sub-agents/references/reviewer.md))
 - To: Root Agent
 - Title: Review Response — {short title matching the review request title}
 - Description: {one sentence stating the decision and the primary reason}

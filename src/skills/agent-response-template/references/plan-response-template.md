@@ -73,4 +73,4 @@
 - Every task in the Task List must flag a `Responsible Role` (developer or tester). Flagging is a routing hint for the Root Agent — the planner/debugger does not delegate.
 - **ALWAYS set Status to `Blocked` and list every open question** when anything is unclear — do not plan around gaps or make assumptions.
 - If Status is `Blocked`, the Root Agent must ask the user before proceeding to Step 4. Execution must not begin with unresolved blockers.
-- Root Agent uses this response to populate delegation prompts for the [developer](../../developer/SKILL.md) and [tester](../../tester/SKILL.md) sub-agents.
+- Root Agent uses this response to populate delegation prompts for the [developer](../../sub-agents/references/developer.md) and [tester](../../sub-agents/references/tester.md) sub-agents.

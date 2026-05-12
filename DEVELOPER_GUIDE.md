@@ -9,7 +9,6 @@
 1. [Overview](#overview)
 2. [When to Use Which Path](#when-to-use-which-path)
 3. [Step-by-Step Usage](#step-by-step-usage)
-   - [Chore Path](#chore-path)
    - [Feature / Refactor Path](#feature--refactor-path)
    - [Bug Fix Path](#bug-fix-path)
 4. [Writing Good Prompts](#writing-good-prompts)
@@ -33,11 +32,10 @@ You ──► Root Agent ──► Planner / Debugger ──► Developer + Test
 
 The system supports three types of tasks:
 
-| Type        | Description                                          | Example                                       |
-| ----------- | ---------------------------------------------------- | --------------------------------------------- |
-| **Feature** | New functionality or a refactor                      | "Add pagination to the user list API"         |
-| **Bug**     | Unexpected behavior or regression                    | "Login fails when email contains a plus sign" |
-| **Chore**   | Low-risk housekeeping with no business logic changes | "Bump axios to 1.7.0"                         |
+| Type        | Description                       | Example                                       |
+| ----------- | --------------------------------- | --------------------------------------------- |
+| **Feature** | New functionality or a refactor   | "Add pagination to the user list API"         |
+| **Bug**     | Unexpected behavior or regression | "Login fails when email contains a plus sign" |
 
 > Want to understand what happens under the hood? See the [workflow skill](src/skills/workflow/SKILL.md) and the role skills under [src/skills/](src/skills/) — `planner`, `debugger`, `developer`, `tester`, `reviewer`.
 
@@ -55,38 +53,12 @@ Use this table to frame your request correctly before prompting:
 | Something broke that used to work           | Bug                |
 | Tests are failing unexpectedly              | Bug                |
 | Performance regression                      | Bug                |
-| Updating a dependency                       | Chore              |
-| Changing a config file                      | Chore              |
-| Setting up a linter or tool                 | Chore              |
-| Fixing lint warnings with no logic changes  | Chore              |
 
-> **When in doubt:** if it touches business logic or could cause a regression, treat it as a **feature** or **bug** — not a chore.
+> **When in doubt:** if it touches business logic or could cause a regression, treat it as a **feature** or **bug**.
 
 ---
 
 ## Step-by-Step Usage
-
-### Chore Path
-
-Chores are the simplest path — the Root Agent handles them directly with no planning phase.
-
-**Steps:**
-
-1. Open the CLI or chat interface.
-2. Describe the chore clearly (see [Writing Good Prompts](#writing-good-prompts)).
-3. The Root Agent will confirm the scope and the files it plans to touch — **review this carefully**.
-4. Reply with your approval (e.g. "yes, go ahead").
-5. The agent makes the change and sends you a summary of files changed.
-
-**Example prompt:**
-
-```
-Chore: Bump the `zod` package to version 3.23.8 in package.json and update the lockfile.
-```
-
-**What to watch for:** if the agent says the change is larger than expected or touches logic files, it will stop and ask you to re-classify. This is correct behavior — do not push it to continue as a chore.
-
----
 
 ### Feature / Refactor Path
 
@@ -163,12 +135,6 @@ The quality of the output depends heavily on the quality of your prompt.
 - Include **reproduction steps** if possible.
 - Paste **stack traces, error messages, or logs** directly in the prompt.
 - Mention **what changed recently** if you suspect a cause.
-
-### For chores
-
-- Be specific about **which package / config / file** is involved.
-- State the **target version or desired state**.
-- Mention any known **compatibility concerns**.
 
 ### General tips
 
@@ -248,9 +214,6 @@ Here's the current schema: [paste schema]
 
 ## Common Mistakes to Avoid
 
-**Labeling a feature as a chore to skip planning.**
-Chores skip the approval gate entirely. If your change touches logic, calling it a chore bypasses safeguards.
-
 **Approving the plan without reading it.**
 The plan is the contract for what will be built. Approving without reading means you lose the chance to correct course before implementation.
 
@@ -274,9 +237,6 @@ Agents flag follow-up items for a reason. Leaving them unaddressed accumulates t
 ┌─────────────────────────────────────────────────────────────────────┐
 │                        AGENT WORKFLOW — QUICK REF                   │
 ├──────────────┬──────────────────────────────────────────────────────┤
-│ CHORE        │ Small, low-risk, no business logic changes           │
-│              │ Confirm scope → done.                                │
-├──────────────┼──────────────────────────────────────────────────────┤
 │ FEATURE      │ New functionality or refactor                        │
 │              │ Prompt → Plan → Approve → done.                      │
 ├──────────────┼──────────────────────────────────────────────────────┤
@@ -288,7 +248,6 @@ Agents flag follow-up items for a reason. Leaving them unaddressed accumulates t
 │  ✓ What (not how)                                                   │
 │  ✓ Acceptance criteria (features)                                   │
 │  ✓ Observed vs expected + stack trace (bugs)                        │
-│  ✓ Target version / file (chores)                                   │
 ├─────────────────────────────────────────────────────────────────────┤
 │ APPROVAL GATE                                                       │
 │  Approve → "looks good, proceed"                                    │

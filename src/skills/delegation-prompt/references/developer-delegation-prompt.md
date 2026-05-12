@@ -4,7 +4,7 @@
 
 ```md
 - From: Root Agent
-- To: developer (sub-agent loaded with [developer skill](../../developer/SKILL.md))
+- To: developer (sub-agent loaded with [developer skill](../../sub-agents/references/developer.md))
 - Title: Implementation Task — {short title matching the plan title}
 - Description: {one sentence describing what must be implemented in this delegation}
 

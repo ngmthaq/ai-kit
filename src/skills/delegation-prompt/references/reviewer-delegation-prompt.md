@@ -4,7 +4,7 @@
 
 ```md
 - From: Root Agent
-- To: reviewer (sub-agent loaded with [reviewer skill](../../reviewer/SKILL.md))
+- To: reviewer (sub-agent loaded with [reviewer skill](../../sub-agents/references/reviewer.md))
 - Title: Review Request — {short title matching the original task title}
 - Description: {one sentence describing what was built or fixed and what the reviewer must assess}
 

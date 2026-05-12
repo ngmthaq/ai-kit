@@ -4,7 +4,7 @@
 
 ```md
 - From: Root Agent
-- To: tester (sub-agent loaded with [tester skill](../../tester/SKILL.md))
+- To: tester (sub-agent loaded with [tester skill](../../sub-agents/references/tester.md))
 - Title: Testing Task — {short title matching the plan title}
 - Description: {one sentence describing what must be tested in this delegation}
 

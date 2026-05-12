@@ -13,15 +13,15 @@ The orchestration contract for the **Root Agent**. The Root Agent never implemen
 
 ---
 
-## Sub-Agent Roles (load via skill)
+## Sub-Agent Roles (load via [sub-agents](../sub-agents/SKILL.md) skill)
 
-| Role      | Skill                              | Mode the Root Agent should request | Edits      |
-| --------- | ---------------------------------- | ---------------------------------- | ---------- |
-| Planner   | [planner](../planner/SKILL.md)     | plan-mode (read-only)              | none       |
-| Debugger  | [debugger](../debugger/SKILL.md)   | plan-mode (read-only)              | none       |
-| Developer | [developer](../developer/SKILL.md) | acceptEdits                        | production |
-| Tester    | [tester](../tester/SKILL.md)       | acceptEdits                        | test files |
-| Reviewer  | [reviewer](../reviewer/SKILL.md)   | default (read-only)                | none       |
+| Role      | Skill                                              | Mode the Root Agent should request | Edits      |
+| --------- | -------------------------------------------------- | ---------------------------------- | ---------- |
+| Planner   | [planner](../sub-agents/references/planner.md)     | plan-mode (read-only)              | none       |
+| Debugger  | [debugger](../sub-agents/references/debugger.md)   | plan-mode (read-only)              | none       |
+| Developer | [developer](../sub-agents/references/developer.md) | acceptEdits                        | production |
+| Tester    | [tester](../sub-agents/references/tester.md)       | acceptEdits                        | test files |
+| Reviewer  | [reviewer](../sub-agents/references/reviewer.md)   | default (read-only)                | none       |
 
 Only the **Root Agent** delegates. Sub-agents never spawn other sub-agents. The planner/debugger flags each task with a `Responsible Role` (developer or tester), and the reviewer flags each issue with a `Responsible Role`. Those flags are routing hints for the Root Agent, never a hand-off — only the Root Agent re-spawns.
 
@@ -33,40 +33,32 @@ Only the **Root Agent** delegates. Sub-agents never spawn other sub-agents. The 
 sequenceDiagram
     actor User
     participant Root as Root Agent
-    participant Planner as planner (skill)
-    participant Debugger as debugger (skill)
-    participant Developer as developer (skill)
-    participant Tester as tester (skill)
-    participant Reviewer as reviewer (skill)
+    participant Planner as planner (sub-agents)
+    participant Debugger as debugger (sub-agents)
+    participant Developer as developer (sub-agents)
+    participant Tester as tester (sub-agents)
+    participant Reviewer as reviewer (sub-agents)
 
-    User->>Root: Prompt (feature / bug / chore)
+    User->>Root: Prompt (feature / bug)
 
-    alt is chore
-        Note over Root: Root Agent executes directly — no sub-agent delegation
-        Root->>User: Confirm chore scope
-        User-->>Root: Approved
-        Note over Root: Root Agent performs the chore in-place
-        Root->>User: Summary report (files changed)
+    alt is feature (refactor)
+        Root->>Planner: Spawn sub-agent (load planner skill, plan-mode)
+        Planner-->>Root: Plan response template
+    else is bug
+        Root->>Debugger: Spawn sub-agent (load debugger skill, plan-mode)
+        Debugger-->>Root: Plan response template
+    end
 
-    else is feature (refactor) or bug
-        alt is feature (refactor)
-            Root->>Planner: Spawn sub-agent (load planner skill, plan-mode)
-            Planner-->>Root: Plan response template
-        else is bug
-            Root->>Debugger: Spawn sub-agent (load debugger skill, plan-mode)
-            Debugger-->>Root: Plan response template
-        end
+    Root->>User: Present plan for approval
+    alt user requests changes
+        User-->>Root: Feedback / revision request
+        Root->>Planner: Re-spawn with user feedback (or debugger for bug)
+        Planner-->>Root: Updated plan response template
+        Root->>User: Present revised plan for approval
+    end
+    User-->>Root: Approved
 
-        Root->>User: Present plan for approval
-        alt user requests changes
-            User-->>Root: Feedback / revision request
-            Root->>Planner: Re-spawn with user feedback (or debugger for bug)
-            Planner-->>Root: Updated plan response template
-            Root->>User: Present revised plan for approval
-        end
-        User-->>Root: Approved
-
-        loop Until complete (max 3 iterations)
+    loop Until complete (max 3 iterations)
             par parallel sub-agents
                 Root->>Developer: Spawn (load developer skill, acceptEdits)
                 Developer-->>Root: Sub-agent result template
@@ -94,7 +86,6 @@ sequenceDiagram
         end
 
         Root->>User: Summary report (work done, files changed, tests updated)
-    end
 ```
 
 > **Parallel-by-default**: developer and tester can run concurrently when the project's testing workflow is `Test-First` (tester writes specs from the requirement) or when developer and tester scopes don't overlap. When `Code-First` and the tester depends on the developer's diff, run them sequentially.
@@ -113,25 +104,19 @@ When a user prompt arrives, the Root Agent **must classify the intent** before a
 
 ### Step 2 — Planning
 
-#### If `chore`
-
-The Root Agent **executes directly** — no sub-agent. Confirm scope and affected files with the user, wait for explicit approval, perform the change in-place (dependency bump, config tweak, tooling setup, lint cleanup), skip Steps 3–7, and proceed to **Step 8**.
-
-If during execution the change turns out to be larger than expected, touches business logic, or risks regressions, the Root Agent **must stop**, re-classify as `feature` or `bug`, and resume Step 2 with the new classification. Do not silently expand scope.
-
 #### If `feature` or `refactor`
 
 Spawn a sub-agent that loads the **planner** skill, in plan-mode, using the feature planning prompt template.
 
 > Prompt template skill: [delegation-prompt](../delegation-prompt/SKILL.md) — `Feature Planning Prompt`
-> Role skill (passed to sub-agent): [planner](../planner/SKILL.md)
+> Role skill (passed to sub-agent): [planner](../sub-agents/references/planner.md)
 
 #### If `bug`
 
 Spawn a sub-agent that loads the **debugger** skill, in plan-mode, using the bug planning prompt template.
 
 > Prompt template skill: [delegation-prompt](../delegation-prompt/SKILL.md) — `Bug Planning Prompt`
-> Role skill (passed to sub-agent): [debugger](../debugger/SKILL.md)
+> Role skill (passed to sub-agent): [debugger](../sub-agents/references/debugger.md)
 
 ---
 
@@ -144,8 +129,6 @@ The planner or debugger sub-agent returns a structured plan using the **plan res
 ---
 
 ### Step 3.5 — User Approval Gate
-
-> **Chore fast-path:** this step does not apply to `chore`.
 
 Before any implementation begins, the Root Agent **must** present the full plan response to the user and **wait** for explicit approval. **DO NOT** make things up.
 
@@ -179,14 +162,14 @@ The Root Agent reads the plan and spawns the appropriate sub-agent(s).
 Use the developer delegation prompt template; pass the developer skill inline.
 
 > Prompt template skill: [delegation-prompt](../delegation-prompt/SKILL.md) — `Developer Delegation Prompt`
-> Role skill: [developer](../developer/SKILL.md)
+> Role skill: [developer](../sub-agents/references/developer.md)
 
 #### Spawn the tester sub-agent
 
 Use the tester delegation prompt template; pass the tester skill inline.
 
 > Prompt template skill: [delegation-prompt](../delegation-prompt/SKILL.md) — `Tester Delegation Prompt`
-> Role skill: [tester](../tester/SKILL.md)
+> Role skill: [tester](../sub-agents/references/tester.md)
 
 #### Running in parallel
 
@@ -227,7 +210,7 @@ When looping back, the Root Agent must pass:
 Spawn a sub-agent that loads the **reviewer** skill, using the reviewer delegation prompt template.
 
 > Prompt template skill: [delegation-prompt](../delegation-prompt/SKILL.md) — `Reviewer Delegation Prompt`
-> Role skill: [reviewer](../reviewer/SKILL.md)
+> Role skill: [reviewer](../sub-agents/references/reviewer.md)
 
 | Reviewer Decision            | Root Agent Action       |
 | ---------------------------- | ----------------------- |
