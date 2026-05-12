@@ -10,7 +10,8 @@
 - **Key Libraries**: `N/A`
 - **Database**: `N/A`
 - **Doc Directory**: `<workspace>/<target>/docs`
-- **Testing Workflow**: `Code-First`
+- **Testing Workflow**: `Code-First` <!-- Code-First | Test-First | Skip-Testing -->
+- **Playwright Check**: `Ask-User` <!-- Always | None | Ask-User -->
 
 > Note: DO NOT edit the checklist template above.
 

@@ -51,10 +51,12 @@ Status must be set explicitly to `complete` or `incomplete`. The `Files Changed`
 
 1. **Read the delegation prompt in full.** Confirm tasks, implementation summary, files changed, test scenarios, acceptance criteria, and (on re-delegation) reviewer feedback are all present.
 2. **Scan every skill listed in `Skill references`.** Apply them — testing patterns (AAA), naming conventions, framework usage. Do not skip them.
-3. **Inspect the developer's changes.** Read the files listed under `Files Changed by Developer` to understand what behaviour exists to be tested. Do not modify them.
-4. **Write tests for every required scenario.** Cover the happy path, the edge cases, and the failure cases listed in the delegation. Each scenario gets at least one focused test.
-5. **For bug fixes, write a regression test** that fails on the buggy behaviour and passes on the fix. This is mandatory when the original classification was `bug`.
-6. **Run the tests** and capture results. Record each test's name, type, and outcome (`pass | fail | skipped`) in the `Test Results` table.
+3. **Gather what to test, based on `Testing Workflow` in [PROJECT_OVERVIEW.md](../PROJECT_OVERVIEW.md):**
+   - `Code-First` — read the files listed under `Files Changed by Developer` to understand the existing behaviour. Do not modify them.
+   - `Test-First` — work from the delegation's requirement and acceptance criteria; there is no developer code yet. Tests must encode the expected behaviour the developer will implement next.
+4. **Write tests for every required scenario.** Cover the happy path, the edge cases, and the failure cases listed in the delegation. Each scenario gets at least one focused test. If the delegation requires E2E coverage, author the specs via [playwright-cli](../skills/playwright-cli/SKILL.md) — the tester only authors them; the reviewer runs them.
+5. **For bug fixes, write a regression test** that fails on the buggy behaviour and passes on the fix.
+6. **Run the tests** and capture results. Record each test's name, type (`unit | integration | e2e`), and outcome (`pass | fail | skipped`) in the `Test Results` table. E2E specs are recorded as `skipped (run-by-reviewer)`.
 7. **Address reviewer feedback explicitly** on re-delegation. Each prior issue must map to a specific test added or updated in this iteration; reference issue numbers in the work summary.
 8. **If the developer's output is incomplete or contradicts the plan**, do not paper over it with weak tests. Mark the result `incomplete`, explain the discrepancy, and let the Root Agent re-plan.
 9. **Return the result** to the Root Agent using [agent-response-template](../skills/agent-response-template/SKILL.md) (`Sub-Agent Result Template`). No prose responses, no partial templates, no direct messages to other sub-agents.
@@ -79,6 +81,10 @@ The tester must apply, at minimum, the following skills on every delegation:
 - [testing-workflow](../skills/testing-workflow/SKILL.md) — testing workflow
 - [clean-code](../skills/clean-code/SKILL.md) — coding principles
 
+When the delegation requires E2E coverage, also apply:
+
+- [playwright-cli](../skills/playwright-cli/SKILL.md) — authoring E2E specs only (reviewer runs them)
+
 Additional skills passed in the delegation's `Skill references` field must also be applied.
 
 ---
@@ -89,5 +95,6 @@ Additional skills passed in the delegation's `Skill references` field must also 
 - **Test requires a production-code change** — Mark the task `blocked`; do not edit production files.
 - **Developer output incomplete or contradicts the plan** — Return `incomplete`; describe the discrepancy precisely so the Root Agent can re-plan.
 - **A test fails after multiple attempts** — Return `incomplete` with the failure output; do not skip the test or weaken assertions.
+- **`playwright-cli` spec authoring fails (skill install/setup gap)** — Mark the task `blocked`; record the command, error, and the failing reference from the skill.
 - **Bug-fix delegation without a feasible regression test** — Mark the task `blocked`; explain why a regression test cannot be written as planned.
 - **Reviewer feedback (re-delegation) cannot be resolved** — Mark the affected task `blocked`; include the original feedback in the result.

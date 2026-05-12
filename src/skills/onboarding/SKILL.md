@@ -119,7 +119,19 @@ Ask the user:
 > - **Test-First** — Write tests before implementation (TDD/BDD)
 > - **Skip-Testing** — No automated tests in this project
 
-### 2.8 — Write PROJECT_OVERVIEW.md
+### 2.8 — Playwright Check
+
+Ask the user:
+
+> "How should the reviewer and tester agents handle Playwright (browser) checks on UI-affecting changes?"
+>
+> - **Always** — Always run Playwright when UI changed
+> - **None** — Skip Playwright checks entirely
+> - **Ask-User** — Ask before running (default)
+
+Default to `Ask-User` if the user does not respond.
+
+### 2.9 — Write PROJECT_OVERVIEW.md
 
 Write all findings to [PROJECT_OVERVIEW.md](../../PROJECT_OVERVIEW.md)
 
