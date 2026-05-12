@@ -46,16 +46,6 @@ The skill will guide the AI through:
 
 ---
 
-## Agent Model Configuration
-
-In the agents folder, you will see many agent files; you can configure each agent to run a different model depending on your purpose.
-
-For Claude Code, you can change the `model` in the YAML configuration from `inherit` to other models such as `haiku`, `sonnet`, or `opus`.
-
-With GitHub Copilot, you can flexibly switch to other models supported by the platform by changing the `model` in the YAML configuration, such as Claude Sonnet 4.6, GPT 5.3 Codex, GPT 5.4, or Gemini 3.1 Pro.
-
----
-
 ## CODING_CONVENTIONS.md
 
 Always define coding conventions for your project before assigning it to AI agents. Fill in the coding conventions in the `CODING_CONVENTIONS.md` file located in the AI ​​agents' configuration directory.
