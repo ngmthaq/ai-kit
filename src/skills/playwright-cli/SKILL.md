@@ -34,7 +34,7 @@ Check the CLI reference for specific commands and use cases: [cli](./references/
 
 ---
 
-## Specific tasks
+## Specific Tasks
 
 - **Running and Debugging Playwright tests** [playwright-tests](./references/playwright-tests.md)
 - **Request mocking** [request-mocking](./references/request-mocking.md)
@@ -50,3 +50,9 @@ Check the CLI reference for specific commands and use cases: [cli](./references/
 - **Form Submission** [form-submission](./references/form-submission.md)
 - **Interactive Sessions** [interactive-session](./references/interactive-session.md)
 - **Multiple Tabs** [multi-tab](./references/multi-tab.md)
+
+---
+
+## Reference Links
+
+- [Playwright CLI Introduction](https://playwright.dev/agent-cli/introduction)
