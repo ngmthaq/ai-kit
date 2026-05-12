@@ -36,6 +36,8 @@ In any agent chat, type:
 /onboarding
 ```
 
+> It is recommended to use GPT model 5.4 or higher; or Claude Opus model 4.6 or higher.
+
 The skill will guide the AI through:
 
 1. Discovering project name, description, languages, frameworks, package manager, key libraries, database, doc directory, and testing workflow — then writing results to `PROJECT_OVERVIEW.md`.
