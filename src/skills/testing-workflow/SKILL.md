@@ -22,4 +22,5 @@ Tests should be written before the implementation code, following the Test-First
 
 ## Note for Code-First and Test-First
 
-Always refer [aaa-testing](../aaa-testing/SKILL.md) skill for best practices on structuring tests, including the Arrange-Act-Assert pattern, common test organization strategies, and guidelines for writing clear and maintainable tests.
+- Always refer [aaa-testing](../aaa-testing/SKILL.md) skill for best practices on structuring tests, including the Arrange-Act-Assert pattern, common test organization strategies, and guidelines for writing clear and maintainable tests.
+- Always refer [playwright-cli](../playwright-cli/SKILL.md) skill for best practices on using Playwright for end-to-end testing, including test organization, writing effective tests, managing test data, and integrating Playwright into the development workflow (verify UI against expected requirements).

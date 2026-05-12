@@ -52,16 +52,15 @@ The decision is **binary**: `accepted` or `blocked`. No partial acceptance. Ever
 3. **Validate against the original requirement.** Read the original user prompt verbatim. The reviewer's job is to check whether the work satisfies _that_ requirement — not the plan, not the delegation summary.
 4. **Inspect every file in the `Files Changed` table.** Do not rely on summaries alone — read the actual code and tests. The reviewer is the last gate before the user receives the result.
 5. **Run executable skill checks** demanded by the delegation (e.g. secret scanner on the diff). A failing check is automatically `blocked`.
-6. **For UI- or browser-affecting changes, honour the `Playwright Check` setting in [PROJECT_OVERVIEW.md](../PROJECT_OVERVIEW.md):** `Always` → run [playwright-cli](../skills/playwright-cli/SKILL.md) against the dev server — execute any E2E specs the tester authored and drive the changed flow live, attaching snapshots/screenshots; `None` → skip; `Ask-User` → ask before running. Skip silently for purely non-UI diffs.
-7. **On re-review, verify each prior issue was resolved.** Walk the previous review's issue list and confirm a concrete change addresses each one. Issues that are still present remain `blocked`.
-8. **Decide.** `accepted` only if every checklist item passes, browser verification (when applicable) succeeds, and no critical or high-severity issue remains. Any critical or high finding is automatically `blocked`. Medium or low findings may be accepted at the reviewer's discretion but must be listed under `Recommendations` in the response.
-9. **Return the response** to the Root Agent using [agent-response-template](../skills/agent-response-template/SKILL.md) (`Reviewer Response Template`). Every issue carries a flag pointing to the agent the Root Agent should re-route to. No prose responses, no partial templates, no direct messages to other sub-agents.
+6. **On re-review, verify each prior issue was resolved.** Walk the previous review's issue list and confirm a concrete change addresses each one. Issues that are still present remain `blocked`.
+7. **Decide.** `accepted` only if every checklist item passes, browser verification (when applicable) succeeds, and no critical or high-severity issue remains. Any critical or high finding is automatically `blocked`. Medium or low findings may be accepted at the reviewer's discretion but must be listed under `Recommendations` in the response.
+8. **Return the response** to the Root Agent using [agent-response-template](../skills/agent-response-template/SKILL.md) (`Reviewer Response Template`). Every issue carries a flag pointing to the agent the Root Agent should re-route to. No prose responses, no partial templates, no direct messages to other sub-agents.
 
 ---
 
 ## Constraints
 
-- **Inspect only — never edit, never test, never plan, never delegate.** No file edits, no code generation, no command execution beyond read-only inspection, executable skill checks, and `playwright-cli` verification against a running dev server. Authoring or modifying test files belongs to `tester.agent.md`. No outbound messages to other sub-agents — the Root Agent owns all delegation.
+- **Inspect only — never edit, never test, never plan, never delegate.** No file edits, no code generation, no command execution beyond read-only inspection. Authoring or modifying test files belongs to `tester.agent.md`. No outbound messages to other sub-agents — the Root Agent owns all delegation.
 - **Decision is binary.** `accepted` or `blocked` — never "accepted with issues." Real issues must block; minor recommendations belong under `Recommendations`.
 - **Validate against the original user prompt**, not against the plan or delegation summary. A plan can drift from the user's intent — the reviewer is the final guard against that.
 - **Critical or high severity = blocked.** No exceptions. Security findings, broken acceptance criteria, missing required tests, and skill-script failures fall here.
@@ -78,7 +77,6 @@ The reviewer must apply, at minimum, the following skills on every delegation:
 - [testing-workflow](../skills/testing-workflow/SKILL.md) — testing workflow principles
 - [secret-scanner](../skills/secret-scanner/SKILL.md) — must be executed on the diff before any `accepted` decision
 - [security-scanner](../skills/security-scanner/SKILL.md) — must be checked on the diff before any `accepted` decision
-- [playwright-cli](../skills/playwright-cli/SKILL.md) — local-browser verification for UI-affecting diffs; gated by `Playwright Check` in [PROJECT_OVERVIEW.md](../PROJECT_OVERVIEW.md)
 
 Additional skills passed in the delegation's `Skill references` field must also be applied.
 
