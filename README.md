@@ -20,10 +20,6 @@ To target `.github/` instead:
 npx @ngmthaq20/ai-kit@latest init github
 ```
 
-In the `agents` folder, remove `permissionMode` and `memory` from the YAML configuration of all agent files because GitHub Copilot does not support them. Also, change `model` from `inherite` to `Auto (copilot)` for proper formatting.
-
-To configure the model dynamically depending on the agent, see the `Agent Model Configuration` section below.
-
 ---
 
 ### First-Time Onboarding / Outdated Project Information
