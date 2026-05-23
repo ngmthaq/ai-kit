@@ -99,7 +99,7 @@ rate_limit_str="${rate_limit_str}$(format_rl "$rl_5h_pct" "$rl_5h_reset" "5h")"
 repo_root=$(cd "$current_dir" 2>/dev/null && git rev-parse --show-toplevel 2>/dev/null || echo "$current_dir")
 dir_display=$(basename "$repo_root")
 if [ -n "$token_str" ]; then
-  printf "🤖 %s | 🧠 %s (%s) | 💰 %s | ⏱️ %s\n📁 %s | 🌳 %s | 🌿 %s" "$model" "$usage_str" "$token_str" "$block_str" "$rate_limit_str" "$dir_display" "$worktree_str" "$git_str"
+  printf "⏱️ %s | 🤖 %s\n🧠 %s (%s) | 💰 %s | 📁 %s\n🌳 %s | 🌿 %s" "$rate_limit_str" "$model" "$usage_str" "$token_str" "$block_str" "$dir_display" "$worktree_str" "$git_str"
 else
-  printf "🤖 %s | 🧠 %s | 💰 %s | ⏱️ %s\n📁 %s | 🌳 %s | 🌿 %s" "$model" "$usage_str" "$block_str" "$rate_limit_str" "$dir_display" "$worktree_str" "$git_str"
+  printf "⏱️ %s | 🤖 %s\n🧠 %s | 💰 %s | 📁 %s\n🌳 %s | 🌿 %s" "$rate_limit_str" "$model" "$usage_str" "$block_str" "$dir_display" "$worktree_str" "$git_str"
 fi
