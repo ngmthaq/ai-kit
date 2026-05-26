@@ -14,14 +14,6 @@ This copies the bundled templates into `.claude/` in the current working directo
 
 ---
 
-To target `.github/` instead:
-
-```sh
-npx @ngmthaq20/ai-kit@latest init github
-```
-
----
-
 ### First-Time Onboarding / Outdated Project Information
 
 If you are setting up AI agents on a project for the first time, or if `PROJECT_OVERVIEW.md` and `CODING_CONVENTIONS.md` are outdated, use the built-in **onboarding** skill to let the AI discover and document your project automatically.
@@ -32,7 +24,7 @@ In any agent chat, type:
 /onboarding
 ```
 
-> It is recommended to use GPT model 5.4 or higher; or Claude Opus model 4.6 or higher.
+> It is recommended to use Claude Opus model 4.6 or higher.
 
 The skill will guide the AI through:
 
