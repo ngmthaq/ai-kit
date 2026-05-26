@@ -8,24 +8,49 @@
 
 1. Install GitNexus following its [README instructions](https://github.com/abhigyanpatwari/GitNexus).
 
+Install gitnexus globally:
+
+```sh
+npm install -g gitnexus
+```
+
+Install Claude MCP for Gitnexus:
+
+```sh
+# macOS / Linux
+claude mcp add gitnexus -- npx -y gitnexus@latest mcp
+
+# Windows
+claude mcp add gitnexus -- cmd /c npx -y gitnexus@latest mcp
+```
+
+Analyze project:
+
+```sh
+npx gitnexus analyze
+```
+
 2. Run GitNexus in your project root. It will generate `AGENTS.md` and `CLAUDE.md`.
 
 3. Rename both generated files to avoid conflicts with the existing `ai-kit` files:
 
    ```sh
    mv AGENTS.md .claude/GIT_NEXUS.md
+   ```
+
+   ```sh
    rm CLAUDE.md
    ```
 
 4. Add a reference to `GIT_NEXUS.md` inside your existing `CLAUDE.md` (or `.claude/CLAUDE.md`) so the AI agent picks up the knowledge graph context alongside your existing configuration:
 
-```markdown
-## Codebase Knowledge Graph
+   ```markdown
+   ## Codebase Knowledge Graph
 
-See [GIT_NEXUS.md](../GIT_NEXUS.md) for the auto-generated codebase index produced by GitNexus, covering dependencies, call chains, clusters, and execution flows.
-```
+   See [GIT_NEXUS.md](../GIT_NEXUS.md) for the auto-generated codebase index produced by GitNexus, covering dependencies, call chains, clusters, and execution flows.
+   ```
 
-Adjust the relative path depending on where your `CLAUDE.md` lives (e.g. `.claude/CLAUDE.md` → `../GIT_NEXUS.md`; root `CLAUDE.md` → `./GIT_NEXUS.md`).
+   Adjust the relative path depending on where your `CLAUDE.md` lives (e.g. `.claude/CLAUDE.md` → `../GIT_NEXUS.md`; root `CLAUDE.md` → `./GIT_NEXUS.md`).
 
 5. Commit `GIT_NEXUS.md` and the updated `CLAUDE.md` together:
 
@@ -33,3 +58,15 @@ Adjust the relative path depending on where your `CLAUDE.md` lives (e.g. `.claud
    git add GIT_NEXUS.md CLAUDE.md   # or .claude/CLAUDE.md
    git commit -m "chore: add GitNexus codebase index as GIT_NEXUS.md"
    ```
+
+6. Run Gitnexus MCP server
+
+```sh
+npx gitnexus mcp
+```
+
+or show web UI:
+
+```sh
+npx gitnexus serve
+```
