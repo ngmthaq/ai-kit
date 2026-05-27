@@ -24,6 +24,12 @@ claude mcp add gitnexus -- npx -y gitnexus@latest mcp
 claude mcp add gitnexus -- cmd /c npx -y gitnexus@latest mcp
 ```
 
+Setup:
+
+```sh
+gitnexus setup
+```
+
 Analyze project:
 
 ```sh
