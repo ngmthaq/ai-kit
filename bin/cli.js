@@ -8,6 +8,20 @@ const path = require("path");
 const AVAILABLE_INSTRUCTION_FILE = {
   github: "copilot-instructions.md",
   claude: "CLAUDE.md",
+  cursor: null,
+};
+
+const CURSOR_RULES = {
+  WORKSPACE_INSTRUCTIONS:
+    "Workspace instructions — entry point linking project overview, coding conventions, agent rules, and the codebase knowledge graph",
+  PROJECT_OVERVIEW:
+    "Project overview — name, description, stack, libraries, docs location, and testing workflow",
+  CODING_CONVENTIONS:
+    "Coding conventions agents must follow when writing code for this project",
+  AGENT_RULES:
+    "DO and DO NOT rules agents must respect when receiving assignments",
+  GIT_NEXUS:
+    "GitNexus codebase knowledge graph — dependencies, call chains, clusters, and execution flows",
 };
 
 function errorLog(message) {
@@ -46,6 +60,12 @@ async function init() {
   const destDir = path.join(process.cwd(), `.${TEMPLATE}`);
   fs.cpSync(srcDir, destDir, { recursive: true });
 
+  // Cursor reads rules from .cursor/rules/*.mdc instead of a single instruction file
+  if (TEMPLATE === "cursor") {
+    moveCursorRules(destDir);
+    return;
+  }
+
   // Rename default instruction file to corresponding template instruction file
   const instructionFile = AVAILABLE_INSTRUCTION_FILE[TEMPLATE];
   const defaultInstructionPath = path.join(
@@ -60,6 +80,48 @@ async function init() {
   fs.renameSync(defaultInstructionPath, destInstructionPath);
 }
 
+function moveCursorRules(destDir) {
+  const rulesDir = path.join(destDir, "rules");
+  fs.mkdirSync(rulesDir, { recursive: true });
+
+  // Move each top-level doc into rules/ as .mdc with Cursor rule frontmatter
+  for (const [name, description] of Object.entries(CURSOR_RULES)) {
+    const sourcePath = path.join(destDir, `${name}.md`);
+    const frontmatter = `---\ndescription: ${description}\nalwaysApply: true\n---\n\n`;
+    const content = fs.readFileSync(sourcePath, "utf8");
+    fs.writeFileSync(path.join(rulesDir, `${name}.mdc`), frontmatter + content);
+    fs.rmSync(sourcePath);
+  }
+
+  rewriteCursorRuleLinks(destDir, rulesDir);
+}
+
+function rewriteCursorRuleLinks(dir, rulesDir) {
+  const pattern = new RegExp(
+    `((?:\\.\\./)+|\\./)?(${Object.keys(CURSOR_RULES).join("|")})\\.md\\b`,
+    "g",
+  );
+
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const entryPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      rewriteCursorRuleLinks(entryPath, rulesDir);
+      continue;
+    }
+    if (!/\.(md|mdc)$/.test(entry.name)) continue;
+
+    const isRuleFile = dir === rulesDir;
+    const content = fs.readFileSync(entryPath, "utf8");
+    const updated = content.replace(pattern, (_match, prefix = "", name) => {
+      const base = isRuleFile ? "" : "rules/";
+      return `${prefix}${base}${name}.mdc`;
+    });
+    if (updated !== content) {
+      fs.writeFileSync(entryPath, updated);
+    }
+  }
+}
+
 function showHelp() {
   console.log(`
     > @ngmthaq20/my-copilot CLI
@@ -71,6 +133,7 @@ function showHelp() {
     Templates:
       github    - Init .github directory with Github Copilot configuration
       claude    - Init .claude directory with Claude Code configuration
+      cursor    - Init .cursor directory with Cursor configuration (rules/*.mdc)
     `);
 }
 
