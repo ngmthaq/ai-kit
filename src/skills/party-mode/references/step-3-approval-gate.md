@@ -1,6 +1,6 @@
 # Step 3 — User Approval Gate
 
-Before any implementation begins, the Root Agent **must** present the full plan (plan template from [Step 2 — Planning](./step-2-planning.md)) to the user and **wait** for explicit approval. **DO NOT** make things up.
+Before any implementation begins, the Root Agent **MUST** present the full plan (plan template from [Step 2 — Planning](./step-2-planning.md)) to the user and **wait** for explicit approval. **DO NOT** make things up.
 
 ## Approved
 

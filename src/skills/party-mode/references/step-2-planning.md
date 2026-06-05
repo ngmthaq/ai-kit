@@ -100,7 +100,7 @@ Write the plan using this template. Every section must be populated.
 
 - Every task in the Task List must flag a `Responsible Role` (developer or tester) — the Root Agent extracts the matching rows when building the [developer](./developer-delegation-prompt.md) and [tester](./tester-delegation-prompt.md) delegation prompts.
 - **ALWAYS set Status to `Blocked` and list every open question** when anything is unclear — do not plan around gaps or make assumptions. Return to [Step 1 — Brainstorming](./step-1-brainstorming.md) to resolve them with the user.
-- **ALWAYS read step 3 - approval gateway** to understand how to interact with user selections. See [Step 3 — User Approval Gate](./step-3-approval-gate.md).
+- The Root Agent **MUST** present the full plan to the user. **ALWAYS read step 3 - approval gateway** to understand how to interact with user selections. See [Step 3 — User Approval Gate](./step-3-approval-gate.md).
 - If Status is `Blocked`, the Root Agent must ask the user before proceeding to Step 4. Execution must not begin with unresolved blockers.
 - The Root Agent reviews delivered work against this plan at Step 6 — keep requirements and acceptance criteria precise enough to review against.
 
