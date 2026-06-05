@@ -27,7 +27,7 @@ The agent system is a multi-agent AI workflow that handles software development 
 You never talk to sub-agents directly. The Root Agent classifies your request, delegates to the right agents, validates results, and reports back to you.
 
 ```
-You ──► Root Agent ──► Planner / Debugger ──► Developer + Tester ──► Reviewer ──► You
+You ──► Root Agent (brainstorm + plan) ──► Developer + Tester ──► Root Agent (review) ──► You
 ```
 
 The system supports three types of tasks:
@@ -37,7 +37,7 @@ The system supports three types of tasks:
 | **Feature** | New functionality or a refactor   | "Add pagination to the user list API"         |
 | **Bug**     | Unexpected behavior or regression | "Login fails when email contains a plus sign" |
 
-> Want to understand what happens under the hood? See the [party-mode skill](src/skills/party-mode/SKILL.md) and the role skills under [src/skills/party-mode/references/](src/skills/party-mode/references/) — `planner`, `debugger`, `developer`, `tester`, `reviewer`.
+> Want to understand what happens under the hood? See the [party-mode skill](src/skills/party-mode/SKILL.md) and the role skills under [src/skills/party-mode/references/](src/skills/party-mode/references/) — `developer` and `tester`. Brainstorming, planning, and review are handled by the Root Agent itself.
 
 ---
 
@@ -62,16 +62,17 @@ Use this table to frame your request correctly before prompting:
 
 ### Feature / Refactor Path
 
-This is the full pipeline: plan → approve → implement → test → review.
+This is the full pipeline: brainstorm → plan → approve → implement → test → review.
 
 **Steps:**
 
 1. **Write your prompt.** Describe the feature or refactor in plain language. Include acceptance criteria if you have them.
-2. **Review the plan.** Before any code is written, the Root Agent presents a plan for your approval. Read it carefully (see [The Approval Gate](#the-approval-gate--what-to-expect)).
-3. **Approve or revise.** Reply with approval, or give specific feedback. The plan will be revised and re-presented.
-4. **Implementation runs automatically.** Code is written and tests are run without any further input from you.
-5. **Review runs automatically.** Output is reviewed internally. If issues are found, the loop repeats.
-6. **Summary.** The Root Agent reports what was done, what files changed, and any follow-up notes.
+2. **Brainstorm.** The Root Agent clarifies the request with you and asks open questions until nothing is ambiguous. Answer them all — no plan is written before that.
+3. **Review the plan.** Before any code is written, the Root Agent presents a plan for your approval. Read it carefully (see [The Approval Gate](#the-approval-gate--what-to-expect)).
+4. **Approve or revise.** Reply with approval, or give specific feedback. The Root Agent loops back to brainstorming, revises the plan, and re-presents it.
+5. **Implementation runs automatically.** Developer and tester sub-agents write the code and run the tests; they surface open questions through the Root Agent if anything is unclear.
+6. **Review runs automatically.** The Root Agent reviews the output against the approved plan, project conventions, security, and business logic. If issues are found, the loop repeats.
+7. **Summary.** The Root Agent reports what was done, what files changed, and any follow-up notes.
 
 **Example prompt:**
 
@@ -96,10 +97,11 @@ The same flow as features, but the Root Agent focuses on root cause analysis bef
 **Steps:**
 
 1. **Write your prompt.** Describe what broke, what you expected, and what happened instead. Include logs or stack traces if you have them.
-2. **Review the fix plan.** Same approval gate as features — do not skip it.
-3. **Approve or revise.** Give feedback if the proposed fix looks wrong.
-4. **Implementation + test + review run automatically.**
-5. **Summary.** Root Agent reports the fix, affected files, and regression tests added.
+2. **Brainstorm.** The Root Agent confirms observed vs expected behavior and reproduction steps with you, and digs for the root cause before planning.
+3. **Review the fix plan.** Same approval gate as features — do not skip it.
+4. **Approve or revise.** Give feedback if the proposed fix looks wrong.
+5. **Implementation + test + review run automatically.**
+6. **Summary.** Root Agent reports the fix, affected files, and regression tests added.
 
 **Example prompt:**
 
