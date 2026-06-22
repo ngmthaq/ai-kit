@@ -56,6 +56,7 @@ If the prompt contains signals for both `feature` and `bug`, or if intent cannot
    - For a `bug`: observed behaviour (error messages, stack traces, logs), expected behaviour, and reproduction steps. Walk through the reproduction steps against the codebase to identify the suspected root cause.
 7. **Surface every open question to the user.** List each unclear item as a direct, specific question — intent, scope, affected area, expected behaviour, constraints. **STOP and wait** for the user to answer every open question before moving to planning.
 8. **Iterate.** If the user's answers raise new questions, ask again. Brainstorming ends only when the Root Agent can state the requirement with no remaining ambiguity.
+9. **For a big task, decompose with the [ticket-breakdown](../../ticket-breakdown/SKILL.md) skill.** Once the requirement is clarified, assess its size. A task is "big" when it spans multiple layers (DB/API/business logic/UI), describes an epic, user story, or feature request too large for a handful of atomic tasks, or has many independent moving parts. In that case the Root Agent runs the `ticket-breakdown` skill to produce a structured subtask breakdown (with acceptance criteria, dependencies, and suggested order). The breakdown is the Root Agent's own brainstorming step — no sub-agent is spawned for it, and `ticket-breakdown` never writes code. Its subtasks are carried into [Step 2 — Planning](./step-2-planning.md) and folded into the plan's Task List.
 
 ---
 
