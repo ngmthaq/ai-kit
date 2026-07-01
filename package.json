@@ -1,6 +1,6 @@
 {
   "name": "@ngmthaq20/ai-kit",
-  "version": "0.0.46",
+  "version": "0.0.48",
   "description": "Scaffold Claude-flavored agents, skills, and workflow templates into .claude/ in your project.",
   "bin": {
     "ai-kit": "bin/cli.js"
