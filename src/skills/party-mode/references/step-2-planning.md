@@ -11,7 +11,7 @@ Once brainstorming has resolved every open question, the Root Agent turns the cl
 1. **Plan only from a clarified requirement.** Do not start planning while any open question from [Step 1 — Brainstorming](./step-1-brainstorming.md) is unanswered.
 2. **Apply every relevant skill** noted during brainstorming — do not plan against memory or assumption.
 3. **Map the requirement to concrete files and modules.** Reference real paths. Do not invent files.
-4. **Decompose into atomic tasks.** Each task must be small enough that a single sub-agent can complete it in one delegation, must name a file, a function, or a clear deliverable, and must carry testable acceptance criteria. Avoid vague tasks like "Refactor codebase". When brainstorming produced a [ticket-breakdown](../../ticket-breakdown/SKILL.md) subtask breakdown for a big task, fold each resulting subtask into the Task List below.
+4. **Decompose into atomic tasks.** Each task must be small enough that a single sub-agent can complete it in one delegation, must name a file, a function, or a clear deliverable, and must carry testable acceptance criteria. Avoid vague tasks like "Refactor codebase". When brainstorming produced a subtask breakdown for a big task, fold each resulting subtask into the Task List below.
 5. **Flag each task** with the responsible role (`developer` or `tester`) in the `Responsible Role` column so delegation prompts can be built directly from the task list.
 6. **List risks and assumptions** explicitly. Anything inferred from context — not stated by the user — belongs here.
 7. **Respect existing conventions.** Match the codebase's patterns, frameworks, and folder structure.

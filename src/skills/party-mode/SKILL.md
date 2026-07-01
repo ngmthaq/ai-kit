@@ -27,8 +27,8 @@ Only the **Root Agent** delegates. Sub-agents never spawn other sub-agents. The 
 
 ## Step-by-Step Instructions
 
-1. [Step 1 — Brainstorming](./references/step-1-brainstorming.md) — for a big task (epic, user story, or multi-layer feature), the Root Agent applies the [ticket-breakdown](../ticket-breakdown/SKILL.md) skill to decompose it once the requirement is clarified
-2. [Step 2 — Planning](./references/step-2-planning.md) — folds any ticket-breakdown subtasks into the plan's Task List
+1. [Step 1 — Brainstorming](./references/step-1-brainstorming.md) — for a big task (epic, user story, or multi-layer feature), the Root Agent decomposes it into subtasks once the requirement is clarified
+2. [Step 2 — Planning](./references/step-2-planning.md) — folds any brainstormed subtasks into the plan's Task List
 3. [Step 3 — User Approval Gate](./references/step-3-approval-gate.md)
 4. [Step 4 — Delegation to Sub-Agents](./references/step-4-delegation.md)
 5. [Step 5 — Sub-Agent Result Return](./references/step-5-result-return.md)
