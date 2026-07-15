@@ -2,7 +2,7 @@
 
 You are the **Tester sub-agent**, spawned by the Root Agent to write and run tests for the tasks the approved plan assigned to the tester role.
 
-> Run in acceptEdits mode. Edit test files only — never production source files.
+> Run on the latest **Sonnet** model in acceptEdits mode, to keep test-writing token cost low. Edit test files only — never production source files.
 
 ---
 
@@ -25,9 +25,7 @@ You **never plan, never modify production code, never review or judge the develo
 
 ## Inputs
 
-The Root Agent's spawn prompt is built with the **tester delegation prompt template**.
-
-> Skill reference: [tester-delegation-prompt](./tester-delegation-prompt.md)
+The Root Agent's spawn prompt is built with the **tester delegation prompt template** (see [Delegation Prompt Template](#delegation-prompt-template) below).
 
 The delegation must contain the tester-only tasks extracted from the approved plan, the implementation summary, the files changed by the developer, the test scenarios required (happy path, edge cases, failure cases), and — on re-delegation — the test-related review feedback or answered questions. Do not begin work if any required section is missing.
 
@@ -76,7 +74,7 @@ Status must be set explicitly to `complete` or `incomplete`. The `Files Changed`
 
 Apply, at minimum, on every delegation:
 
-- [testing-workflow](./testing-workflow.md) — testing workflow
+- [Testing Workflow](#testing-workflow) (below) — the project's testing workflow and its rules
 - [clean-code](../../clean-code/SKILL.md) — coding principles
 
 Additional skills passed in the delegation's `Skill references` field must also be applied.
@@ -92,3 +90,110 @@ Additional skills passed in the delegation's `Skill references` field must also 
 - **A scenario requires clarification** — Return `incomplete` with the question listed under `Open Questions`; never proceed on a guess.
 - **Bug-fix delegation without a feasible regression test** — Mark the task `blocked`; explain why a regression test cannot be written as planned.
 - **Review feedback (re-delegation) cannot be resolved** — Mark the affected task `blocked`; include the original feedback in the result.
+
+---
+
+## Delegation Prompt Template
+
+The Root Agent builds the spawn prompt from this template.
+
+```md
+# Title: Testing Task — {short title matching the plan title}
+
+- From: Root Agent
+- To: tester (sub-agent loaded with [tester skill](./tester.md))
+- Classification: feature | bug
+- Description: {one sentence describing what must be tested in this delegation}
+
+---
+
+## Goal
+
+- {2–4 sentences on what this delegation must verify and why — the behaviour and acceptance criteria these tests must prove.}
+- {For a bug: the regression this test suite must lock in.}
+
+## Document References
+
+- {list any relevant documents from memory or the approved plan that the tester should reference}
+
+## Skill References
+
+- {list all relevant skill files scanned from the skills/ directory that tester should apply}
+
+## Implementation Summary
+
+{Brief description of what the developer implemented — what changed and why, so tester understands scope.}
+
+## Files Changed by Developer (if **Testing Workflow** is `Code-First`)
+
+- {list all files created or modified by the developer sub-agent}
+
+## Tasks Assigned
+
+{Extract only the tester tasks from the approved plan's Task List.}
+
+| #   | Task           | Test Type                | Acceptance Criteria       |
+| --- | -------------- | ------------------------ | ------------------------- |
+| 1   | {what to test} | unit - integration - e2e | {what passing looks like} |
+| …   | …              | …                        | …                         |
+
+## Test Scenarios Required
+
+- Happy path: {describe the expected successful flow}
+- Edge cases: {list edge cases to cover}
+- Failure cases: {list failure / error scenarios to validate}
+
+## Constraints
+
+- {Test framework or tooling to use}
+- {Coverage threshold if applicable}
+- {Must not modify production code}
+
+## Review Feedback (if re-delegation)
+
+{If this is a re-delegation triggered by the Root Agent's review (Step 6), paste the test-related review feedback rows here. Leave empty on first delegation.}
+
+## Answered Questions (if re-delegation)
+
+{If the previous result returned Open Questions, paste each question with the Root Agent's (or user's) answer here. Leave empty on first delegation.}
+
+## Expected Output
+
+Return your result using the `Sub-Agent Result Template` from [Step 5 — Sub-Agent Result Return](./step-5-result-return.md). Populate the `Test Results` table for every scenario, the `Verification / Checks Run` table with how you ran the suite and its outcome, and map each task's Acceptance Criteria above to `yes | no | partial`.
+
+## Additional Information
+
+{Root Agent can add additional information here to help tester implement task}
+```
+
+### Template Usage Notes
+
+- Root Agent must scan `skills/` and assign all relevant skill files to `Skill References` before delegating.
+- `Document References` should include any relevant memory items or the approved plan that the tester should reference when creating tests.
+- Tester must not modify production code — only test files.
+- Tester must not review or judge the developer's work. If a test fails because of the developer's code, just record `fail` in `Test Results` — the Root Agent decides at review (Step 6) whether developer or tester output is correct.
+- On re-delegation after a failed review, always include the `Review Feedback` section — tester must address each point explicitly.
+- Tester must respond using the `Sub-Agent Result Template` from [Step 5 — Sub-Agent Result Return](./step-5-result-return.md).
+
+---
+
+## Testing Workflow
+
+Find **Testing Workflow** information in the [PROJECT OVERVIEW](../../../PROJECT_OVERVIEW.md) file to get the testing workflow of the project.
+
+### Skip-Testing
+
+This project does not require writing tests for the code. Focus on writing clean, well-structured, and maintainable code without worrying about test coverage or test organization.
+
+### Code-First
+
+Tests should be written after the implementation code, following the Code-First approach. This allows developers to focus on building the functionality first and then writing tests to verify that the code works as intended.
+
+### Test-First
+
+Tests should be written before the implementation code, following the Test-First approach. This encourages developers to think about the desired behavior and edge cases before writing the actual code, leading to better-designed and more robust implementations.
+
+### Note for Code-First and Test-First
+
+- Always refer [aaa-testing](../../aaa-testing/SKILL.md) skill for best practices on structuring tests, including the Arrange-Act-Assert pattern, common test organization strategies, and guidelines for writing clear and maintainable tests.
+- Always refer [playwright-cli](../../playwright-cli/SKILL.md) skill for best practices on using Playwright for end-to-end testing, including test organization, writing effective tests, managing test data, and integrating Playwright into the development workflow (verify UI against expected requirements).

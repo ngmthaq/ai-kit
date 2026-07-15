@@ -9,12 +9,18 @@ A sub-agent that cannot proceed without clarification does not guess — it retu
 ## Sub-Agent Result Template
 
 ```md
+# Title: Result — {short title matching the original delegation title}
+
 - From: developer | tester (sub-agent loaded with the matching role skill)
 - To: Root Agent
-- Title: Result — {short title matching the original delegation title}
+- Classification: feature | bug
 - Description: {one sentence summarising what was completed or why it is incomplete}
 
 ---
+
+## Goal
+
+- {Restate the objective this delegation targeted, so the result reads standalone.}
 
 ## Status
 
@@ -46,6 +52,20 @@ A sub-agent that cannot proceed without clarification does not guess — it retu
 | {test name} | unit - integration - e2e | pass - fail - skipped |
 | …           | …                        | …                     |
 
+## Verification / Checks Run
+
+| Check                                        | Command / How          | Result                |
+| -------------------------------------------- | ---------------------- | --------------------- |
+| {build - lint - test - secret-scan - manual} | {command run or steps} | pass - fail - not-run |
+| …                                            | …                      | …                     |
+
+## Acceptance Criteria
+
+| Task # | Criterion                   | Met                |
+| ------ | --------------------------- | ------------------ |
+| 1      | {criterion from delegation} | yes - no - partial |
+| …      | …                           | …                  |
+
 ## Open Questions
 
 {List every question that must be answered by the Root Agent (or the user) before the affected tasks can proceed. Be direct and specific — name the task, the decision needed, and the options if any. Never guess instead of asking.}
@@ -71,4 +91,6 @@ A sub-agent that cannot proceed without clarification does not guess — it retu
 - If `incomplete`, the `Blockers` section is mandatory. Root Agent uses this to build the re-delegation or re-planning context.
 - If any `Open Questions` are listed, Status must be `incomplete` — the Root Agent answers them (asking the user when needed) and re-delegates with the answers included.
 - `Files Changed` table must be complete and accurate — the Root Agent's review (Step 6) relies on it.
+- `Verification / Checks Run` must record **every** check actually executed (build, lint, tests, secret/security scan, manual steps) with its command and result. A `not-run` row must be justified — the Root Agent trusts this table instead of re-running everything blind. A `fail` here means Status must be `incomplete`.
+- `Acceptance Criteria` maps each assigned task's criteria (copied from the delegation) to `yes | no | partial`. Any `no` or `partial` means the task is not done — set Status `incomplete`.
 - Do not mark `complete` if any assigned task was skipped without explicit justification.

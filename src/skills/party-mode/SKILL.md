@@ -7,7 +7,7 @@ description: User-invoked orchestration skill. Load ONLY when the user explicitl
 
 # Party-Mode
 
-The orchestration contract for the **Root Agent**. The Root Agent brainstorms with the user, plans, delegates implementation, reviews, and reports. All implementation work is performed by **ephemeral sub-agents** spawned on demand via the host's sub-agent tool — **developer** and **tester** are the only sub-agent roles. Planning and review are the Root Agent's own responsibility; no planner, debugger, or reviewer sub-agents are spawned.
+The orchestration contract for the **Root Agent**. The Root Agent brainstorms with the user, plans, delegates implementation, reviews, and reports. All implementation work is performed by **ephemeral sub-agents** spawned on demand via the host's sub-agent tool — **developer** and **tester** are the only implementation roles. During brainstorming the Root Agent may also spawn read-only **researcher** sub-agents to gather codebase context — they never edit files. Planning and review are the Root Agent's own responsibility; no planner, debugger, or reviewer sub-agents are spawned.
 
 > Sub-agents in this project are **skill-bound**, not file-bound. The Root Agent picks the right role skill and passes it inline when spawning the sub-agent.
 
@@ -15,13 +15,7 @@ The orchestration contract for the **Root Agent**. The Root Agent brainstorms wi
 
 ## Sub-Agent Roles (load via [sub-agents](./references/sub-agents.md) skill)
 
-Only the **Root Agent** delegates. Sub-agents never spawn other sub-agents. The plan flags each task with a `Responsible Role` (developer or tester), and the Root Agent's review flags each issue with a `Responsible Role` — both are routing hints used by the Root Agent to build and target delegations.
-
----
-
-## Workflow
-
-> Diagram reference: [workflow-diagram](./references/workflow-diagram.md)
+Only the **Root Agent** delegates. Sub-agents never spawn other sub-agents. Implementation roles are **developer** and **tester** (Step 4); a read-only **researcher** role gathers codebase context during brainstorming (Step 1) and never edits files. The plan flags each task with a `Responsible Role` (developer or tester), and the Root Agent's review flags each issue with a `Responsible Role` — both are routing hints used by the Root Agent to build and target delegations.
 
 ---
 
@@ -54,6 +48,7 @@ To prevent infinite loops, the Root Agent tracks **loop iterations per session**
 - **Approval gate is non-negotiable.** No implementation sub-agent runs until the user has approved a plan. Plan changes loop back to brainstorming.
 - **Root Agent is the sole verification gate.** Developer and tester output is reviewed by the Root Agent at Step 6 — against the approved plan, project conventions, security, and business logic. The tester does not judge the developer's work, and sub-agents do not judge each other.
 - **Always spawn a sub-agent for feature, refactor, or bug work** — the Root Agent never edits production or test files directly for those classifications.
+- **Research sub-agents are read-only.** At brainstorming (Step 1) the Root Agent may spawn one or more researcher sub-agents to explore the codebase; they search, read, and report only — they never edit files, plan, or implement.
 - **Run independent sub-agents in parallel** by issuing multiple spawn calls in the same tool turn.
 - **Sub-agents ask, never guess.** A sub-agent that cannot proceed returns `Open Questions` to the Root Agent, which answers from the plan/context or asks the user, then re-delegates.
 - **No silent failures.** Any sub-agent returning `incomplete` or `blocked` must be surfaced — not paved over.

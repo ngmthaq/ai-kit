@@ -8,12 +8,13 @@ Central skill index for all **ephemeral sub-agents** spawned by the Root Agent d
 
 ## Roles
 
-| Role      | Reference                   | Mode        | Edits      |
-| --------- | --------------------------- | ----------- | ---------- |
-| Developer | [developer](./developer.md) | acceptEdits | production |
-| Tester    | [tester](./tester.md)       | acceptEdits | test files |
+| Role       | Reference                     | Model         | Mode        | Edits      | Stage                  |
+| ---------- | ----------------------------- | ------------- | ----------- | ---------- | ---------------------- |
+| Researcher | [researcher](./researcher.md) | inherit       | read-only   | none       | Step 1 — Brainstorming |
+| Developer  | [developer](./developer.md)   | latest Sonnet | acceptEdits | production | Step 4 — Delegation    |
+| Tester     | [tester](./tester.md)         | latest Sonnet | acceptEdits | test files | Step 4 — Delegation    |
 
-> Planning and review are **Root Agent responsibilities** — see [Step 2 — Planning](./step-2-planning.md) and [Step 6 — Review](./step-6-review.md). No planner, debugger, or reviewer sub-agents are spawned.
+> Planning and review are **Root Agent responsibilities** — see [Step 2 — Planning](./step-2-planning.md) and [Step 6 — Review](./step-6-review.md). No planner, debugger, or reviewer sub-agents are spawned. The **Researcher** is read-only and exists solely to gather codebase context during brainstorming — it never plans, implements, or edits.
 
 ---
 

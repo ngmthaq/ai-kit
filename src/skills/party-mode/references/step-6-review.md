@@ -22,24 +22,27 @@ The Root Agent reviews the developer and tester output itself — no reviewer su
 1. **Check the self-reported `Status` first.** If any sub-agent result is `incomplete` or `blocked`, or contains `Open Questions`, resolve those before reviewing quality — see the routing table above.
 2. **Validate against the approved plan and the original user requirement.** Read the original user prompt verbatim and the approved plan. The work must satisfy both — a delegation summary can drift from the user's intent.
 3. **Inspect every file in the `Files Changed` tables.** Do not rely on the sub-agent summaries alone — read the actual code and tests.
-4. **Check project conventions.** Naming, folder structure, patterns, frameworks, and every skill assigned in the delegation must be followed.
-5. **Check security.** Run the executable skill checks on the diff — a failing check is automatically a fail.
-6. **Check business logic.** Walk the changed code paths against the plan's functional requirements: correct behaviour, edge cases handled, no unintended side effects or regressions.
-7. **Check tests.** Tests cover the required scenarios (happy path, edge cases, failure cases), pass, and — for bug fixes — include the mandatory regression test.
-8. **On re-review, verify each prior issue was resolved.** Walk the previous review's issue list and confirm a concrete change addresses each one. Issues still present remain failed.
-9. **Decide.** `accepted` only if every checklist item passes and no critical or high-severity issue remains. Otherwise loop back to Step 4 with review feedback.
+4. **Cross-check the `Acceptance Criteria` and `Verification / Checks Run` tables.** Every criterion must be `yes`; any `no`/`partial` fails the review. Re-run any check the sub-agent marked `not-run` or that is critical (security/secret scans always), and confirm the reported `pass` results are real — a self-reported pass is a claim, not proof.
+5. **Check project conventions.** Naming, folder structure, patterns, frameworks, and every skill assigned in the delegation must be followed.
+6. **Check security.** Run the executable skill checks on the diff — a failing check is automatically a fail.
+7. **Check business logic.** Walk the changed code paths against the plan's functional requirements: correct behaviour, edge cases handled, no unintended side effects or regressions.
+8. **Check tests.** Tests cover the required scenarios (happy path, edge cases, failure cases), pass, and — for bug fixes — include the mandatory regression test.
+9. **On re-review, verify each prior issue was resolved.** Walk the previous review's issue list and confirm a concrete change addresses each one. Issues still present remain failed.
+10. **Decide.** `accepted` only if every checklist item passes and no critical or high-severity issue remains. Otherwise loop back to Step 4 with review feedback.
 
 ---
 
 ## Checklist
 
-| Item                                                 | Result                |
-| ---------------------------------------------------- | --------------------- |
-| Satisfies the approved plan and original requirement | pass - fail - partial |
-| Follows project conventions and skill references     | pass - fail - partial |
-| No unintended side effects or regressions            | pass - fail - partial |
-| Tests cover required scenarios and pass              | pass - fail - partial |
-| No security, performance, or maintainability issues  | pass - fail - partial |
+| Item                                                  | Result                |
+| ----------------------------------------------------- | --------------------- |
+| Satisfies the approved plan and original requirement  | pass - fail - partial |
+| Every task's Acceptance Criteria met                  | pass - fail - partial |
+| Verification / checks re-confirmed (not just claimed) | pass - fail - partial |
+| Follows project conventions and skill references      | pass - fail - partial |
+| No unintended side effects or regressions             | pass - fail - partial |
+| Tests cover required scenarios and pass               | pass - fail - partial |
+| No security, performance, or maintainability issues   | pass - fail - partial |
 
 - The decision is **binary**: `accepted` or `not qualified` — never "accepted with issues".
 - `critical` or `high` severity issues always fail the review. `medium` or `low` may be accepted at the Root Agent's discretion but must be noted in the summary report as recommendations.
@@ -73,7 +76,7 @@ For each issue, record enough detail for the responsible sub-agent to act on it 
 Apply, at minimum, on every review:
 
 - [clean-code](../../clean-code/SKILL.md) — code review checklist
-- [testing-workflow](./testing-workflow.md) — testing workflow principles
+- [testing-workflow](./tester.md#testing-workflow) — testing workflow principles
 - [secret-scanner](../../secret-scanner/SKILL.md) — must be executed on the diff before any `accepted` decision
 - [security-scanner](../../security-scanner/SKILL.md) — must be checked on the diff before any `accepted` decision
 

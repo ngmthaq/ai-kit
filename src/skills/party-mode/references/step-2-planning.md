@@ -30,17 +30,18 @@ Once brainstorming has resolved every open question, the Root Agent turns the cl
 Present the full plan to the user **in a chat message** using this template — do not persist it to a file yet. Every section must be populated.
 
 ```md
-- Author: Root Agent
-- Title: Plan — {short title matching the original request}
+# Title: Plan — {short title matching the original request}
+
 - Classification: feature | bug
 - Description: {one sentence summarising the proposed approach}
 
 ---
 
-## Approach Summary
+## Approach Summary / Goal
 
 - {2–4 sentences explaining the overall implementation or fix strategy. Why this approach was chosen.}
 - {For a bug: state the confirmed root cause, not just the symptom.}
+- {Goal}
 
 ## Functional Requirements
 
@@ -77,13 +78,13 @@ Present the full plan to the user **in a chat message** using this template — 
 
 {Ordered list of atomic tasks. Each task must map to a specific sub-agent.}
 
-| #   | Status | Task               | Responsible Role | Dependencies | Skills             |
-| --- | ------ | ------------------ | ---------------- | ------------ | ------------------ |
-| 1   | WIP    | {task description} | developer        | none         | `clean-code`       |
-| 2   | TODO   | {task description} | tester           | task 1       | `testing-workflow` |
-| …   | …      | …                  | …                | …            | …                  |
+| #   | Status | Task               | Responsible Role | Dependencies | Acceptance Criteria    | Skills        |
+| --- | ------ | ------------------ | ---------------- | ------------ | ---------------------- | ------------- |
+| 1   | WIP    | {task description} | developer        | none         | {what done looks like} | `clean-code`  |
+| 2   | TODO   | {task description} | tester           | task 1       | {what passing means}   | `aaa-testing` |
+| …   | …      | …                  | …                | …            | …                      | …             |
 
-> **Note:** Tasks must be atomic and actionable. Avoid vague descriptions like "Refactor codebase" — instead, break it down into specific changes to files or functions. Each task must flag a `Responsible Role` (developer or tester) so the Root Agent can build delegation prompts directly from the task list, and reference any relevant skills that should be applied during execution.
+> **Note:** Tasks must be atomic and actionable. Avoid vague descriptions like "Refactor codebase" — instead, break it down into specific changes to files or functions. Each task must flag a `Responsible Role` (developer or tester) so the Root Agent can build delegation prompts directly from the task list, carry testable `Acceptance Criteria` (copied verbatim into the delegation's `Tasks Assigned` table and checked back at Step 6), and reference any relevant skills that should be applied during execution.
 
 > **Note:** Status field in `Task List` includes:
 
@@ -98,7 +99,7 @@ Present the full plan to the user **in a chat message** using this template — 
 
 ## Usage Notes
 
-- Every task in the Task List must flag a `Responsible Role` (developer or tester) — the Root Agent extracts the matching rows when building the [developer](./developer-delegation-prompt.md) and [tester](./tester-delegation-prompt.md) delegation prompts.
+- Every task in the Task List must flag a `Responsible Role` (developer or tester) — the Root Agent extracts the matching rows when building the [developer](./developer.md#delegation-prompt-template) and [tester](./tester.md#delegation-prompt-template) delegation prompts.
 - **ALWAYS set Status to `Blocked` and list every open question** when anything is unclear — do not plan around gaps or make assumptions. Return to [Step 1 — Brainstorming](./step-1-brainstorming.md) to resolve them with the user.
 - The Root Agent **MUST** present the full plan to the user **as a chat message only** — do not write it to the Doc Directory in this step. **ALWAYS read step 3 - approval gateway** to understand how to interact with user selections and when the plan is persisted to a file. See [Step 3 — User Approval Gate](./step-3-approval-gate.md).
 - If Status is `Blocked`, the Root Agent must ask the user before proceeding to Step 4. Execution must not begin with unresolved blockers.
@@ -111,6 +112,6 @@ Present the full plan to the user **in a chat message** using this template — 
 Apply, at minimum, on every plan:
 
 - [clean-code](../../clean-code/SKILL.md) — quality principles to bake into the plan
-- [testing-workflow](./testing-workflow.md) — testing workflow principles
+- [testing-workflow](./tester.md#testing-workflow) — testing workflow principles
 
 Additional skills identified during brainstorming must also be applied.

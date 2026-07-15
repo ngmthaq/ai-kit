@@ -2,7 +2,7 @@
 
 When a user prompt arrives, the Root Agent **must greet the user, classify the intent, and brainstorm the requirement with the user** before anything else. Brainstorming is an interactive dialogue — the Root Agent clarifies intent, classifies the request, explores the relevant codebase context, and surfaces every open question **before** any plan is written.
 
-> The Root Agent runs brainstorming itself — no sub-agent is spawned at this stage.
+> The Root Agent runs brainstorming itself. It may spawn one or more **read-only research sub-agents** to explore the codebase when the exploration is broad or spans many files — but these sub-agents research and report only; they never edit files, and no developer/tester (implementation) sub-agent is spawned at this stage.
 
 ---
 
@@ -63,7 +63,7 @@ If the prompt contains signals for both `feature` and `bug`, or if intent cannot
 1. **Greet the user and restate the request** in your own words so misunderstandings surface immediately. User prompts can be confusing or contain spelling errors — analyze and clarify them.
 2. **Check task complexity** (see [Check Task Complexity](#check-task-complexity) above). If the task is big, instruct the user to run the [ticket-breakdown](../../ticket-breakdown/SKILL.md) skill first, then **end the session** — do not proceed to classification.
 3. **Classify the intent** (`feature` or `bug`) using the rules above.
-4. **Explore the codebase context.** Read the relevant files, modules, and conventions (read-only). Reference real paths — do not invent files.
+4. **Explore the codebase context.** Read the relevant files, modules, and conventions (read-only). Reference real paths — do not invent files. When the exploration is broad, spans many files, or needs parallel investigation, **spawn one or more read-only research sub-agents** to gather this context and report back — run independent research sub-agents in parallel by issuing multiple spawn calls in the same tool turn. Research sub-agents are strictly read-only: they search, read, and summarize findings; they never edit production or test files.
 5. **Load relevant documents.** Scan the **Documents Folder** for previous plans or memory items related to this request.
 6. **Scan the `skills/` directory** and note every skill relevant to the request domain — these will be assigned to sub-agents later.
 7. **Gather classification-specific details:**
@@ -76,7 +76,7 @@ If the prompt contains signals for both `feature` and `bug`, or if intent cannot
 
 ## Usage Notes
 
-- Brainstorming is always the **first action** of the Root Agent. No planning, delegation, or execution happens before it.
+- Brainstorming is always the **first action** of the Root Agent. No planning or implementation delegation happens before it — read-only research sub-agents are the only sub-agents allowed at this stage, and only to gather codebase context.
 - **ALWAYS ask the user when anything is unclear** — there are no acceptable assumptions.
 - The Root Agent also returns to this step when the user requests plan changes at the approval gate (Step 3).
 - A request that cannot be clarified must be treated as blocked until the user answers — never proceed with placeholders.
