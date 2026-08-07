@@ -1,4 +1,4 @@
-# Phase 1 — Fetch & Analyze
+# Phase 1 — Fetch & Analyze the Epic
 
 ## 1a. Determine input source
 
@@ -11,36 +11,56 @@
 
 If the user provides a ticket ID but no system is specified, ask: _"Is that a Jira, Linear, or GitHub issue?"_
 
-## 1b. Analyze and output a structured summary
+If the input is a single feature rather than an epic, say so and confirm with the user: _"This reads as one feature, not an epic. Shall I write a single PRD for it instead of breaking it into multiple features?"_
+
+## 1b. Ask clarifying questions first
+
+Before analyzing, check whether you can answer all of these from the input. If not, **ask the user** — do not invent answers:
+
+- Who are the target users / personas?
+- What problem or business need is this epic addressing?
+- What outcome or metric should improve?
+- Are there known constraints (compliance, platform, launch date, existing product areas)?
+- Is anything explicitly out of scope?
+
+## 1c. Analyze and output a structured summary
 
 Present this before asking for Phase 2 approval:
 
 ```md
-## 📋 Ticket Analysis
+## 📋 Epic Analysis
 
-**Title:** <ticket title>
+**Title:** <epic title>
 **Source:** Jira / Linear / GitHub / Pasted text
-**Type:** User Story / Bug / Feature / Task
+**Type:** Epic / User Story / Feature request
 
-### Goal
+### Problem
 
-<1–2 sentences: what problem this solves or what value it delivers>
+<3–5 sentences: the user problem or business need this epic addresses>
 
-### Scope
+### Desired Outcome
 
-<bullet list of what's in scope>
+<what success looks like, and the metrics expected to improve>
+
+### Target Users / Personas
+
+<who this is for, and what each persona is trying to accomplish>
+
+### Product Scope
+
+<bullet list of the capabilities in scope, expressed as user-facing value — not technical layers>
 
 ### Out of Scope / Assumptions
 
 <bullet list of assumptions or explicit exclusions>
 
-### Key Technical Areas
+### Constraints
 
-<list affected layers: e.g. Frontend, API, DB schema, Auth, Infra, Tests>
+<non-functional constraints known so far: performance, security, accessibility, data privacy, compliance, platform>
 
 ### Risks / Open Questions
 
 <anything ambiguous that the team needs to clarify>
 ```
 
-Then ask: _"Does this analysis look right? Any corrections before I break it down?"_
+Then ask: _"Does this analysis look right? Any corrections before I break the epic into features?"_

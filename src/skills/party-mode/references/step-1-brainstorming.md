@@ -14,7 +14,7 @@ When a user prompt arrives, the Root Agent **must greet the user, classify the i
 - describes an epic, user story, or feature request too large for a handful of atomic tasks, or
 - has many independent moving parts.
 
-**If the task is big, STOP.** Tell the user they must run the [ticket-breakdown](../../ticket-breakdown/SKILL.md) skill first to decompose it into smaller tickets, then **end the session**. Do not classify, brainstorm further, plan, or spawn any sub-agent. The user re-invokes `/party-mode` on an individual ticket once the breakdown is done.
+**If the task is big, STOP.** Tell the user they must run the [ticket-breakdown](../../ticket-breakdown/SKILL.md) skill first to decompose it into feature-level tickets, each with its own PRD, then **end the session**. Do not classify, brainstorm further, plan, or spawn any sub-agent. The user re-invokes `/party-mode` on an individual feature ticket once the breakdown is done.
 
 Only continue to classification when the task is small enough to be handled directly.
 

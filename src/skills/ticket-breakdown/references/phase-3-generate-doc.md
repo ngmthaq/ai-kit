@@ -1,72 +1,97 @@
-# Phase 3 — Generate Markdown Document
+# Phase 3 — Generate a PRD per Feature
 
-Generate a `.md` file capturing the full breakdown for documentation and future reference in **Doc Directory**.
+Write one PRD markdown file **per feature** approved in Phase 2. The PRD is the single source of truth for the engineering team and is what a technical specification will later be generated from.
 
-## Filename format
+## File path
+
+Write the files flat into the **Doc Directory** (see `PROJECT_OVERVIEW.md`, defaults to `/docs`) — no sub-folders:
 
 ```
-d-m-y-h-i-s-<summary>.md
+<Doc Directory>/yyyy-mm-dd-<summary>-prd.md
 ```
 
-Where:
+- `yyyy-mm-dd` = date the PRD is written (e.g. `2026-08-07`)
+- `<summary>` = kebab-case slug of the feature name (max 6 words, lowercase, no special chars)
 
-- `d-m-y` = day-month-year (e.g. `20-05-2026`)
-- `h-i-s` = hour-minute-second in 24h format (e.g. `14-32-05`)
-- `<summary>` = kebab-case slug from the ticket title (max 6 words, lowercase, no special chars)
+**Example:** `/docs/2026-08-07-self-serve-assessment-creation-prd.md`
 
-**Example:** `20-05-2026-14-32-05-add-assessments-feature-api.md`
-
-## File contents
+## PRD template
 
 ```markdown
-# <Ticket Title>
+# <Feature Name>
 
-**Date:** <d/m/y h:i:s>
-**Source:** <Jira/Linear/GitHub/Pasted text> — <ticket ID or URL if available>
-**Type:** <User Story / Bug / Feature / Task>
+## Epic
 
----
+- **Epic PRD:** <link or path to the parent epic document, or the ticket ID/URL>
+- **Epic Architecture:** <link or path if one exists, otherwise `N/A`>
 
 ## Goal
 
-<from Phase 1>
+**Problem:** <3–5 sentences describing the user problem or business need this feature addresses>
 
-## Scope
+**Solution:** <how this feature solves that problem>
 
-<from Phase 1>
+**Impact:** <expected outcomes or metrics to be improved — e.g. user engagement, conversion rate, time-to-complete>
 
-## Out of Scope / Assumptions
+## User Personas
 
-<from Phase 1>
+<the target user(s) for this feature, and what each one is trying to accomplish>
 
-## Key Technical Areas
+## User Stories
 
-<from Phase 1>
+- As a `<user persona>`, I want to `<perform an action>` so that I can `<achieve a benefit>`.
+- ...
 
-## Risks / Open Questions
+<cover the primary paths and the edge cases>
 
-<from Phase 1>
+## Requirements
 
----
+### Functional Requirements
 
-## Subtask
+- <what the system must do — specific, unambiguous, observable behaviour>
+- ...
 
-### #1 — <Title>
+### Non-Functional Requirements
 
-**Status:** TODO | WIP | DONE
+- <constraints and quality attributes: performance, security, accessibility, data privacy>
+- ...
 
-**Acceptance Criteria:**
+## Acceptance Criteria
 
-- [ ] <criterion 1>
-- [ ] <criterion 2>
+### <User story or requirement it covers>
 
-**Depends on:** —
+- [ ] Given <context>, when <action>, then <observable outcome>
+- [ ] ...
 
----
+### <Next user story or requirement>
 
-### #2 — <Title>
+- [ ] ...
 
-...
+## Out of Scope
+
+- <what is explicitly not included in this feature>
+- ...
 ```
 
-Then ask: _"Document saved ✅. Shall I proceed to create the tickets in your ticket system?"_
+## Rules
+
+- **One file per feature** — do not merge several features into a single PRD
+- **No implementation detail** — no schemas, endpoints, libraries, file names, or architecture. If a requirement can only be stated in technical terms, restate it as observable behaviour
+- **Every user story gets acceptance criteria** — a story with no AC is unfinished
+- **Out of Scope is never empty** — if nothing is excluded, say so explicitly and note the boundary with adjacent features
+- Cross-reference sibling features by their PRD path when a dependency exists
+
+## After writing
+
+Present a summary of what was written:
+
+```markdown
+## 📄 PRDs Generated
+
+| #   | Feature                        | Path                                                   |
+| --- | ------------------------------ | ------------------------------------------------------ |
+| 1   | Self-serve assessment creation | /docs/2026-08-07-self-serve-assessment-creation-prd.md |
+| 2   | Assessment results dashboard   | /docs/2026-08-07-assessment-results-dashboard-prd.md   |
+```
+
+Then ask: _"PRDs saved ✅. Shall I proceed to create the feature tickets in your ticket system?"_
