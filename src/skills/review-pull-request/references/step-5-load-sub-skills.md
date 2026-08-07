@@ -8,4 +8,4 @@ Load each sub-skill in full before applying it. Follow every rule and phase defi
 | [security-scanner](../../security-scanner/SKILL.md) | Always                                     |
 | [aaa-testing](../../aaa-testing/SKILL.md)           | Only if test files are present in the diff |
 
-> `security-scanner` runs inline against the diff — no external tool execution required. Apply its SAST patterns and AppSec deep audit phases manually.
+> `security-scanner` runs against the diff only. Apply its vulnerability deep scan and data-flow analysis inline — no external SAST tooling is required — but do execute `scripts/scan-secrets.sh --diff` on the diff.

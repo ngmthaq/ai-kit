@@ -8,5 +8,4 @@ Ask the user:
 
 If the user approves:
 
-- Load and run the [secret-scanner](../../secret-scanner/SKILL.md) skill.
 - Load and run the [security-scanner](../../security-scanner/SKILL.md) skill.

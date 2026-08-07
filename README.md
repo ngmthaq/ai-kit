@@ -30,7 +30,7 @@ The skill will guide the AI through:
 
 1. Discovering project name, description, languages, frameworks, package manager, key libraries, database, doc directory, and testing workflow — then writing results to `PROJECT_OVERVIEW.md`.
 2. Scanning the codebase for coding conventions, presenting them for your approval, then writing results to `CODING_CONVENTIONS.md`.
-3. _(Optional)_ Running secret and security scanners.
+3. _(Optional)_ Running a security review (secrets, dependency CVEs, and vulnerability scan).
 4. _(Optional)_ Auditing codebase quality against clean code principles.
 5. _(Optional)_ Auditing test files for AAA structure.
 

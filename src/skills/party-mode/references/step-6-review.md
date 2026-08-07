@@ -77,7 +77,6 @@ Apply, at minimum, on every review:
 
 - [clean-code](../../clean-code/SKILL.md) — code review checklist
 - [testing-workflow](./tester.md#testing-workflow) — testing workflow principles
-- [secret-scanner](../../secret-scanner/SKILL.md) — must be executed on the diff before any `accepted` decision
-- [security-scanner](../../security-scanner/SKILL.md) — must be checked on the diff before any `accepted` decision
+- [security-scanner](../../security-scanner/SKILL.md) — must be run on the diff before any `accepted` decision; its secrets scan (`scan-secrets.sh --diff`) must exit `0`
 
 Additional skills assigned in the delegations must also be enforced.
