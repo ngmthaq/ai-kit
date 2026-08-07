@@ -1,6 +1,6 @@
 # Step 3 — Coding Conventions
 
-**Goal:** Read [CODING_CONVENTIONS.md](../../../CODING_CONVENTIONS.md) to check for existing information. Discover and document the project's coding standards. Write approved results to [CODING_CONVENTIONS.md](../../../CODING_CONVENTIONS.md).
+**Goal:** Read [CODING_CONVENTIONS.md](../../../references/CODING_CONVENTIONS.md) to check for existing information. Discover and document the project's coding standards. Write approved results to [CODING_CONVENTIONS.md](../../../references/CODING_CONVENTIONS.md).
 
 1. **Scan** the repository for convention signals:
    - Naming: camelCase, snake_case, PascalCase for files, variables, functions, classes
@@ -15,4 +15,4 @@
 
    > "Here are the coding conventions I found. Do you want to modify anything or approve them as-is?"
 
-3. **Only after user approval**, write the conventions to [CODING_CONVENTIONS.md](../../../CODING_CONVENTIONS.md).
+3. **Only after user approval**, write the conventions to [CODING_CONVENTIONS.md](../../../references/CODING_CONVENTIONS.md).

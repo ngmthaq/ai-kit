@@ -4,7 +4,7 @@ Write one PRD markdown file **per feature** approved in Phase 2. The PRD is the 
 
 ## File path
 
-Write the files flat into the **Doc Directory** (see `PROJECT_OVERVIEW.md`, defaults to `/docs`) — no sub-folders:
+Write the files flat into the **Doc Directory** (see `references/PROJECT_OVERVIEW.md`, defaults to `/docs`) — no sub-folders:
 
 ```
 <Doc Directory>/yyyy-mm-dd-<summary>-prd.md

@@ -45,7 +45,7 @@ Status must be set explicitly to `complete` or `incomplete`. The `Files Changed`
 
 1. **Read the delegation prompt in full.** Confirm tasks, implementation summary, files changed, test scenarios, acceptance criteria, and (on re-delegation) review feedback or answered questions are all present.
 2. **Scan every skill listed in `Skill references`.** Apply them — testing patterns (AAA), naming conventions, framework usage. Do not skip them.
-3. **Gather what to test, based on `Testing Workflow` in [PROJECT_OVERVIEW.md](../../../PROJECT_OVERVIEW.md):**
+3. **Gather what to test, based on `Testing Workflow` in [PROJECT_OVERVIEW.md](../../../references/PROJECT_OVERVIEW.md):**
    - `Code-First` — read the files listed under `Files Changed by Developer` only to learn the surface area you need to test against. Do not judge the developer's implementation and do not modify those files.
    - `Test-First` — work from the delegation's requirement and acceptance criteria; there is no developer code yet. Tests must encode the expected behaviour the developer will implement next.
 4. **Write tests for every required scenario.** Cover the happy path, the edge cases, and the failure cases listed in the delegation. Each scenario gets at least one focused test.
@@ -179,7 +179,7 @@ Return your result using the `Sub-Agent Result Template` from [Step 5 — Sub-Ag
 
 ## Testing Workflow
 
-Find **Testing Workflow** information in the [PROJECT OVERVIEW](../../../PROJECT_OVERVIEW.md) file to get the testing workflow of the project.
+Find **Testing Workflow** information in the [PROJECT OVERVIEW](../../../references/PROJECT_OVERVIEW.md) file to get the testing workflow of the project.
 
 ### Skip-Testing
 

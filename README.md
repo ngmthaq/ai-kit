@@ -16,7 +16,7 @@ This copies the bundled templates into `.claude/` in the current working directo
 
 ### First-Time Onboarding / Outdated Project Information
 
-If you are setting up AI agents on a project for the first time, or if `PROJECT_OVERVIEW.md` and `CODING_CONVENTIONS.md` are outdated, use the built-in **onboarding** skill to let the AI discover and document your project automatically.
+If you are setting up AI agents on a project for the first time, or if `references/PROJECT_OVERVIEW.md` and `references/CODING_CONVENTIONS.md` are outdated, use the built-in **onboarding** skill to let the AI discover and document your project automatically.
 
 In any agent chat, type:
 
@@ -28,8 +28,8 @@ In any agent chat, type:
 
 The skill will guide the AI through:
 
-1. Discovering project name, description, languages, frameworks, package manager, key libraries, database, doc directory, and testing workflow — then writing results to `PROJECT_OVERVIEW.md`.
-2. Scanning the codebase for coding conventions, presenting them for your approval, then writing results to `CODING_CONVENTIONS.md`.
+1. Discovering project name, description, languages, frameworks, package manager, key libraries, database, doc directory, and testing workflow — then writing results to `references/PROJECT_OVERVIEW.md`.
+2. Scanning the codebase for coding conventions, presenting them for your approval, then writing results to `references/CODING_CONVENTIONS.md`.
 3. _(Optional)_ Running a security review (secrets, dependency CVEs, and vulnerability scan).
 4. _(Optional)_ Auditing codebase quality against clean code principles.
 5. _(Optional)_ Auditing test files for AAA structure.
@@ -38,19 +38,19 @@ The skill will guide the AI through:
 
 ## Configuration Files
 
-After running `init`, three Markdown files are written into the AI agents' configuration directory (`.claude/`). Together they tell every agent **what your project is**, **how to write code for it**, and **what it is and isn't allowed to do**. Fill them in before assigning any task — agents read them as ground truth.
+After running `init`, three Markdown files are written into `.claude/references/`. Together they tell every agent **what your project is**, **how to write code for it**, and **what it is and isn't allowed to do**. Fill them in before assigning any task — agents read them as ground truth.
 
-| File                    | Purpose                                                       | When to edit                                    |
-| ----------------------- | ------------------------------------------------------------- | ----------------------------------------------- |
-| `PROJECT_OVERVIEW.md`   | High-level facts about the project (stack, tooling, testing). | Once at setup, then whenever the stack changes. |
-| `CODING_CONVENTIONS.md` | How code should be written and structured.                    | Once at setup, then as conventions evolve.      |
-| `AGENT_RULES.md`        | Hard guardrails — what agents may and may not do.             | Rarely; these are safety boundaries.            |
+| File                               | Purpose                                                       | When to edit                                    |
+| ---------------------------------- | ------------------------------------------------------------- | ----------------------------------------------- |
+| `references/PROJECT_OVERVIEW.md`   | High-level facts about the project (stack, tooling, testing). | Once at setup, then whenever the stack changes. |
+| `references/CODING_CONVENTIONS.md` | How code should be written and structured.                    | Once at setup, then as conventions evolve.      |
+| `references/AGENT_RULES.md`        | Hard guardrails — what agents may and may not do.             | Rarely; these are safety boundaries.            |
 
-> 💡 You don't have to fill these in by hand. Run the [`/onboarding`](#first-time-onboarding--outdated-project-information) skill and the AI will scan your codebase and populate `PROJECT_OVERVIEW.md` and `CODING_CONVENTIONS.md` for you.
+> 💡 You don't have to fill these in by hand. Run the [`/onboarding`](#first-time-onboarding--outdated-project-information) skill and the AI will scan your codebase and populate `references/PROJECT_OVERVIEW.md` and `references/CODING_CONVENTIONS.md` for you.
 
 ---
 
-### PROJECT_OVERVIEW.md
+### references/PROJECT_OVERVIEW.md
 
 Gives agents a quick orientation **before** they start working, so they don't have to rediscover the stack on every task. It contains a fixed checklist of project facts:
 
@@ -64,7 +64,7 @@ Gives agents a quick orientation **before** they start working, so they don't ha
 
 ---
 
-### CODING_CONVENTIONS.md
+### references/CODING_CONVENTIONS.md
 
 Defines **how** code should be written so agent output matches your codebase's existing style. Always fill this in before assigning work — without it, agents fall back to generic defaults. Recommended things to cover:
 
@@ -76,7 +76,7 @@ Defines **how** code should be written so agent output matches your codebase's e
 
 ---
 
-### AGENT_RULES.md
+### references/AGENT_RULES.md
 
 The agents' **guardrails** — the explicit `DO` / `DON'T` boundaries that apply to every task. Read these before assigning work, since they govern safety and scope. Highlights:
 

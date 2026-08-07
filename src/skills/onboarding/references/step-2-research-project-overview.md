@@ -1,6 +1,6 @@
 # Step 2 — Research Project Overview
 
-**Goal:** Read [PROJECT_OVERVIEW.md](../../../PROJECT_OVERVIEW.md) to check for existing information. Build a complete picture of the project. Write all findings to [PROJECT_OVERVIEW.md](../../../PROJECT_OVERVIEW.md).
+**Goal:** Read [PROJECT_OVERVIEW.md](../../../references/PROJECT_OVERVIEW.md) to check for existing information. Build a complete picture of the project. Write all findings to [PROJECT_OVERVIEW.md](../../../references/PROJECT_OVERVIEW.md).
 
 ## 2.1 — Project Name and Description
 
@@ -106,4 +106,4 @@ Default to `Ask-User` if the user does not respond.
 
 ## 2.9 — Write PROJECT_OVERVIEW.md
 
-Write all findings to [PROJECT_OVERVIEW.md](../../../PROJECT_OVERVIEW.md).
+Write all findings to [PROJECT_OVERVIEW.md](../../../references/PROJECT_OVERVIEW.md).
