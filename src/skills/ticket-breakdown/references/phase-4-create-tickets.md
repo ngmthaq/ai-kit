@@ -31,7 +31,11 @@ If the user picks a ticket system, confirm the target: project key / team / repo
 
 Create tickets **in dependency order** so that "blocked by" links resolve correctly.
 
-## 4c. Output summary
+## 4c. Update the PRD overview
+
+Edit the overview file written in Phase 3 (`<Doc Directory>/yyyy-mm-dd-<epic-summary>-prd-overview.md`) and fill in the **Ticket** column for every row with the created ticket ID, linked to its URL — e.g. `[PROJ-124](<url>)`. Leave Status as ⬜ Not started; that is maintained by the team.
+
+## 4d. Output summary
 
 After all tickets are created, output a summary table:
 
@@ -44,6 +48,7 @@ After all tickets are created, output a summary table:
 | 2   | PROJ-125  | Assessment results dashboard   | /docs/2026-08-07-assessment-results-dashboard-prd.md   | <url> |
 
 **Parent epic:** PROJ-123 — features linked ✅
+**Overview updated:** /docs/2026-08-07-performance-review-cycle-prd-overview.md
 ```
 
 ## MCP Reference
