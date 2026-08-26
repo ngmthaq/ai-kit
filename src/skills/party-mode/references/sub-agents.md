@@ -10,7 +10,7 @@ Central skill index for all **ephemeral sub-agents** spawned by the Root Agent d
 
 | Role       | Reference                     | Model         | Mode        | Edits      | Stage                  |
 | ---------- | ----------------------------- | ------------- | ----------- | ---------- | ---------------------- |
-| Researcher | [researcher](./researcher.md) | inherit       | read-only   | none       | Step 1 — Brainstorming |
+| Researcher | [researcher](./researcher.md) | latest Sonnet | read-only   | none       | Step 1 — Brainstorming |
 | Developer  | [developer](./developer.md)   | latest Sonnet | acceptEdits | production | Step 4 — Delegation    |
 | Tester     | [tester](./tester.md)         | latest Sonnet | acceptEdits | test files | Step 4 — Delegation    |
 
